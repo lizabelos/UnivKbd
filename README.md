@@ -22,6 +22,14 @@ cmake --install .
 
 ## Usage
 
+To link with cmake : 
+```cmake
+find_package(UniQKey REQUIRED)
+target_link_libraries(myapp PRIVATE UniQKey::UniQKey)
+```
+
+With autotools, link to the library `libUniQKey.a`.
+
 To create a floating keyboard that will show up when a widget is focused, use the following code:
 ```cpp
 #include <UniQKey/UniQKey>
