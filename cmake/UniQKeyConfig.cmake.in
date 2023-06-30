@@ -1,0 +1,46 @@
+# Check if the user requested the use of a package
+if(NOT @PACKAGE_FIND_PACKAGE_NAME@)
+  return()
+endif()
+
+# Provide the package name
+set(@PACKAGE_NAME@_FOUND TRUE)
+set(@PACKAGE_NAME@_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include/UniQKey")
+set(@PACKAGE_NAME@_LIBRARIES "${CMAKE_INSTALL_PREFIX}/lib/libUniQKey.a")
+
+# Create imported target
+add_library(@PACKAGE_FIND_PACKAGE_NAME@ INTERFACE)
+target_include_directories(@PACKAGE_FIND_PACKAGE_NAME@ INTERFACE ${@PACKAGE_NAME@_INCLUDE_DIRS})
+target_link_libraries(@PACKAGE_FIND_PACKAGE_NAME@ INTERFACE ${@PACKAGE_NAME@_LIBRARIES})
+
+# Provide version information
+set(@PACKAGE_NAME@_VERSION 1.0.0)
+set(@PACKAGE_NAME@_VERSION_EXACT TRUE)
+
+# Provide the package config version file
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/@PACKAGE_NAME@ConfigVersion.cmake"
+                                 VERSION ${@PACKAGE_NAME@_VERSION}
+                                 COMPATIBILITY SameMajorVersion)
+
+# Export package from the build tree
+export(EXPORT @PACKAGE_NAME@Targets
+       FILE "${CMAKE_CURRENT_BINARY_DIR}/@PACKAGE_NAME@Targets.cmake"
+       NAMESPACE @PACKAGE_FIND_PACKAGE_NAME@::)
+
+# Create the package config file
+configure_package_config_file(
+  "${CMAKE_CURRENT_LIST_DIR}/@PACKAGE_NAME@Config.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/@PACKAGE_NAME@Config.cmake"
+  INSTALL_DESTINATION lib/cmake/@PACKAGE_NAME@
+)
+
+# Install the package config and version files
+install(EXPORT @PACKAGE_NAME@Targets
+        FILE "@PACKAGE_NAME@Targets.cmake"
+        NAMESPACE @PACKAGE_FIND_PACKAGE_NAME@::
+        DESTINATION lib/cmake/@PACKAGE_NAME@)
+
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/@PACKAGE_NAME@Config.cmake"
+              "${CMAKE_CURRENT_BINARY_DIR}/@PACKAGE_NAME@ConfigVersion.cmake"
+        DESTINATION lib/cmake/@PACKAGE_NAME@)

@@ -1,11 +1,10 @@
 #include <QApplication>
-
-#include "SimpleTextEditor.h"
+#include "UniQKey/UniQKey"
 
 int main(int argc, char **argv) {
     QApplication app(argc, argv);
 
-    SimpleTextEditor editor;
+    UniQKey::SimpleTextEditor editor;
     editor.show();
 
     return app.exec();
