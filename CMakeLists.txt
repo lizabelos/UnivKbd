@@ -12,8 +12,8 @@ add_library(UniQKey STATIC
         UniQKey/SimpleTextEditor.cpp
         UniQKey/VirtualKeyboard.h
         UniQKey/VirtualKeyboard.cpp
-        UniQKey/KeyboardLayout.cpp
-        UniQKey/KeyboardLayout.h
+        UniQKey/Keyboard.cpp
+        UniQKey/Keyboard.h
         )
 
 target_link_libraries(UniQKey Qt6::Core Qt6::Gui Qt6::Widgets)
@@ -38,7 +38,7 @@ install(TARGETS UniQKey
 install(FILES
         UniQKey/SimpleTextEditor.h
         UniQKey/VirtualKeyboard.h
-        UniQKey/KeyboardLayout.h
+        UniQKey/Keyboard.h
         UniQKey/UniQKey
         DESTINATION include/UniQKey
         )

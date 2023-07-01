@@ -8,37 +8,36 @@
 #include <QPointer>
 #include <QLabel>
 
+#include "Keyboard.h"
+
 namespace UniQKey {
 
     class VirtualKeyboardButton : public QPushButton {
     Q_OBJECT
 
     public:
-        VirtualKeyboardButton(QChar mainkey, QChar shiftkey, QChar altgrkey);
+        VirtualKeyboardButton(const Key &key);
+        ~VirtualKeyboardButton() override;
 
-        VirtualKeyboardButton(Qt::KeyboardModifier modifier);
-
-        void updateModifiers(bool shift, bool altgr, bool isctrl);
+        void setCurrentKey(int index);
 
     signals:
-
         void virtualKeyPressed(QChar key);
 
-        void virtualModifierKeyPressed(Qt::KeyboardModifier modifier);
-
     private slots:
-
         void virtualButtonPressed();
 
     private:
-        QChar mMainkey, mShiftkey, mAltgrkey, mCurrentKey;
-        bool mIsModifier;
-        Qt::KeyboardModifier mModifier;
+        Key mKey;
+        QString mKeyString[3];
 
-        QPointer<QGridLayout> gridLayout;
-        QPointer<QLabel> mainkeyLabel;
-        QPointer<QLabel> shiftkeyLabel;
-        QPointer<QLabel> altgrkeyLabel;
+        QPointer<QGridLayout> mGridLayout;
+        QPointer<QLabel> mLabels[3];
+
+        QFont mCurrentFont, mDefaultFont;
+        QColor mCurrentColor, mDefaultColor;
+
+        int mCurrentKey;
 
     };
 
@@ -56,14 +55,10 @@ namespace UniQKey {
 
         void virtualKeyPressed(QChar key);
 
-        void virtualModifierKeyPressed(Qt::KeyboardModifier modifier);
-
     private:
-        bool loadLayoutFromFile(const QString &fileName);
+        bool loadLayoutFromKeyboard(const Keyboard &keyboard);
 
-        void addButton(int x, int y, QChar mainkey, QChar shiftkey, QChar altgrkey, int spanx = 1, int spany = 1);
-
-        void addButton(int x, int y, Qt::KeyboardModifier modifier, int spanx = 1, int spany = 1);
+        void addButtonFromKey(const Key &key);
 
     private:
         QWidget *mParent;

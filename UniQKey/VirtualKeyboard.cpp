@@ -3,108 +3,183 @@
 #include <QKeyEvent>
 #include <QLabel>
 
-UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(QChar mainkey, QChar shiftkey, QChar altgrkey) {
+#include <unordered_set>
 
-    mMainkey = mainkey;
-    mShiftkey = shiftkey;
-    mAltgrkey = altgrkey;
-    mIsModifier = false;
-    mCurrentKey = mMainkey;
+namespace UniQKey {
+    bool gShiftPressed = false;
+    bool gAltPressed = false;
+    std::unordered_set<VirtualKeyboardButton*> gVirtualKeyboardButtons;
 
-    QFont bigFont;
-    bigFont.setPointSize(14);
+    void pressShift() {
+        gShiftPressed = !gShiftPressed;
+        int index = gShiftPressed * 1 + gAltPressed * 2;
+        for (auto button : gVirtualKeyboardButtons) {
+            button->setCurrentKey(index);
+        }
+    }
 
-    QFont smallFont;
-    smallFont.setPointSize(10);
-
-    gridLayout = new QGridLayout(this);
-    mainkeyLabel = new QLabel(mainkey, this);
-    shiftkeyLabel = new QLabel(shiftkey, this);
-    altgrkeyLabel = new QLabel(altgrkey, this);
-
-    mainkeyLabel->setFont(bigFont);
-    shiftkeyLabel->setFont(smallFont);
-    altgrkeyLabel->setFont(smallFont);
-
-    // center the text in the QLabel
-    mainkeyLabel->setAlignment(Qt::AlignCenter);
-    shiftkeyLabel->setAlignment(Qt::AlignCenter);
-    altgrkeyLabel->setAlignment(Qt::AlignCenter);
-
-    gridLayout->addWidget(mainkeyLabel, 0, 0, 2, 2);
-    gridLayout->addWidget(shiftkeyLabel, 2, 1);
-    gridLayout->addWidget(altgrkeyLabel, 2, 2);
-
-    setMinimumSize(60, 70);
-
-    setLayout(gridLayout);
-
-    connect(this, &QPushButton::pressed, this, &VirtualKeyboardButton::virtualButtonPressed);
-}
-
-UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(Qt::KeyboardModifier modifier) {
-
-    mIsModifier = true;
-    mModifier = modifier;
-
-    setMinimumSize(60, 70);
-
-    QFont bigFont;
-    bigFont.setPointSize(14);
-    setFont(bigFont);
-
-    setText(QKeySequence(modifier).toString());
-
-    setCheckable(true);
-
-    connect(this, &QPushButton::pressed, this, &VirtualKeyboardButton::virtualButtonPressed);
+    void pressAlt() {
+        gAltPressed = !gAltPressed;
+        int index = gShiftPressed * 1 + gAltPressed * 2;
+        for (auto button : gVirtualKeyboardButtons) {
+            button->setCurrentKey(index);
+        }
+    }
 
 }
 
-void UniQKey::VirtualKeyboardButton::updateModifiers(bool shift, bool altgr, bool isctrl) {
-    if (mIsModifier) {
-        if (mModifier == Qt::KeyboardModifier::ShiftModifier) {
-            setChecked(shift);
-        }
-        if (mModifier == Qt::KeyboardModifier::AltModifier) {
-            setChecked(altgr);
-        }
-        if (mModifier == Qt::KeyboardModifier::ControlModifier) {
-            setChecked(isctrl);
-        }
-        return;
+UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key) {
+
+    switch (key.getType()) {
+
+        case KeyType::REGULAR:
+            mKeyString[0] = key.getCharacters()[0];
+            mKeyString[1] = key.getCharacters()[1];
+            mKeyString[2] = key.getCharacters()[2];
+            break;
+
+        case KeyType::SHIFT:
+            mKeyString[0] = "Shift";
+            break;
+
+        case KeyType::CTRL:
+            mKeyString[0] = "Ctrl";
+            break;
+
+        case KeyType::ALT:
+            mKeyString[0] = "Alt";
+            break;
+
+        case KeyType::FUNCTION:
+            mKeyString[0] = key.getCharacters();
+            break;
+
+        case KeyType::TAB:
+            mKeyString[0] = "Tab";
+            break;
+
+        case KeyType::BACKSPACE:
+            mKeyString[0] = "Backspace";
+            break;
+
+        case KeyType::CAPS_LOCK:
+            mKeyString[0] = "Caps Lock";
+            break;
+
+        case KeyType::SPACE:
+            mKeyString[0] = "Space";
+            break;
+
+        case KeyType::ENTER:
+            mKeyString[0] = "Enter";
+            break;
+
+        default:
+            break;
+
     }
 
-    if ((!shift && !altgr) || isctrl) {
-        mainkeyLabel->setText(mMainkey);
-        shiftkeyLabel->setText(mShiftkey);
-        altgrkeyLabel->setText(mAltgrkey);
-        mCurrentKey = mMainkey;
-    } else if (shift && !altgr) {
-        mainkeyLabel->setText(mShiftkey);
-        shiftkeyLabel->setText(mMainkey);
-        altgrkeyLabel->setText(mAltgrkey);
-        mCurrentKey = mShiftkey;
-    } else if (!shift && altgr) {
-        mainkeyLabel->setText(mAltgrkey);
-        shiftkeyLabel->setText(mShiftkey);
-        altgrkeyLabel->setText(mMainkey);
-        mCurrentKey = mAltgrkey;
-    } else if (shift && altgr) {
-        mainkeyLabel->setText(mAltgrkey);
-        shiftkeyLabel->setText(mMainkey);
-        altgrkeyLabel->setText(mShiftkey);
-        mCurrentKey = mAltgrkey;
+    mGridLayout = new QGridLayout(this);
+    setMinimumSize(60, 70);
+    setLayout(mGridLayout);
+
+    mCurrentFont.setPointSize(14);
+    mCurrentFont.setBold(true);
+    mCurrentColor = QColor(0, 0, 0);
+
+    mDefaultFont.setPointSize(10);
+    mDefaultColor = QColor(100, 100, 100);
+
+    if (mKeyString[1] == "" && mKeyString[2] == "") {
+        mLabels[0] = new QLabel(mKeyString[0], this);
+        mLabels[0]->setAlignment(Qt::AlignCenter);
+        mGridLayout->addWidget(mLabels[0], 0, 0, 1, 2);
     }
 
+    if (mKeyString[1] != "" && mKeyString[2] == "") {
+        mLabels[0] = new QLabel(mKeyString[0], this);
+        mLabels[1] = new QLabel(mKeyString[1], this);
+
+        mLabels[0]->setAlignment(Qt::AlignCenter);
+        mLabels[1]->setAlignment(Qt::AlignCenter);
+
+        mGridLayout->addWidget(mLabels[0], 0, 0, 1, 2);
+        mGridLayout->addWidget(mLabels[1], 2, 1);
+    }
+
+    if (mKeyString[1] != "" && mKeyString[2] != "") {
+        mLabels[0] = new QLabel(mKeyString[0], this);
+        mLabels[1] = new QLabel(mKeyString[1], this);
+        mLabels[2] = new QLabel(mKeyString[2], this);
+
+        mLabels[0]->setAlignment(Qt::AlignCenter);
+        mLabels[1]->setAlignment(Qt::AlignCenter);
+        mLabels[2]->setAlignment(Qt::AlignCenter);
+
+        mGridLayout->addWidget(mLabels[0], 0, 0, 1, 2);
+        mGridLayout->addWidget(mLabels[1], 1, 0);
+        mGridLayout->addWidget(mLabels[2], 1, 1);
+    }
+
+
+    connect(this, &QPushButton::pressed, this, &VirtualKeyboardButton::virtualButtonPressed);
+
+    gVirtualKeyboardButtons.insert(this);
+
+    setCurrentKey(0);
+}
+
+UniQKey::VirtualKeyboardButton::~VirtualKeyboardButton() {
+    gVirtualKeyboardButtons.erase(this);
 }
 
 void UniQKey::VirtualKeyboardButton::virtualButtonPressed() {
-    if (mIsModifier) {
-        emit virtualModifierKeyPressed(mModifier);
-        setChecked(!isChecked());
-    } else {
-        emit virtualKeyPressed(mCurrentKey);
+    
+    switch(mKey.getType()) {
+
+        case KeyType::REGULAR:
+            emit virtualKeyPressed(mKey.getCharacters()[mCurrentKey]);
+            break;
+        
+        case KeyType::SHIFT:
+            UniQKey::pressShift();
+            break;
+
+        case KeyType::CTRL:
+            // todo
+            break;
+
+        case KeyType::ALT:
+            UniQKey::pressAlt();
+            break;
+
+        default:
+            break;
+
+    }
+
+}
+
+void UniQKey::VirtualKeyboardButton::setCurrentKey(int index) {
+    int maxIndex = 0;
+    for (; maxIndex < 2; maxIndex++) {
+        if (mLabels[maxIndex + 1] == nullptr) {
+            break;
+        }
+    }
+
+    mCurrentKey = std::min(maxIndex, index);
+
+    for (int i = 0; i < 3; i++) {
+        if (mLabels[i] != nullptr) {
+            if (i == mCurrentKey) {
+                mLabels[i]->setFont(mCurrentFont);
+                mLabels[i]->setStyleSheet("color: " + mCurrentColor.name());
+            } else {
+                mLabels[i]->setFont(mDefaultFont);
+                mLabels[i]->setStyleSheet("color: " + mDefaultColor.name());
+            }
+        }
     }
 }
 
@@ -137,61 +212,37 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
         }
     });
 
-    if (loadLayoutFromFile("../azerty.txt")) {
+    Keyboard keyboard;
+    if (loadLayoutFromKeyboard(keyboard)) {
         setLayout(mGridLayout);
     } else {
         throw std::runtime_error("Failed to load the keyboard layout file.");
     }
 }
 
-bool UniQKey::VirtualKeyboard::loadLayoutFromFile(const QString &fileName) {
-    QFile file(fileName);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        return false;
+bool UniQKey::VirtualKeyboard::loadLayoutFromKeyboard(const Keyboard& keyboard) {
 
-    QTextStream in(&file);
+    for (const auto& key : keyboard.getKeys()) {
 
-    int minX = 9999, minY = 9999, maxX = -9999, maxY = -9999;
+        addButtonFromKey(key);
 
-    while (!in.atEnd()) {
-        QString line = in.readLine();
-        QStringList keys = line.split(" ");
-
-        if (keys.size() != 5) {
-            continue;
-        }
-
-        int x = keys.at(0).toInt();
-        int y = keys.at(1).toInt();
-
-        minX = std::min(minX, x);
-        minY = std::min(minY, y);
-        maxX = std::max(maxX, x);
-        maxY = std::max(maxY, y);
-
-        addButton(x, y, keys.at(2).at(0), keys.at(3).at(0), keys.at(4).at(0));
     }
 
-    addButton(maxX + 1, minY - 1, Qt::KeyboardModifier::ControlModifier, 1, 2);
-    addButton(maxX + 1, minY + 1, Qt::KeyboardModifier::AltModifier, 1, 2);
-    addButton(maxX + 1, minY + 3, ' ', ' ', ' ', 1, 4);
-    addButton(maxX + 1, minY + 7, Qt::KeyboardModifier::ShiftModifier, 1, 2);
-
-    file.close();
     return true;
 }
 
-void UniQKey::VirtualKeyboard::addButton(int x, int y, QChar mainkey, QChar shiftkey, QChar altgrkey, int spanx, int spany) {
-    VirtualKeyboardButton *btn = new VirtualKeyboardButton(mainkey, shiftkey, altgrkey);
-    connect(btn, &VirtualKeyboardButton::virtualKeyPressed, this, &VirtualKeyboard::virtualKeyPressed);
-    mGridLayout->addWidget(btn, x, y, spanx, spany);
-    mButtons.append(btn);
-}
+void UniQKey::VirtualKeyboard::addButtonFromKey(const Key &key) {
 
-void UniQKey::VirtualKeyboard::addButton(int x, int y, Qt::KeyboardModifier modifier, int spanx, int spany) {
-    VirtualKeyboardButton *btn = new VirtualKeyboardButton(modifier);
-    connect(btn, &VirtualKeyboardButton::virtualModifierKeyPressed, this, &VirtualKeyboard::virtualModifierKeyPressed);
-    mGridLayout->addWidget(btn, x, y, spanx, spany);
+    const int spanResolution = 4;
+
+    int x = key.getX() * spanResolution;
+    int y = key.getY() * spanResolution;
+    int spanx = key.getXSpan() * spanResolution;
+    int spany = key.getYSpan() * spanResolution;
+
+    VirtualKeyboardButton *btn = new VirtualKeyboardButton(key);
+    connect(btn, &VirtualKeyboardButton::virtualKeyPressed, this, &VirtualKeyboard::virtualKeyPressed);
+    mGridLayout->addWidget(btn, y, x, spany, spanx);
     mButtons.append(btn);
 }
 
@@ -216,26 +267,6 @@ void UniQKey::VirtualKeyboard::virtualKeyPressed(QChar key) {
         QInputMethodEvent *inputMethodEvent = new QInputMethodEvent();
         inputMethodEvent->setCommitString(key);
         QApplication::sendEvent(mParent, inputMethodEvent);
-    }
-}
-
-void UniQKey::VirtualKeyboard::virtualModifierKeyPressed(Qt::KeyboardModifier modifier) {
-    switch (modifier) {
-        case Qt::KeyboardModifier::ShiftModifier:
-            mIsShiftPressed = !mIsShiftPressed;
-            break;
-        case Qt::KeyboardModifier::ControlModifier:
-            mIsCtrlPressed = !mIsCtrlPressed;
-            break;
-        case Qt::KeyboardModifier::AltModifier:
-            mIsAltGrPressed = !mIsAltGrPressed;
-            break;
-        default:
-            break;
-    }
-
-    for (auto button : mButtons) {
-        button->updateModifiers(mIsShiftPressed, mIsAltGrPressed, mIsCtrlPressed);
     }
 }
 
