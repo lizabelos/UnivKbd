@@ -2,80 +2,50 @@
 #define UNIQKEY_KEYBOARD_H
 
 #include <QString>
-#include <vector>
+#include <QFile>
+#include <QList>
+
+#include "Key.h"
 
 namespace UniQKey {
 
-enum class KeyType { 
-    REGULAR, 
-    SHIFT, 
-    CTRL, 
-    ALT, 
-    FUNCTION,
-    TAB,
-    BACKSPACE,
-    CAPS_LOCK,
-    SPACE,
-    ENTER    
-};
+    class Keyboard {
+    public:
+        inline const std::vector<Key>& getKeys() const {
+            return mKeys;
+        }
 
-class Key {
-public:
-    Key() = default;
+        inline void serialize(QFile &file) {
+            int size = mKeys.size();
+            file.write(reinterpret_cast<char*>(&size), sizeof(int));
+            for (int i = 0; i < size; ++i) {
+                mKeys[i].serialize(file);
+            }
+        }
 
-    Key(KeyType type, float xSpan = 1, float ySpan = 1);
+        inline void deserialize(QFile &file) {
+            int size;
+            file.read(reinterpret_cast<char*>(&size), sizeof(int));
+            mKeys.resize(size);
+            for (int i = 0; i < size; ++i) {
+                mKeys[i].deserialize(file);
+            }
+        }
 
-    Key(const QString& characters, float xSpan = 1, float ySpan = 1);
+        static QList<QString> getOperatingSystemKeyboards();
 
-    inline KeyType getType() const {
-        return mType;
-    }
+        static Keyboard getKeyboardFromOperatingSystem(const QString &layout);
 
-    inline const QString& getCharacters() const {
-        return mCharacters;
-    }
+        static Keyboard getDefaultKeyboardFromOperatingSystem();
 
-    inline float getXSpan() const {
-        return mXSpan;
-    }
+    protected:
+        Keyboard() = default;
 
-    inline float getYSpan() const {
-        return mYSpan;
-    }
+    private:
+        std::vector<Key> mKeys;
+    };
 
-    inline float getX() const {
-        return mX;
-    }
 
-    inline float getY() const {
-        return mY;
-    }
-
-    inline void setX(float x) {
-        mX = x;
-    }
-
-    inline void setY(float y) {
-        mY = y;
-    }
-
-private:
-    KeyType mType;
-    QString mCharacters;
-    float mXSpan, mYSpan, mX, mY;
-};
-
-class Keyboard {
-public:
-    Keyboard();
-
-    inline const std::vector<Key>& getKeys() const {
-        return mKeys;
-    }
-
-private:
-    std::vector<Key> mKeys;
-};
 
 }  // namespace UniQKey
 

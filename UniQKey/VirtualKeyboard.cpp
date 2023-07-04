@@ -5,29 +5,6 @@
 
 #include <unordered_set>
 
-namespace UniQKey {
-    bool gShiftPressed = false;
-    bool gAltPressed = false;
-    std::unordered_set<VirtualKeyboardButton*> gVirtualKeyboardButtons;
-
-    void pressShift() {
-        gShiftPressed = !gShiftPressed;
-        int index = gShiftPressed * 1 + gAltPressed * 2;
-        for (auto button : gVirtualKeyboardButtons) {
-            button->setCurrentKey(index);
-        }
-    }
-
-    void pressAlt() {
-        gAltPressed = !gAltPressed;
-        int index = gShiftPressed * 1 + gAltPressed * 2;
-        for (auto button : gVirtualKeyboardButtons) {
-            button->setCurrentKey(index);
-        }
-    }
-
-}
-
 UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key) {
 
     switch (key.getType()) {
@@ -124,40 +101,15 @@ UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key
 
     connect(this, &QPushButton::pressed, this, &VirtualKeyboardButton::virtualButtonPressed);
 
-    gVirtualKeyboardButtons.insert(this);
-
     setCurrentKey(0);
 }
 
 UniQKey::VirtualKeyboardButton::~VirtualKeyboardButton() {
-    gVirtualKeyboardButtons.erase(this);
+
 }
 
 void UniQKey::VirtualKeyboardButton::virtualButtonPressed() {
-    
-    switch(mKey.getType()) {
-
-        case KeyType::REGULAR:
-            emit virtualKeyPressed(mKey.getCharacters()[mCurrentKey]);
-            break;
-        
-        case KeyType::SHIFT:
-            UniQKey::pressShift();
-            break;
-
-        case KeyType::CTRL:
-            // todo
-            break;
-
-        case KeyType::ALT:
-            UniQKey::pressAlt();
-            break;
-
-        default:
-            break;
-
-    }
-
+    emit virtualKeyPressed(*this, mKey);
 }
 
 void UniQKey::VirtualKeyboardButton::setCurrentKey(int index) {
@@ -189,13 +141,37 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Tool);
     setAttribute(Qt::WA_TranslucentBackground);
 
-    mGridLayout = new QGridLayout(this);
+    mMainLayout = new QVBoxLayout(this);
+    setLayout(mMainLayout);
+
+    QList<QString> keyboardLayouts = Keyboard::getOperatingSystemKeyboards();
+    if (keyboardLayouts.size() == 0) {
+        throw std::runtime_error("No keyboard layouts found");
+    }
+    // add a combobox to select the keyboard layout
+    mKeyboardSelector = new QComboBox(this);
+    mMainLayout->addWidget(mKeyboardSelector);
+    for (auto keyboardLayout : keyboardLayouts) {
+        mKeyboardSelector->addItem(keyboardLayout);
+    }
+    // set to English (United States) as default
+    mKeyboardSelector->setCurrentText("US");
+
+    connect(mKeyboardSelector, &QComboBox::currentTextChanged, [=](const QString &text) {
+        Keyboard keyboard = Keyboard::getKeyboardFromOperatingSystem(text);
+        if (!loadLayoutFromKeyboard(keyboard)) {
+            throw std::runtime_error("Failed to load the keyboard layout file.");
+        }
+    });
+
+    mKeyboardLayout = new QGridLayout(this);
+    mMainLayout->addLayout(mKeyboardLayout);
 
     qDebug() << "Parent is " << parent;
 
     connect(qApp, &QApplication::focusChanged, [=](QWidget *old, QWidget *now) {
         qDebug() << "Focus changed from" << old << "to" << now;
-        if (now == this || old == this) {
+        if (now == this || old == this || now == mKeyboardSelector) {
             return;
         }
         for (auto button : mButtons) {
@@ -212,22 +188,24 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
         }
     });
 
-    Keyboard keyboard;
-    if (loadLayoutFromKeyboard(keyboard)) {
-        setLayout(mGridLayout);
-    } else {
+    Keyboard keyboard = Keyboard::getDefaultKeyboardFromOperatingSystem();
+    if (!loadLayoutFromKeyboard(keyboard)) {
         throw std::runtime_error("Failed to load the keyboard layout file.");
     }
 }
 
 bool UniQKey::VirtualKeyboard::loadLayoutFromKeyboard(const Keyboard& keyboard) {
 
-    for (const auto& key : keyboard.getKeys()) {
-
-        addButtonFromKey(key);
-
+    // empty the layout
+    QLayoutItem *child;
+    while ((child = mKeyboardLayout->takeAt(0)) != nullptr) {
+        delete child->widget();
+        delete child;
     }
 
+    for (const auto& key : keyboard.getKeys()) {
+        addButtonFromKey(key);
+    }
     return true;
 }
 
@@ -241,19 +219,39 @@ void UniQKey::VirtualKeyboard::addButtonFromKey(const Key &key) {
     int spany = key.getYSpan() * spanResolution;
 
     VirtualKeyboardButton *btn = new VirtualKeyboardButton(key);
-    connect(btn, &VirtualKeyboardButton::virtualKeyPressed, this, &VirtualKeyboard::virtualKeyPressed);
-    mGridLayout->addWidget(btn, y, x, spany, spanx);
+    connect(btn, &VirtualKeyboardButton::virtualKeyPressed, this, &VirtualKeyboard::onVirtualKeyPressed);
+    mKeyboardLayout->addWidget(btn, y, x, spany, spanx);
     mButtons.append(btn);
 }
 
-void UniQKey::VirtualKeyboard::virtualKeyPressed(QChar key) {
+void UniQKey::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key) {
 
-    if (mIsCtrlPressed) {
+    switch (key.getType()) {
+    
+    case KeyType::REGULAR:
+        onVirtualRegularKeyPressed(button, key.getCharacters()[button.getCurrentKey()]); // todo : this is not 0
+        break;
+        
+    case KeyType::SHIFT:
+    case KeyType::ALT:
+    case KeyType::CTRL:
+        mKeyModifier ^= (unsigned char)key.getType();
+        for (auto button : mButtons) {
+            button->setCurrentKey(mKeyModifier);
+        }
+    
+    }
+
+}
+
+void UniQKey::VirtualKeyboard::onVirtualRegularKeyPressed(VirtualKeyboardButton &button, const QChar &key) {
+
+    if (mKeyModifier & (unsigned char)KeyType::CTRL == 0) {
         Qt::KeyboardModifiers modifiers = Qt::KeyboardModifier::ControlModifier;
-        if (mIsShiftPressed) {
+        if (mKeyModifier & (unsigned char)KeyType::SHIFT == 0) {
             modifiers |= Qt::KeyboardModifier::ShiftModifier;
         }
-        if (mIsAltGrPressed) {
+        if (mKeyModifier & (unsigned char)KeyType::ALT == 0) {
             modifiers |= Qt::KeyboardModifier::AltModifier;
         }
         // emit a Qt shortcut
@@ -268,6 +266,7 @@ void UniQKey::VirtualKeyboard::virtualKeyPressed(QChar key) {
         inputMethodEvent->setCommitString(key);
         QApplication::sendEvent(mParent, inputMethodEvent);
     }
+
 }
 
 void UniQKey::VirtualKeyboard::parentTakeFocus() {

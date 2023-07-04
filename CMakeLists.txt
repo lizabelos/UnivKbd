@@ -12,9 +12,20 @@ add_library(UniQKey STATIC
         UniQKey/SimpleTextEditor.cpp
         UniQKey/VirtualKeyboard.h
         UniQKey/VirtualKeyboard.cpp
-        UniQKey/Keyboard.cpp
         UniQKey/Keyboard.h
+        UniQKey/Key.h
         )
+
+# OS Dependant sources
+if (WIN32)
+    target_sources(UniQKey PRIVATE
+            UniQKey/Keyboard.windows.cpp
+    )
+else(WIN32)
+    target_sources(UniQKey PRIVATE
+            UniQKey/Keyboard.default.cpp
+    )
+endif(WIN32)
 
 target_link_libraries(UniQKey Qt6::Core Qt6::Gui Qt6::Widgets)
 

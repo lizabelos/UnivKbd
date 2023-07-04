@@ -4,13 +4,22 @@
 #include <QApplication>
 #include <QWidget>
 #include <QPushButton>
+#include <QVBoxLayout>
 #include <QGridLayout>
 #include <QPointer>
 #include <QLabel>
+#include <QFont>
+#include <QColor>
+#include <QList>
+#include <QComboBox>
+
+#include <unordered_set>
 
 #include "Keyboard.h"
 
 namespace UniQKey {
+
+    class VirtualKeyboardButton;
 
     class VirtualKeyboardButton : public QPushButton {
     Q_OBJECT
@@ -21,8 +30,12 @@ namespace UniQKey {
 
         void setCurrentKey(int index);
 
+        inline int getCurrentKey() const {
+            return mCurrentKey;
+        }
+
     signals:
-        void virtualKeyPressed(QChar key);
+        void virtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
 
     private slots:
         void virtualButtonPressed();
@@ -53,7 +66,9 @@ namespace UniQKey {
 
         void parentLooseFocus();
 
-        void virtualKeyPressed(QChar key);
+        void onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
+
+        void onVirtualRegularKeyPressed(VirtualKeyboardButton &button, const QChar &key);
 
     private:
         bool loadLayoutFromKeyboard(const Keyboard &keyboard);
@@ -63,11 +78,13 @@ namespace UniQKey {
     private:
         QWidget *mParent;
         QList<QPointer<VirtualKeyboardButton>> mButtons;
-        QPointer<QGridLayout> mGridLayout;
 
-        bool mIsShiftPressed = false;
-        bool mIsAltGrPressed = false;
-        bool mIsCtrlPressed = false;
+        QPointer<QVBoxLayout> mMainLayout;
+        QPointer<QGridLayout> mKeyboardLayout;
+
+        QPointer<QComboBox> mKeyboardSelector;
+
+        unsigned char mKeyModifier = 0;
     };
 
 }
