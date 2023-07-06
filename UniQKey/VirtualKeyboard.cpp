@@ -2,6 +2,7 @@
 #include <QFile>
 #include <QKeyEvent>
 #include <QLabel>
+#include <QTimer>
 
 #include <unordered_set>
 
@@ -17,6 +18,7 @@ UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key
 
         default:
             mKeyString[0] = key.toString();
+            setCheckable(true);
             break;
 
     }
@@ -226,8 +228,16 @@ void UniQKey::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button
         
     default:
         pressModifier(key);
-        for (auto button : mButtons) {
-            button->setCurrentKey(mKeyModifier);
+        qDebug() << currentKeyType();
+        for (auto otherButton : mButtons) {
+            if (otherButton == &button) {
+                continue;
+            }
+            if (otherButton->getKey().getType() == KeyType::REGULAR) {
+                otherButton->setCurrentKey(currentKeyType());
+            } else {
+                otherButton->setChecked(isModifierPressed(otherButton->getKey()));
+            }
         }
         event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), "");
         mKeySequence = QKeySequence(QKeyCombination(getModifiers()));
@@ -235,9 +245,8 @@ void UniQKey::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button
     }
 
     QShortcutEvent *shortcutEvent = new QShortcutEvent(mKeySequence, 0, false);
-    qDebug() << "Sending event" << shortcutEvent << "to" << mParent;
     QCoreApplication::postEvent(mParent, shortcutEvent);
-  //  QCoreApplication::postEvent(mParent, event);
+    QCoreApplication::postEvent(mParent, event);
 }
 
 

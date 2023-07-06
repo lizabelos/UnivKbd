@@ -34,6 +34,10 @@ namespace UniQKey {
             return mCurrentKey;
         }
 
+        inline const Key &getKey() const {
+            return mKey;
+        }
+
     signals:
         void virtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
 
@@ -98,6 +102,10 @@ namespace UniQKey {
 
         inline bool isModifierPressed(const Key &key) const {
             return (mKeyModifier & ((unsigned long)1 << (int)key.getType())) != 0;
+        }
+
+        inline int currentKeyType() const {
+            return (mKeyModifier & ((unsigned long)1 << (int)KeyType::SHIFT)) + (mKeyModifier & ((unsigned long)1 << (int)KeyType::ALT));
         }
 
     private:
