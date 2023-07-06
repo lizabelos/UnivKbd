@@ -9,6 +9,13 @@
 
 namespace UniQKey {
 
+    inline QStringList getKeyboardLayouts() {
+        QStringList layouts;
+        layouts << "qwertyuiopasdfghjklzxcvbnm";
+        layouts << "azertyuiopqsdfghjklmwxcvbn";
+        return layouts;
+    }
+
     class Keyboard {
     public:
         inline const std::vector<Key>& getKeys() const {
@@ -34,7 +41,7 @@ namespace UniQKey {
 
         static QList<QString> getOperatingSystemKeyboards();
 
-        static Keyboard getKeyboardFromOperatingSystem(const QString &layout);
+        static Keyboard getKeyboardFromOperatingSystem(const QString &country, const QString &layout);
 
         static Keyboard getDefaultKeyboardFromOperatingSystem();
 

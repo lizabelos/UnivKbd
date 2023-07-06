@@ -1,6 +1,8 @@
 #include "SimpleTextEditor.h"
 #include "VirtualKeyboard.h"
 
+#include <QWidget>
+
 UniQKey::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
 
     /*** Text Document ***/
@@ -25,6 +27,7 @@ UniQKey::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
 
 
     VirtualKeyboard *keyboard = new VirtualKeyboard(mTextEditor);
+    
 
     /*** Font Actions ***/
     boldAction = new QAction("Bold", this);
@@ -69,8 +72,19 @@ UniQKey::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
 
     /*** This Window **/
     setMinimumSize(QSize(795, 1042));
-    setCentralWidget(scrollArea);
-}
+
+    //setCentralWidget(scrollArea);
+    /*** Use a layout to add the keyboard in the bottom of the scrollArea */
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(scrollArea);
+    layout->addWidget(keyboard);
+    
+    QWidget *centralWidget = new QWidget;
+    centralWidget->setLayout(layout);
+
+    setCentralWidget(centralWidget);
+    
+} 
 
 void UniQKey::SimpleTextEditor::makeTextBold() {
     QFont font = mTextEditor->currentFont();

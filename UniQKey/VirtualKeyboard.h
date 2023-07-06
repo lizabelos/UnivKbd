@@ -60,20 +60,45 @@ namespace UniQKey {
     public:
         VirtualKeyboard(QWidget *parent = nullptr);
 
-    private slots:
+        inline Qt::KeyboardModifiers getModifiers() const {
+            Qt::KeyboardModifiers modifiers = Qt::NoModifier;
+            if (isModifierPressed(KeyType::CTRL)) {
+                modifiers |= Qt::ControlModifier;
+            }
+            if (isModifierPressed(KeyType::ALT)) {
+                modifiers |= Qt::AltModifier;
+            }
+            if (isModifierPressed(KeyType::SHIFT)) {
+                modifiers |= Qt::ShiftModifier;
+            }
+            return modifiers;
+        }
 
+    public slots:
+        void setEnabled(bool enabled);
+
+        void triggerSetEnabled();
+
+    private slots:
+    
         void parentTakeFocus();
 
         void parentLooseFocus();
 
         void onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
 
-        void onVirtualRegularKeyPressed(VirtualKeyboardButton &button, const QChar &key);
-
     private:
         bool loadLayoutFromKeyboard(const Keyboard &keyboard);
 
         void addButtonFromKey(const Key &key);
+
+        inline void pressModifier(const Key &key) {
+            mKeyModifier ^= (unsigned long)1 << (int)key.getType();
+        }
+
+        inline bool isModifierPressed(const Key &key) const {
+            return (mKeyModifier & ((unsigned long)1 << (int)key.getType())) != 0;
+        }
 
     private:
         QWidget *mParent;
@@ -82,9 +107,15 @@ namespace UniQKey {
         QPointer<QVBoxLayout> mMainLayout;
         QPointer<QGridLayout> mKeyboardLayout;
 
-        QPointer<QComboBox> mKeyboardSelector;
+        QPointer<QComboBox> mCountrySelector;
+        QPointer<QComboBox> mLayoutSelector;
 
-        unsigned char mKeyModifier = 0;
+        QPointer<QPushButton> mOpenCloseButton;
+
+        unsigned long mKeyModifier = 0;
+        QKeySequence mKeySequence;
+
+        bool mIsEnabled = true;
     };
 
 }

@@ -9,13 +9,25 @@ namespace UniQKey {
         REGULAR = 0, 
         SHIFT = 1, 
         ALT = 2,
-        CTRL = 4, 
-        FUNCTION = 8,
-        TAB = 16,
-        BACKSPACE = 32,
-        CAPS_LOCK = 64,
-        SPACE = 128,
-        ENTER = 256    
+        CTRL = 3, 
+        ESC = 4,
+        TAB = 5,
+        BACKSPACE = 6,
+        CAPS_LOCK = 7,
+        SPACE = 8,
+        ENTER = 9,
+        FN1 = 10,
+        FN2 = 11,
+        FN3 = 12,
+        FN4 = 13,
+        FN5 = 14,
+        FN6 = 15,
+        FN7 = 16,
+        FN8 = 17,
+        FN9 = 18,
+        FN10 = 19,
+        FN11 = 20,
+        FN12 = 21    
     };
 
     class Key {
@@ -62,13 +74,13 @@ namespace UniQKey {
             mY = y;
         }
 
-        inline void serialize(QFile &file) {
-            file.write(reinterpret_cast<char*>(&mType), sizeof(KeyType));
-            file.write(reinterpret_cast<char*>(&mXSpan), sizeof(float));
-            file.write(reinterpret_cast<char*>(&mYSpan), sizeof(float));
-            file.write(reinterpret_cast<char*>(&mX), sizeof(float));
-            file.write(reinterpret_cast<char*>(&mY), sizeof(float));
-            file.write(reinterpret_cast<char*>(&mCharacters), sizeof(QString));
+        inline void serialize(QFile &file) const {
+            file.write(reinterpret_cast<const char*>(&mType), sizeof(KeyType));
+            file.write(reinterpret_cast<const char*>(&mXSpan), sizeof(float));
+            file.write(reinterpret_cast<const char*>(&mYSpan), sizeof(float));
+            file.write(reinterpret_cast<const char*>(&mX), sizeof(float));
+            file.write(reinterpret_cast<const char*>(&mY), sizeof(float));
+            file.write(reinterpret_cast<const char*>(&mCharacters), sizeof(QString));
         }
 
         inline void deserialize(QFile &file) {
@@ -78,6 +90,199 @@ namespace UniQKey {
             file.read(reinterpret_cast<char*>(&mX), sizeof(float));
             file.read(reinterpret_cast<char*>(&mY), sizeof(float));
             file.read(reinterpret_cast<char*>(&mCharacters), sizeof(QString));
+        }
+
+        inline QString toString(int i = 0) const {
+            switch (getType()) {
+
+                case KeyType::REGULAR:
+                    return getCharacters()[i];
+                    break;
+
+                case KeyType::SHIFT:
+                    return "Shift";
+                    break;
+
+                case KeyType::CTRL:
+                    return "Ctrl";
+                    break;
+
+                case KeyType::ALT:
+                    return "Alt";
+                    break;
+
+                case KeyType::ESC:
+                    return "Esc";
+                    break;
+
+                case KeyType::TAB:
+                    return "Tab";
+                    break;
+
+                case KeyType::BACKSPACE:
+                    return "Backspace";
+                    break;
+
+                case KeyType::CAPS_LOCK:
+                    return "Caps Lock";
+                    break;
+
+                case KeyType::SPACE:
+                    return "Space";
+                    break;
+
+                case KeyType::ENTER:
+                    return "Enter";
+                    break;
+
+                case KeyType::FN1:
+                    return "Fn1";
+                    break;
+
+                case KeyType::FN2:
+                    return "Fn2";
+                    break;
+
+                case KeyType::FN3:
+                    return "Fn3";
+                    break;
+
+                case KeyType::FN4:
+                    return "Fn4";
+                    break;
+
+                case KeyType::FN5:
+                    return "Fn5";
+                    break;
+
+                case KeyType::FN6:
+                    return "Fn6";
+                    break;
+
+                case KeyType::FN7:
+                    return "Fn7";
+                    break;
+
+                case KeyType::FN8:
+                    return "Fn8";
+                    break;
+
+                case KeyType::FN9:
+                    return "Fn9";
+                    break;
+
+                case KeyType::FN10:
+                    return "Fn10";
+                    break;
+
+                case KeyType::FN11:
+                    return "Fn11";
+                    break;
+
+                case KeyType::FN12:
+                    return "Fn12";
+                    break;
+
+                default:
+                    return "";
+
+            }
+        }
+
+        Qt::Key toQtKey() const {
+            switch (getType()) {
+                    
+                    case KeyType::REGULAR:
+                        return static_cast<Qt::Key>(getCharacters()[0].unicode());
+                        break;
+    
+                    case KeyType::SHIFT:
+                        return Qt::Key_Shift;
+                        break;
+    
+                    case KeyType::CTRL:
+                        return Qt::Key_Control;
+                        break;
+    
+                    case KeyType::ALT:
+                        return Qt::Key_Alt;
+                        break;
+    
+                    case KeyType::ESC:
+                        return Qt::Key_Escape;
+                        break;
+    
+                    case KeyType::TAB:
+                        return Qt::Key_Tab;
+                        break;
+    
+                    case KeyType::BACKSPACE:
+                        return Qt::Key_Backspace;
+                        break;
+    
+                    case KeyType::CAPS_LOCK:
+                        return Qt::Key_CapsLock;
+                        break;
+    
+                    case KeyType::SPACE:
+                        return Qt::Key_Space;
+                        break;
+    
+                    case KeyType::ENTER:
+                        return Qt::Key_Enter;
+                        break;
+    
+                    case KeyType::FN1:
+                        return Qt::Key_F1;
+                        break;
+    
+                    case KeyType::FN2:
+                        return Qt::Key_F2;
+                        break;
+    
+                    case KeyType::FN3:
+                        return Qt::Key_F3;
+                        break;
+    
+                    case KeyType::FN4:
+                        return Qt::Key_F4;
+                        break;
+    
+                    case KeyType::FN5:
+                        return Qt::Key_F5;
+                        break;
+    
+                    case KeyType::FN6:
+                        return Qt::Key_F6;
+                        break;
+    
+                    case KeyType::FN7:
+                        return Qt::Key_F7;
+                        break;
+    
+                    case KeyType::FN8:
+                        return Qt::Key_F8;
+                        break;
+    
+                    case KeyType::FN9:
+                        return Qt::Key_F9;
+                        break;
+    
+                    case KeyType::FN10:
+                        return Qt::Key_F10;
+                        break;
+    
+                    case KeyType::FN11:
+                        return Qt::Key_F11;
+                        break;
+    
+                    case KeyType::FN12:
+                        return Qt::Key_F12;
+                        break;
+    
+                    default:
+                        return Qt::Key_unknown;
+                }
         }
 
     private:

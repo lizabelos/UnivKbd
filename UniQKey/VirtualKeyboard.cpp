@@ -10,48 +10,13 @@ UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key
     switch (key.getType()) {
 
         case KeyType::REGULAR:
-            mKeyString[0] = key.getCharacters()[0];
-            mKeyString[1] = key.getCharacters()[1];
-            mKeyString[2] = key.getCharacters()[2];
-            break;
-
-        case KeyType::SHIFT:
-            mKeyString[0] = "Shift";
-            break;
-
-        case KeyType::CTRL:
-            mKeyString[0] = "Ctrl";
-            break;
-
-        case KeyType::ALT:
-            mKeyString[0] = "Alt";
-            break;
-
-        case KeyType::FUNCTION:
-            mKeyString[0] = key.getCharacters();
-            break;
-
-        case KeyType::TAB:
-            mKeyString[0] = "Tab";
-            break;
-
-        case KeyType::BACKSPACE:
-            mKeyString[0] = "Backspace";
-            break;
-
-        case KeyType::CAPS_LOCK:
-            mKeyString[0] = "Caps Lock";
-            break;
-
-        case KeyType::SPACE:
-            mKeyString[0] = "Space";
-            break;
-
-        case KeyType::ENTER:
-            mKeyString[0] = "Enter";
+            mKeyString[0] = key.toString(0);
+            mKeyString[1] = key.toString(1);
+            mKeyString[2] = key.toString(2);
             break;
 
         default:
+            mKeyString[0] = key.toString();
             break;
 
     }
@@ -149,29 +114,52 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
         throw std::runtime_error("No keyboard layouts found");
     }
     // add a combobox to select the keyboard layout
-    mKeyboardSelector = new QComboBox(this);
-    mMainLayout->addWidget(mKeyboardSelector);
+    mCountrySelector = new QComboBox(this);
+    mMainLayout->addWidget(mCountrySelector);
     for (auto keyboardLayout : keyboardLayouts) {
-        mKeyboardSelector->addItem(keyboardLayout);
+        mCountrySelector->addItem(keyboardLayout);
     }
     // set to English (United States) as default
-    mKeyboardSelector->setCurrentText("US");
+    mCountrySelector->setCurrentText("US");
 
-    connect(mKeyboardSelector, &QComboBox::currentTextChanged, [=](const QString &text) {
-        Keyboard keyboard = Keyboard::getKeyboardFromOperatingSystem(text);
+
+    mLayoutSelector = new QComboBox(this);
+    mMainLayout->addWidget(mLayoutSelector);
+    for (auto layout : getKeyboardLayouts()) {
+        mLayoutSelector->addItem(layout);
+    }
+    mLayoutSelector->setCurrentText(getKeyboardLayouts()[0]);
+
+    connect(mCountrySelector, &QComboBox::currentTextChanged, [=](const QString &text) {
+        Keyboard keyboard = Keyboard::getKeyboardFromOperatingSystem(mCountrySelector->currentText(), mLayoutSelector->currentText());
         if (!loadLayoutFromKeyboard(keyboard)) {
             throw std::runtime_error("Failed to load the keyboard layout file.");
         }
     });
 
+    connect(mLayoutSelector, &QComboBox::currentTextChanged, [=](const QString &text) {
+        Keyboard keyboard = Keyboard::getKeyboardFromOperatingSystem(mCountrySelector->currentText(), mLayoutSelector->currentText());
+        if (!loadLayoutFromKeyboard(keyboard)) {
+            throw std::runtime_error("Failed to load the keyboard layout file.");
+        }
+    });
+    
+
     mKeyboardLayout = new QGridLayout(this);
     mMainLayout->addLayout(mKeyboardLayout);
+
+    mOpenCloseButton = new QPushButton("Open/Close", this);
+    mMainLayout->addWidget(mOpenCloseButton);
+    
+    // connect to slot triggerSetEnabled
+    connect(mOpenCloseButton, &QPushButton::clicked, this, &VirtualKeyboard::triggerSetEnabled);
+
 
     qDebug() << "Parent is " << parent;
 
     connect(qApp, &QApplication::focusChanged, [=](QWidget *old, QWidget *now) {
         qDebug() << "Focus changed from" << old << "to" << now;
-        if (now == this || old == this || now == mKeyboardSelector) {
+        if (now == this || old == this || now == mCountrySelector || now == mLayoutSelector) {
             return;
         }
         for (auto button : mButtons) {
@@ -188,7 +176,7 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
         }
     });
 
-    Keyboard keyboard = Keyboard::getDefaultKeyboardFromOperatingSystem();
+    Keyboard keyboard = Keyboard::getKeyboardFromOperatingSystem(mCountrySelector->currentText(), mLayoutSelector->currentText());
     if (!loadLayoutFromKeyboard(keyboard)) {
         throw std::runtime_error("Failed to load the keyboard layout file.");
     }
@@ -226,48 +214,32 @@ void UniQKey::VirtualKeyboard::addButtonFromKey(const Key &key) {
 
 void UniQKey::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key) {
 
+    QKeyEvent *event;
+    QKeySequence mKeySequence;
+
     switch (key.getType()) {
     
     case KeyType::REGULAR:
-        onVirtualRegularKeyPressed(button, key.getCharacters()[button.getCurrentKey()]); // todo : this is not 0
+        event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), key.getCharacters()[button.getCurrentKey()]);
+        mKeySequence = QKeySequence(QKeyCombination(getModifiers(), key.toQtKey()));
         break;
         
-    case KeyType::SHIFT:
-    case KeyType::ALT:
-    case KeyType::CTRL:
-        mKeyModifier ^= (unsigned char)key.getType();
+    default:
+        pressModifier(key);
         for (auto button : mButtons) {
             button->setCurrentKey(mKeyModifier);
         }
-    
+        event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), "");
+        mKeySequence = QKeySequence(QKeyCombination(getModifiers()));
+
     }
 
+    QShortcutEvent *shortcutEvent = new QShortcutEvent(mKeySequence, 0, false);
+    qDebug() << "Sending event" << shortcutEvent << "to" << mParent;
+    QCoreApplication::postEvent(mParent, shortcutEvent);
+  //  QCoreApplication::postEvent(mParent, event);
 }
 
-void UniQKey::VirtualKeyboard::onVirtualRegularKeyPressed(VirtualKeyboardButton &button, const QChar &key) {
-
-    if (mKeyModifier & (unsigned char)KeyType::CTRL == 0) {
-        Qt::KeyboardModifiers modifiers = Qt::KeyboardModifier::ControlModifier;
-        if (mKeyModifier & (unsigned char)KeyType::SHIFT == 0) {
-            modifiers |= Qt::KeyboardModifier::ShiftModifier;
-        }
-        if (mKeyModifier & (unsigned char)KeyType::ALT == 0) {
-            modifiers |= Qt::KeyboardModifier::AltModifier;
-        }
-        // emit a Qt shortcut
-        QKeySequence shortcut(key);
-        QShortcutEvent *shortcutEvent = new QShortcutEvent(shortcut, modifiers);
-        QApplication::sendEvent(mParent, shortcutEvent);
-
-        QKeyEvent *keyEvent = new QKeyEvent(QEvent::KeyPress, key.unicode(), modifiers, QString(key));
-        QApplication::sendEvent(mParent, keyEvent);
-    } else {
-        QInputMethodEvent *inputMethodEvent = new QInputMethodEvent();
-        inputMethodEvent->setCommitString(key);
-        QApplication::sendEvent(mParent, inputMethodEvent);
-    }
-
-}
 
 void UniQKey::VirtualKeyboard::parentTakeFocus() {
     show();
@@ -275,4 +247,34 @@ void UniQKey::VirtualKeyboard::parentTakeFocus() {
 
 void UniQKey::VirtualKeyboard::parentLooseFocus() {
     hide();
+}
+
+void UniQKey::VirtualKeyboard::setEnabled(bool enabled) {
+    mIsEnabled = enabled;
+    if (enabled) {
+        mOpenCloseButton->setText("Close");
+
+        mMainLayout->removeWidget(mOpenCloseButton); // to keep the button at the bottom
+
+        // add the selectors and the keyboard layout
+        mMainLayout->addWidget(mCountrySelector);
+        mMainLayout->addWidget(mLayoutSelector);
+        mMainLayout->addLayout(mKeyboardLayout);
+        mMainLayout->addWidget(mOpenCloseButton);
+
+    } else {
+        mOpenCloseButton->setText("Open");
+
+
+        // hide the selectors and the keyboard layout. for that we are going to revmoe them from the layout
+        mMainLayout->removeWidget(mCountrySelector);
+        mMainLayout->removeWidget(mLayoutSelector);
+        mMainLayout->removeItem(mKeyboardLayout);
+
+
+    }
+}
+
+void UniQKey::VirtualKeyboard::triggerSetEnabled() {
+    setEnabled(!mIsEnabled);
 }
