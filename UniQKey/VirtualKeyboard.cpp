@@ -1,4 +1,5 @@
 #include "VirtualKeyboard.h"
+
 #include <QFile>
 #include <QKeyEvent>
 #include <QLabel>
@@ -23,7 +24,7 @@ UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key
 
     }
 
-    mGridLayout = new QGridLayout(this);
+    mGridLayout = new QGridLayout();
     setMinimumSize(60, 70);
     setLayout(mGridLayout);
 
@@ -35,14 +36,14 @@ UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key
     mDefaultColor = QColor(100, 100, 100);
 
     if (mKeyString[1] == "" && mKeyString[2] == "") {
-        mLabels[0] = new QLabel(mKeyString[0], this);
+        mLabels[0] = new QLabel(mKeyString[0]);
         mLabels[0]->setAlignment(Qt::AlignCenter);
         mGridLayout->addWidget(mLabels[0], 0, 0, 1, 2);
     }
 
     if (mKeyString[1] != "" && mKeyString[2] == "") {
-        mLabels[0] = new QLabel(mKeyString[0], this);
-        mLabels[1] = new QLabel(mKeyString[1], this);
+        mLabels[0] = new QLabel(mKeyString[0]);
+        mLabels[1] = new QLabel(mKeyString[1]);
 
         mLabels[0]->setAlignment(Qt::AlignCenter);
         mLabels[1]->setAlignment(Qt::AlignCenter);
@@ -52,9 +53,9 @@ UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key
     }
 
     if (mKeyString[1] != "" && mKeyString[2] != "") {
-        mLabels[0] = new QLabel(mKeyString[0], this);
-        mLabels[1] = new QLabel(mKeyString[1], this);
-        mLabels[2] = new QLabel(mKeyString[2], this);
+        mLabels[0] = new QLabel(mKeyString[0]);
+        mLabels[1] = new QLabel(mKeyString[1]);
+        mLabels[2] = new QLabel(mKeyString[2]);
 
         mLabels[0]->setAlignment(Qt::AlignCenter);
         mLabels[1]->setAlignment(Qt::AlignCenter);
@@ -108,15 +109,15 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Tool);
     setAttribute(Qt::WA_TranslucentBackground);
 
-    mMainLayout = new QVBoxLayout(this);
+    mMainLayout = new QVBoxLayout();
     setLayout(mMainLayout);
 
-    QList<QString> keyboardLayouts = Keyboard::getOperatingSystemKeyboards();
+    QList<QString> keyboardLayouts = Keyboard::listExportedKeyboards();
     if (keyboardLayouts.size() == 0) {
         throw std::runtime_error("No keyboard layouts found");
     }
     // add a combobox to select the keyboard layout
-    mCountrySelector = new QComboBox(this);
+    mCountrySelector = new QComboBox();
     mMainLayout->addWidget(mCountrySelector);
     for (auto keyboardLayout : keyboardLayouts) {
         mCountrySelector->addItem(keyboardLayout);
@@ -125,7 +126,7 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
     mCountrySelector->setCurrentText("US");
 
 
-    mLayoutSelector = new QComboBox(this);
+    mLayoutSelector = new QComboBox();
     mMainLayout->addWidget(mLayoutSelector);
     for (auto layout : getKeyboardLayouts()) {
         mLayoutSelector->addItem(layout);
@@ -133,21 +134,21 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
     mLayoutSelector->setCurrentText(getKeyboardLayouts()[0]);
 
     connect(mCountrySelector, &QComboBox::currentTextChanged, [=](const QString &text) {
-        Keyboard keyboard = Keyboard::getKeyboardFromOperatingSystem(mCountrySelector->currentText(), mLayoutSelector->currentText());
+        Keyboard keyboard = Keyboard::importKeyboard(mCountrySelector->currentText(), mLayoutSelector->currentText());
         if (!loadLayoutFromKeyboard(keyboard)) {
             throw std::runtime_error("Failed to load the keyboard layout file.");
         }
     });
 
     connect(mLayoutSelector, &QComboBox::currentTextChanged, [=](const QString &text) {
-        Keyboard keyboard = Keyboard::getKeyboardFromOperatingSystem(mCountrySelector->currentText(), mLayoutSelector->currentText());
+        Keyboard keyboard = Keyboard::importKeyboard(mCountrySelector->currentText(), mLayoutSelector->currentText());
         if (!loadLayoutFromKeyboard(keyboard)) {
             throw std::runtime_error("Failed to load the keyboard layout file.");
         }
     });
     
 
-    mKeyboardLayout = new QGridLayout(this);
+    mKeyboardLayout = new QGridLayout();
     mMainLayout->addLayout(mKeyboardLayout);
 
     mOpenCloseButton = new QPushButton("Open/Close", this);
@@ -178,7 +179,7 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
         }
     });
 
-    Keyboard keyboard = Keyboard::getKeyboardFromOperatingSystem(mCountrySelector->currentText(), mLayoutSelector->currentText());
+    Keyboard keyboard = Keyboard::importKeyboard(mCountrySelector->currentText(), mLayoutSelector->currentText());
     if (!loadLayoutFromKeyboard(keyboard)) {
         throw std::runtime_error("Failed to load the keyboard layout file.");
     }
@@ -208,6 +209,8 @@ void UniQKey::VirtualKeyboard::addButtonFromKey(const Key &key) {
     int spanx = key.getXSpan() * spanResolution;
     int spany = key.getYSpan() * spanResolution;
 
+    qDebug() << "Adding button : " << x << " " << y << " " << spanx << " " << spany;
+
     VirtualKeyboardButton *btn = new VirtualKeyboardButton(key);
     connect(btn, &VirtualKeyboardButton::virtualKeyPressed, this, &VirtualKeyboard::onVirtualKeyPressed);
     mKeyboardLayout->addWidget(btn, y, x, spany, spanx);
@@ -217,16 +220,13 @@ void UniQKey::VirtualKeyboard::addButtonFromKey(const Key &key) {
 void UniQKey::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key) {
 
     QKeyEvent *event;
-    QKeySequence mKeySequence;
+    //QKeySequence mKeySequence;
 
     switch (key.getType()) {
-    
-    case KeyType::REGULAR:
-        event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), key.getCharacters()[button.getCurrentKey()]);
-        mKeySequence = QKeySequence(QKeyCombination(getModifiers(), key.toQtKey()));
-        break;
         
-    default:
+    case KeyType::SHIFT:
+    case KeyType::ALT:
+    case KeyType::CTRL:
         pressModifier(key);
         qDebug() << currentKeyType();
         for (auto otherButton : mButtons) {
@@ -240,13 +240,19 @@ void UniQKey::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button
             }
         }
         event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), "");
-        mKeySequence = QKeySequence(QKeyCombination(getModifiers()));
+        //mKeySequence = QKeySequence(QKeyCombination(getModifiers()));
+
+    default:
+        event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), key.getCharacters()[button.getCurrentKey()]);
+        //mKeySequence = QKeySequence(QKeyCombination(getModifiers(), key.toQtKey()));
+        break;
 
     }
 
-    QShortcutEvent *shortcutEvent = new QShortcutEvent(mKeySequence, 0, false);
-    QCoreApplication::postEvent(mParent, shortcutEvent);
+    //QShortcutEvent *shortcutEvent = new QShortcutEvent(mKeySequence, 0, false);
+    //QCoreApplication::postEvent(mParent, shortcutEvent);
     QCoreApplication::postEvent(mParent, event);
+
 }
 
 

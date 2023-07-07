@@ -4,6 +4,8 @@
 int main(int argc, char **argv) {
     QApplication app(argc, argv);
 
+    //UniQKey::Keyboard::exportOperatingSystemKeyboards();
+
     qDebug() << "Launching UniQKey SimpleTextEditor...";
     UniQKey::SimpleTextEditor editor;
 

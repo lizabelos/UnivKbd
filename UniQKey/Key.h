@@ -13,21 +13,20 @@ namespace UniQKey {
         ESC = 3,
         TAB = 4,
         BACKSPACE = 5,
-        CAPS_LOCK = 6,
-        SPACE = 7,
-        ENTER = 8,
-        FN1 = 9,
-        FN2 = 10,
-        FN3 = 11,
-        FN4 = 12,
-        FN5 = 13,
-        FN6 = 14,
-        FN7 = 15,
-        FN8 = 16,
-        FN9 = 17,
-        FN10 = 18,
-        FN11 = 19,
-        FN12 = 20    
+        SPACE = 6,
+        ENTER = 7,
+        FN1 = 8,
+        FN2 = 9,
+        FN3 = 10,
+        FN4 = 11,
+        FN5 = 12,
+        FN6 = 13,
+        FN7 = 14,
+        FN8 = 15,
+        FN9 = 16,
+        FN10 = 17,
+        FN11 = 18,
+        FN12 = 19    
     };
 
     class Key {
@@ -75,21 +74,38 @@ namespace UniQKey {
         }
 
         inline void serialize(QFile &file) const {
-            file.write(reinterpret_cast<const char*>(&mType), sizeof(KeyType));
-            file.write(reinterpret_cast<const char*>(&mXSpan), sizeof(float));
-            file.write(reinterpret_cast<const char*>(&mYSpan), sizeof(float));
-            file.write(reinterpret_cast<const char*>(&mX), sizeof(float));
-            file.write(reinterpret_cast<const char*>(&mY), sizeof(float));
-            file.write(reinterpret_cast<const char*>(&mCharacters), sizeof(QString));
+            file.write((const char*)(&mType), sizeof(KeyType));
+            file.write((const char*)(&mXSpan), sizeof(float));
+            file.write((const char*)(&mYSpan), sizeof(float));
+            file.write((const char*)(&mX), sizeof(float));
+            file.write((const char*)(&mY), sizeof(float));
+
+            int mCharactersSize = mCharacters.size();
+            file.write((const char*)(&mCharactersSize), sizeof(int));
+            if (mCharactersSize > 0) {
+                file.write(mCharacters.toStdString().c_str(), mCharactersSize);
+            }
+
+            qDebug() << "Serialized " << mXSpan << " " << mYSpan << " " << mX << " " << mY << " " << mCharactersSize << " " << mCharacters;
         }
 
         inline void deserialize(QFile &file) {
-            file.read(reinterpret_cast<char*>(&mType), sizeof(KeyType));
-            file.read(reinterpret_cast<char*>(&mXSpan), sizeof(float));
-            file.read(reinterpret_cast<char*>(&mYSpan), sizeof(float));
-            file.read(reinterpret_cast<char*>(&mX), sizeof(float));
-            file.read(reinterpret_cast<char*>(&mY), sizeof(float));
-            file.read(reinterpret_cast<char*>(&mCharacters), sizeof(QString));
+            file.read((char*)(&mType), sizeof(KeyType));
+            file.read((char*)(&mXSpan), sizeof(float));
+            file.read((char*)(&mYSpan), sizeof(float));
+            file.read((char*)(&mX), sizeof(float));
+            file.read((char*)(&mY), sizeof(float));
+            
+            int mCharactersSize;
+            file.read((char*)(&mCharactersSize), sizeof(int));
+            if (mCharactersSize > 0) {
+                char* mCharactersBuffer = new char[mCharactersSize];
+                file.read(mCharactersBuffer, mCharactersSize);
+                mCharacters = QString(mCharactersBuffer);
+                delete[] mCharactersBuffer;
+            }
+
+            qDebug() << "Deserialized " << mXSpan << " " << mYSpan << " " << mX << " " << mY << " " << mCharactersSize << " " << mCharacters;
         }
 
         inline QString toString(int i = 0) const {
@@ -121,10 +137,6 @@ namespace UniQKey {
 
                 case KeyType::BACKSPACE:
                     return "Backspace";
-                    break;
-
-                case KeyType::CAPS_LOCK:
-                    return "Caps Lock";
                     break;
 
                 case KeyType::SPACE:
@@ -219,11 +231,7 @@ namespace UniQKey {
                     case KeyType::BACKSPACE:
                         return Qt::Key_Backspace;
                         break;
-    
-                    case KeyType::CAPS_LOCK:
-                        return Qt::Key_CapsLock;
-                        break;
-    
+
                     case KeyType::SPACE:
                         return Qt::Key_Space;
                         break;
