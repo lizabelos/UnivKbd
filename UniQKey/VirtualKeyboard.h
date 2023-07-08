@@ -1,3 +1,26 @@
+/*
+* --------------------------------------------------------------
+* Project: UniQKey
+* Author: Liza Belos
+* Year: 2023
+* 
+* Copyright (c) 2023. All rights reserved.
+* This work is licensed under the terms of the MIT License.
+* For a copy, see <https://opensource.org/licenses/MIT>.
+* --------------------------------------------------------------
+*
+* NOTICE:
+* This file is part of the original distribution of the UniQKey project. 
+* All changes and redistributions of this file must retain this notice, 
+* the list of contributors, and the entire copyright notice including the
+* MIT License information.
+* 
+* DISCLAIMER:
+* This software is provided 'as-is', without any express or implied warranty. 
+* In no event will the authors be held liable for any damages arising from 
+* the use of this software.
+*/
+
 #ifndef VIRTUALKEYBOARD_H
 #define VIRTUALKEYBOARD_H
 
@@ -18,8 +41,6 @@
 #include "Keyboard.h"
 
 namespace UniQKey {
-
-    class VirtualKeyboardButton;
 
     class VirtualKeyboardButton : public QPushButton {
     Q_OBJECT
@@ -58,12 +79,48 @@ namespace UniQKey {
 
     };
 
+    /**
+     * @class VirtualKeyboard
+     *
+     * @brief Represents a virtual keyboard that can be used as an input method for widgets.
+     *
+     * The VirtualKeyboard class provides a customizable on-screen keyboard that can be used
+     * as an input method for widgets in Qt applications. It can be used as a floating keyboard
+     * that shows up when a widget is focused, or it can be added directly to a widget's layout.
+     *
+     * To create a floating keyboard that shows up when a widget is focused, you can use the
+     * following code:
+     *
+     * ```cpp
+     * #include <UniQKey/UniQKey>
+     *
+     * QWidget *anyWidget = ...;
+     * UniQKey::VirtualKeyboard *keyboard = new VirtualKeyboard(anyWidget);
+     * ```
+     *
+     * If you don't want the keyboard to float, you can add it to your widget's layout
+     * using the `addWidget()` function:
+     *
+     * ```cpp
+     * anyWidget->layout()->addWidget(keyboard);
+     * ```
+     */
     class VirtualKeyboard : public QWidget {
     Q_OBJECT
 
     public:
+        /**
+         * @brief Constructor for the VirtualKeyboard class.
+         *
+         * @param parent The parent widget with which the keyboard will be associated. When this widget will be in focus, the keyboard will be shown. automatically
+         */
         VirtualKeyboard(QWidget *parent = nullptr);
 
+        /**
+         * @brief Returns the Qt keyboard modifiers.
+         *
+         * @return The keyboard modifiers indicating which modifier keys are currently pressed (Ctrl, Alt, Shift).
+         */
         inline Qt::KeyboardModifiers getModifiers() const {
             Qt::KeyboardModifiers modifiers = Qt::NoModifier;
             if (isModifierPressed(KeyType::CTRL)) {
@@ -79,12 +136,19 @@ namespace UniQKey {
         }
 
     public slots:
+        /**
+         * @brief Sets the enabled state of the virtual keyboard.
+         *
+         * @param enabled The enabled state of the virtual keyboard.
+         */
         void setEnabled(bool enabled);
 
+        /**
+         * @brief Triggers the setEnabled() slot to enable or disable the virtual keyboard.
+         */
         void triggerSetEnabled();
 
     private slots:
-    
         void parentTakeFocus();
 
         void parentLooseFocus();

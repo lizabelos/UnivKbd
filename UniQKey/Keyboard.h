@@ -1,3 +1,26 @@
+/*
+* --------------------------------------------------------------
+* Project: UniQKey
+* Author: Liza Belos
+* Year: 2023
+* 
+* Copyright (c) 2023. All rights reserved.
+* This work is licensed under the terms of the MIT License.
+* For a copy, see <https://opensource.org/licenses/MIT>.
+* --------------------------------------------------------------
+*
+* NOTICE:
+* This file is part of the original distribution of the UniQKey project. 
+* All changes and redistributions of this file must retain this notice, 
+* the list of contributors, and the entire copyright notice including the
+* MIT License information.
+* 
+* DISCLAIMER:
+* This software is provided 'as-is', without any express or implied warranty. 
+* In no event will the authors be held liable for any damages arising from 
+* the use of this software.
+*/
+
 #ifndef UNIQKEY_KEYBOARD_H
 #define UNIQKEY_KEYBOARD_H
 
@@ -9,12 +32,20 @@
 
 #include "Key.h"
 
-inline void UniQKey_init() {
+/**
+ * @brief Internal function to initializes the UniQKey Qt resources.
+ */
+inline void UNIQKEY_INIT_RESOURCE() {
     Q_INIT_RESOURCE(keyboards);
 }
 
 namespace UniQKey {
 
+    /**
+     * @brief Returns a list of available keyboard layouts.
+     *
+     * @return QStringList A list of keyboard layouts.
+     */
     inline QStringList getKeyboardLayouts() {
         QStringList layouts;
         layouts << "qwertyuiopasdfghjklzxcvbnm";
@@ -22,12 +53,30 @@ namespace UniQKey {
         return layouts;
     }
 
+    /**
+     * @class Keyboard
+     *
+     * @brief Represents a keyboard.
+     */
     class Keyboard {
     public:
+
+        /**
+         * @brief Returns the keys of the keyboard.
+         *
+         * @return The keys of the keyboard.
+         */
         inline const std::vector<Key>& getKeys() const {
             return mKeys;
         }
 
+        /**
+         * @brief Serializes the keyboard into a file.
+         *
+         * @param file The file to serialize the keyboard into.
+         * 
+         * @note You can serialize multiple keyboards into the same file.
+         */
         inline void serialize(QFile &file) {
             int size = mKeys.size();
             file.write((char*)(&size), sizeof(int));
@@ -36,6 +85,13 @@ namespace UniQKey {
             }
         }
 
+        /**
+         * @brief Deserializes the keyboard from a file.
+         *
+         * @param file The file to deserialize the keyboard from.
+         * 
+         * @note You can deserialize mutliple keyboards from a same file.
+         */
         inline void deserialize(QFile &file) {
             qDebug() << "Deserializing keyboard...";
             int size;
@@ -48,12 +104,32 @@ namespace UniQKey {
             qDebug() << "Deserialized keyboard.";
         }
 
+        /**
+         * @brief Returns a list of keyboards grabbed from the operating system.
+         *
+         * @return A list of operating system keyboards.
+         */
         static QList<QString> getOperatingSystemKeyboards();
 
+        /**
+         * @brief Returns a keyboard based on the country and layout from the operating system.
+         *
+         * @param country The country of the keyboard.
+         * @param layout The layout of the keyboard.
+         * @return The keyboard corresponding to the country and layout.
+         */
         static Keyboard getKeyboardFromOperatingSystem(const QString &country, const QString &layout);
 
+        /**
+         * @brief Returns the default keyboard from the operating system.
+         *
+         * @return The default keyboard from the operating system.
+         */
         static Keyboard getDefaultKeyboardFromOperatingSystem();
 
+        /**
+         * @brief Exports operating system keyboards to files.
+         */
         static inline void exportOperatingSystemKeyboards() {
             // create directory keyboards
             QDir dir("keyboards");
@@ -74,10 +150,16 @@ namespace UniQKey {
             }
         }
 
-        static inline QList<QString> listExportedKeyboards() {
+        /**
+         * @brief Lists the exported keyboards.
+         *
+         * @param path The path to look at for keyboards
+         * @return A list of exported keyboards.
+         */
+        static inline QList<QString> listExportedKeyboards(QString path=":/") {
             // initialize keyboards resources
-            UniQKey_init();
-            QDir dir(":/");
+            UNIQKEY_INIT_RESOURCE();
+            QDir dir(path);
             if (!dir.exists()) {
                 return QList<QString>();
             }
@@ -89,6 +171,13 @@ namespace UniQKey {
             return keyboards;
         }
 
+        /**
+         * @brief Imports a keyboard from a file.
+         *
+         * @param name The name of the keyboard.
+         * @param layout The layout of the keyboard.
+         * @return Keyboard The imported keyboard.
+         */
         static inline Keyboard importKeyboard(const QString &name, const QString &layout) {
             // todo : layout
             QFile file(":/" + name + ".keyboard");

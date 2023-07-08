@@ -106,3 +106,19 @@ install(
         "${CMAKE_CURRENT_BINARY_DIR}/UniQKeyConfigVersion.cmake"
         DESTINATION lib/cmake/UniQKey
 )
+
+# Doxygen
+find_package(Doxygen)
+
+if(DOXYGEN_FOUND)
+    set(DOXYGEN_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/UniQKey)
+    set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doc)
+    set(DOXYGEN_GENERATE_HTML YES)
+    set(DOXYGEN_GENERATE_MAN NO)
+    set(DOXYGEN_PROJECT_NAME "UniQKey")
+    set(DOXYGEN_PROJECT_VERSION "1.0.0")
+    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE ${CMAKE_CURRENT_SOURCE_DIR}/README.md)
+    set(DOXYGEN_GENERATE_XML YES)
+    
+    doxygen_add_docs(doc ${DOXYGEN_INPUT})
+endif()

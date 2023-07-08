@@ -1,3 +1,26 @@
+/*
+* --------------------------------------------------------------
+* Project: UniQKey
+* Author: Liza Belos
+* Year: 2023
+* 
+* Copyright (c) 2023. All rights reserved.
+* This work is licensed under the terms of the MIT License.
+* For a copy, see <https://opensource.org/licenses/MIT>.
+* --------------------------------------------------------------
+*
+* NOTICE:
+* This file is part of the original distribution of the UniQKey project. 
+* All changes and redistributions of this file must retain this notice, 
+* the list of contributors, and the entire copyright notice including the
+* MIT License information.
+* 
+* DISCLAIMER:
+* This software is provided 'as-is', without any express or implied warranty. 
+* In no event will the authors be held liable for any damages arising from 
+* the use of this software.
+*/
+
 #ifndef UNIQKEY_KEY_H
 #define UNIQKEY_KEY_H
 
@@ -5,6 +28,11 @@
 
 namespace UniQKey {
 
+    /**
+     * @brief The KeyType enum
+     * 
+     * Define the type of a key.
+     */
     enum class KeyType { 
         REGULAR = -1, 
         SHIFT = 0, 
@@ -29,50 +57,118 @@ namespace UniQKey {
         FN12 = 19    
     };
 
+
+    /**
+     * @brief The Key class
+     * 
+     * Define a key of a keyboard, with its type, its associated characters, and its position.
+     */
     class Key {
     public:
+        /***
+         * @brief The default constructor of a key.
+         * 
+         * Warning : The default constructor of a key does not initialize any field. It is here only for serialization purposes,
+         * or for pre-allocating a vector of keys.
+        */
         Key() = default;
 
+        /**
+         * @brief The constructor of a "not regular" key.
+         * 
+         * @param type The type of the key.
+         * @param xSpan The width of the key.
+         * @param ySpan The height of the key.
+         * 
+         * @see KeyType
+        */
         Key(KeyType type, float xSpan = 1, float ySpan = 1) : mType(type), mCharacters(""), mXSpan(xSpan), mYSpan(ySpan) {
 
         }
 
+        /**
+         * @brief The constructor of a regular key.
+         * 
+         * @param characters The characters associated to the key.
+         * @param xSpan The width of the key.
+         * @param ySpan The height of the key.
+         * 
+         * @see KeyType
+        */
         Key(const QString& characters, float xSpan = 1, float ySpan = 1) : mType(KeyType::REGULAR), mCharacters(characters), mXSpan(xSpan), mYSpan(ySpan) {
 
         }
 
+        /**
+         * @brief Get the type of the key.
+         * 
+         * @return The type of the key.
+         * @see KeyType
+         **/
         inline KeyType getType() const {
             return mType;
         }
 
+        /**
+         * @brief Get the characters associated to the key.
+         * 
+         * @return The characters associated to the key. If the key is not regular, it returns an empty string.
+         **/
         inline const QString& getCharacters() const {
             return mCharacters;
         }
 
+        /**
+         * @brief Get the width of the key.
+         * 
+         * @return The width of the key in the keyboard.
+         **/
         inline float getXSpan() const {
             return mXSpan;
         }
 
+
+        /**
+         * @brief Get the height of the key.
+         * 
+         * @return The height of the key in the keyboard.
+         **/
         inline float getYSpan() const {
             return mYSpan;
         }
 
+
+        /**
+         * @brief Get the x position of the key.
+         * 
+         * @return The x position of the key in the keyboard.
+         **/
         inline float getX() const {
             return mX;
         }
 
+        /**
+         * @brief Get the y position of the key.
+         * 
+         * @return The y position of the key in the keyboard.
+         **/
         inline float getY() const {
             return mY;
         }
 
-        inline void setX(float x) {
+        void setX(float x) {
             mX = x;
         }
 
-        inline void setY(float y) {
+        void setY(float y) {
             mY = y;
         }
 
+        /**
+         * @brief Serialize the key in a file.
+         * 
+         * @param file The file in which the key will be serialized.
+         **/
         inline void serialize(QFile &file) const {
             file.write((const char*)(&mType), sizeof(KeyType));
             file.write((const char*)(&mXSpan), sizeof(float));
@@ -89,25 +185,39 @@ namespace UniQKey {
             qDebug() << "Serialized " << mXSpan << " " << mYSpan << " " << mX << " " << mY << " " << mCharactersSize << " " << mCharacters;
         }
 
-        inline void deserialize(QFile &file) {
-            file.read((char*)(&mType), sizeof(KeyType));
-            file.read((char*)(&mXSpan), sizeof(float));
-            file.read((char*)(&mYSpan), sizeof(float));
-            file.read((char*)(&mX), sizeof(float));
-            file.read((char*)(&mY), sizeof(float));
+        /**
+         * @brief Deserialize a key from a file.
+         * 
+         * @param file The file from which the key will be deserialized.
+         * @return The deserialized key.
+         **/
+        static inline Key deserialize(QFile &file) {
+            Key key;
+
+            file.read((char*)(&key.mType), sizeof(KeyType));
+            file.read((char*)(&key.mXSpan), sizeof(float));
+            file.read((char*)(&key.mYSpan), sizeof(float));
+            file.read((char*)(&key.mX), sizeof(float));
+            file.read((char*)(&key.mY), sizeof(float));
             
             int mCharactersSize;
             file.read((char*)(&mCharactersSize), sizeof(int));
             if (mCharactersSize > 0) {
                 char* mCharactersBuffer = new char[mCharactersSize];
                 file.read(mCharactersBuffer, mCharactersSize);
-                mCharacters = QString(mCharactersBuffer);
+                key.mCharacters = QString(mCharactersBuffer);
                 delete[] mCharactersBuffer;
             }
 
-            qDebug() << "Deserialized " << mXSpan << " " << mYSpan << " " << mX << " " << mY << " " << mCharactersSize << " " << mCharacters;
+            return key;
         }
 
+        /**
+         * @brief Convert the key to a string that can be used for UI.
+         * 
+         * @param i The index of the character to display. If the key is not regular, this parameter is ignored.
+         * @return The string that can be used for UI.
+         **/        
         inline QString toString(int i = 0) const {
             switch (getType()) {
 
@@ -201,6 +311,11 @@ namespace UniQKey {
             }
         }
 
+        /**
+         * @brief Convert the key to a Qt key.
+         * 
+         * @return The Qt key.
+         **/
         Qt::Key toQtKey() const {
             switch (getType()) {
                     
