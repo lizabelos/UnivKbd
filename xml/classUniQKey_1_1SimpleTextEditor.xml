@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classUniQKey_1_1SimpleTextEditor" kind="class" language="C++" prot="public">
+    <compoundname>UniQKey::SimpleTextEditor</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QMainWindow</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classUniQKey_1_1SimpleTextEditor_1aa2c49bb30a7654cbba16ddde7c07752f" prot="private" static="no" mutable="no">
+        <type>QPointer&lt; QTextEdit &gt;</type>
+        <definition>QPointer&lt;QTextEdit&gt; UniQKey::SimpleTextEditor::mTextEditor</definition>
+        <argsstring></argsstring>
+        <name>mTextEditor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="74" column="18" bodyfile="UniQKey/SimpleTextEditor.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1SimpleTextEditor_1a1c16470102cd07e8dcf676b20b3df42e" prot="private" static="no" mutable="no">
+        <type>QPointer&lt; QTextDocument &gt;</type>
+        <definition>QPointer&lt;QTextDocument&gt; UniQKey::SimpleTextEditor::mTextDocument</definition>
+        <argsstring></argsstring>
+        <name>mTextDocument</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="75" column="18" bodyfile="UniQKey/SimpleTextEditor.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1SimpleTextEditor_1ae6fc5c378b6cd2aca464e5b52ce805b3" prot="private" static="no" mutable="no">
+        <type>QPointer&lt; QAction &gt;</type>
+        <definition>QPointer&lt;QAction&gt; UniQKey::SimpleTextEditor::boldAction</definition>
+        <argsstring></argsstring>
+        <name>boldAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="77" column="18" bodyfile="UniQKey/SimpleTextEditor.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1SimpleTextEditor_1aa8cb9244f3cea588098e141c0139700d" prot="private" static="no" mutable="no">
+        <type>QPointer&lt; QAction &gt;</type>
+        <definition>QPointer&lt;QAction&gt; UniQKey::SimpleTextEditor::italicAction</definition>
+        <argsstring></argsstring>
+        <name>italicAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="78" column="18" bodyfile="UniQKey/SimpleTextEditor.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1SimpleTextEditor_1abe86f19049d1495a1d66009ba947a83e" prot="private" static="no" mutable="no">
+        <type>QPointer&lt; QAction &gt;</type>
+        <definition>QPointer&lt;QAction&gt; UniQKey::SimpleTextEditor::underlineAction</definition>
+        <argsstring></argsstring>
+        <name>underlineAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="79" column="18" bodyfile="UniQKey/SimpleTextEditor.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1SimpleTextEditor_1a14e2abb63878f61fb8032eb22045b53e" prot="private" static="no" mutable="no">
+        <type>qreal</type>
+        <definition>qreal UniQKey::SimpleTextEditor::mZoomFactor</definition>
+        <argsstring></argsstring>
+        <name>mZoomFactor</name>
+        <initializer>= 1.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="81" column="15" bodyfile="UniQKey/SimpleTextEditor.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classUniQKey_1_1SimpleTextEditor_1a253acbb3553c6c9e5e94c7e2902f7ff8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UniQKey::SimpleTextEditor::SimpleTextEditor</definition>
+        <argsstring>(QWidget *parent=0)</argsstring>
+        <name>SimpleTextEditor</name>
+        <param>
+          <type>QWidget *</type>
+          <declname>parent</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="52" column="9" bodyfile="UniQKey/SimpleTextEditor.cpp" bodystart="29" bodyend="110"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classUniQKey_1_1SimpleTextEditor_1ad98e1c96ee84b1180e400f632b82646e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UniQKey::SimpleTextEditor::wheelEvent</definition>
+        <argsstring>(QWheelEvent *event) override</argsstring>
+        <name>wheelEvent</name>
+        <param>
+          <type>QWheelEvent *</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="55" column="14" bodyfile="UniQKey/SimpleTextEditor.cpp" bodystart="136" bodyend="147"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-slot">
+      <memberdef kind="slot" id="classUniQKey_1_1SimpleTextEditor_1abfde11145d0344e38a9705cec97362c5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UniQKey::SimpleTextEditor::makeTextBold</definition>
+        <argsstring>()</argsstring>
+        <name>makeTextBold</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="59" column="14" bodyfile="UniQKey/SimpleTextEditor.cpp" bodystart="112" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="slot" id="classUniQKey_1_1SimpleTextEditor_1a2e6925789f1d779ddf7213563431df7a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UniQKey::SimpleTextEditor::makeTextItalic</definition>
+        <argsstring>()</argsstring>
+        <name>makeTextItalic</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="61" column="14" bodyfile="UniQKey/SimpleTextEditor.cpp" bodystart="118" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="slot" id="classUniQKey_1_1SimpleTextEditor_1ae6a113b98abba950b8b078dc0736ca93" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UniQKey::SimpleTextEditor::makeTextUnderlined</definition>
+        <argsstring>()</argsstring>
+        <name>makeTextUnderlined</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="63" column="14" bodyfile="UniQKey/SimpleTextEditor.cpp" bodystart="124" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="slot" id="classUniQKey_1_1SimpleTextEditor_1a16938438ea762bbab39553b2f243f1e2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UniQKey::SimpleTextEditor::updateFormatActions</definition>
+        <argsstring>(const QTextCharFormat &amp;format)</argsstring>
+        <name>updateFormatActions</name>
+        <param>
+          <type>const QTextCharFormat &amp;</type>
+          <declname>format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="65" column="14" bodyfile="UniQKey/SimpleTextEditor.cpp" bodystart="130" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="slot" id="classUniQKey_1_1SimpleTextEditor_1ac304eca32f61d16f8176be82e369bcc2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UniQKey::SimpleTextEditor::zoom</definition>
+        <argsstring>(int level)</argsstring>
+        <name>zoom</name>
+        <param>
+          <type>int</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="67" column="14" bodyfile="UniQKey/SimpleTextEditor.cpp" bodystart="149" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="slot" id="classUniQKey_1_1SimpleTextEditor_1aa13f6b76a59995eaf2a76c505a3d5cd3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UniQKey::SimpleTextEditor::zoomIn</definition>
+        <argsstring>()</argsstring>
+        <name>zoomIn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="69" column="14" bodyfile="UniQKey/SimpleTextEditor.cpp" bodystart="160" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="slot" id="classUniQKey_1_1SimpleTextEditor_1a8cbb7fab3e84aae6821f10b8abc6d564" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UniQKey::SimpleTextEditor::zoomOut</definition>
+        <argsstring>()</argsstring>
+        <name>zoomOut</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/SimpleTextEditor.h" line="71" column="14" bodyfile="UniQKey/SimpleTextEditor.cpp" bodystart="169" bodyend="176"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>QMainWindow</label>
+      </node>
+      <node id="1">
+        <label>UniQKey::SimpleTextEditor</label>
+        <link refid="classUniQKey_1_1SimpleTextEditor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>QMainWindow</label>
+      </node>
+      <node id="1">
+        <label>UniQKey::SimpleTextEditor</label>
+        <link refid="classUniQKey_1_1SimpleTextEditor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="UniQKey/SimpleTextEditor.h" line="48" column="5" bodyfile="UniQKey/SimpleTextEditor.h" bodystart="48" bodyend="83"/>
+    <listofallmembers>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1ae6fc5c378b6cd2aca464e5b52ce805b3" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>boldAction</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1aa8cb9244f3cea588098e141c0139700d" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>italicAction</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1abfde11145d0344e38a9705cec97362c5" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>makeTextBold</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1a2e6925789f1d779ddf7213563431df7a" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>makeTextItalic</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1ae6a113b98abba950b8b078dc0736ca93" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>makeTextUnderlined</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1a1c16470102cd07e8dcf676b20b3df42e" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>mTextDocument</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1aa2c49bb30a7654cbba16ddde7c07752f" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>mTextEditor</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1a14e2abb63878f61fb8032eb22045b53e" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>mZoomFactor</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1a253acbb3553c6c9e5e94c7e2902f7ff8" prot="public" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>SimpleTextEditor</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1abe86f19049d1495a1d66009ba947a83e" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>underlineAction</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1a16938438ea762bbab39553b2f243f1e2" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>updateFormatActions</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1ad98e1c96ee84b1180e400f632b82646e" prot="protected" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>wheelEvent</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1ac304eca32f61d16f8176be82e369bcc2" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>zoom</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1aa13f6b76a59995eaf2a76c505a3d5cd3" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>zoomIn</name></member>
+      <member refid="classUniQKey_1_1SimpleTextEditor_1a8cbb7fab3e84aae6821f10b8abc6d564" prot="private" virt="non-virtual"><scope>UniQKey::SimpleTextEditor</scope><name>zoomOut</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

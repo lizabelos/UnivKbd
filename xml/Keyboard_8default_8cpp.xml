@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Keyboard_8default_8cpp" kind="file" language="C++">
+    <compoundname>Keyboard.default.cpp</compoundname>
+    <includes refid="Keyboard_8h" local="yes">Keyboard.h</includes>
+    <incdepgraph>
+      <node id="5">
+        <label>QList</label>
+      </node>
+      <node id="8">
+        <label>Key.h</label>
+        <link refid="Key_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>UniQKey/Keyboard.default.cpp</label>
+        <link refid="Keyboard_8default_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Keyboard.h</label>
+        <link refid="Keyboard_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>QDebug</label>
+      </node>
+      <node id="3">
+        <label>QString</label>
+      </node>
+      <node id="4">
+        <label>QFile</label>
+      </node>
+      <node id="6">
+        <label>QDir</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment">*<sp/>--------------------------------------------------------------</highlight></codeline>
+<codeline lineno="3"><highlight class="comment">*<sp/>Project:<sp/>UniQKey</highlight></codeline>
+<codeline lineno="4"><highlight class="comment">*<sp/>Author:<sp/>Liza<sp/>Belos</highlight></codeline>
+<codeline lineno="5"><highlight class="comment">*<sp/>Year:<sp/>2023</highlight></codeline>
+<codeline lineno="6"><highlight class="comment">*<sp/></highlight></codeline>
+<codeline lineno="7"><highlight class="comment">*<sp/>Copyright<sp/>(c)<sp/>2023.<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="8"><highlight class="comment">*<sp/>This<sp/>work<sp/>is<sp/>licensed<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>MIT<sp/>License.</highlight></codeline>
+<codeline lineno="9"><highlight class="comment">*<sp/>For<sp/>a<sp/>copy,<sp/>see<sp/>&lt;https://opensource.org/licenses/MIT&gt;.</highlight></codeline>
+<codeline lineno="10"><highlight class="comment">*<sp/>--------------------------------------------------------------</highlight></codeline>
+<codeline lineno="11"><highlight class="comment">*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment">*<sp/>NOTICE:</highlight></codeline>
+<codeline lineno="13"><highlight class="comment">*<sp/>This<sp/>file<sp/>is<sp/>part<sp/>of<sp/>the<sp/>original<sp/>distribution<sp/>of<sp/>the<sp/>UniQKey<sp/>project.<sp/></highlight></codeline>
+<codeline lineno="14"><highlight class="comment">*<sp/>All<sp/>changes<sp/>and<sp/>redistributions<sp/>of<sp/>this<sp/>file<sp/>must<sp/>retain<sp/>this<sp/>notice,<sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="comment">*<sp/>the<sp/>list<sp/>of<sp/>contributors,<sp/>and<sp/>the<sp/>entire<sp/>copyright<sp/>notice<sp/>including<sp/>the</highlight></codeline>
+<codeline lineno="16"><highlight class="comment">*<sp/>MIT<sp/>License<sp/>information.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment">*<sp/></highlight></codeline>
+<codeline lineno="18"><highlight class="comment">*<sp/>DISCLAIMER:</highlight></codeline>
+<codeline lineno="19"><highlight class="comment">*<sp/>This<sp/>software<sp/>is<sp/>provided<sp/>&apos;as-is&apos;,<sp/>without<sp/>any<sp/>express<sp/>or<sp/>implied<sp/>warranty.<sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="comment">*<sp/>In<sp/>no<sp/>event<sp/>will<sp/>the<sp/>authors<sp/>be<sp/>held<sp/>liable<sp/>for<sp/>any<sp/>damages<sp/>arising<sp/>from<sp/></highlight></codeline>
+<codeline lineno="21"><highlight class="comment">*<sp/>the<sp/>use<sp/>of<sp/>this<sp/>software.</highlight></codeline>
+<codeline lineno="22"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;Keyboard.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">QList&lt;QString&gt;<sp/><ref refid="classUniQKey_1_1Keyboard_1a41865f8d78a127407dbab849f4d9b027" kindref="member">UniQKey::Keyboard::getOperatingSystemKeyboards</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>QList&lt;QString&gt;();</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><ref refid="classUniQKey_1_1Keyboard" kindref="compound">UniQKey::Keyboard</ref><sp/><ref refid="classUniQKey_1_1Keyboard_1aac22929ea2fc18109cbd48067203f8fd" kindref="member">UniQKey::Keyboard::getKeyboardFromOperatingSystem</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>QString<sp/>&amp;country,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>QString<sp/>&amp;layout)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;OS<sp/>Not<sp/>supported&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><ref refid="classUniQKey_1_1Keyboard" kindref="compound">UniQKey::Keyboard</ref><sp/><ref refid="classUniQKey_1_1Keyboard_1a746c9e2827672a0bc81f54b86c61023f" kindref="member">UniQKey::Keyboard::getDefaultKeyboardFromOperatingSystem</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;OS<sp/>Not<sp/>supported&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="UniQKey/Keyboard.default.cpp"/>
+  </compounddef>
+</doxygen>

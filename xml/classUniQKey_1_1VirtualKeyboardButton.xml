@@ -1,0 +1,284 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classUniQKey_1_1VirtualKeyboardButton" kind="class" language="C++" prot="public">
+    <compoundname>UniQKey::VirtualKeyboardButton</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">QPushButton</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classUniQKey_1_1VirtualKeyboardButton_1afc146c09b957cc311ad00d28d275b1e7" prot="private" static="no" mutable="no">
+        <type><ref refid="classUniQKey_1_1Key" kindref="compound">Key</ref></type>
+        <definition>Key UniQKey::VirtualKeyboardButton::mKey</definition>
+        <argsstring></argsstring>
+        <name>mKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="69" column="13" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1VirtualKeyboardButton_1a190fbf24bfd84eabd3e21193c6a1c0c5" prot="private" static="no" mutable="no">
+        <type>QString</type>
+        <definition>QString UniQKey::VirtualKeyboardButton::mKeyString[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>mKeyString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="70" column="17" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1VirtualKeyboardButton_1a183c40f10034530f47f2921ea57faadf" prot="private" static="no" mutable="no">
+        <type>QPointer&lt; QGridLayout &gt;</type>
+        <definition>QPointer&lt;QGridLayout&gt; UniQKey::VirtualKeyboardButton::mGridLayout</definition>
+        <argsstring></argsstring>
+        <name>mGridLayout</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="72" column="18" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1VirtualKeyboardButton_1aad50bacccaba7fe98cede23131499b27" prot="private" static="no" mutable="no">
+        <type>QPointer&lt; QLabel &gt;</type>
+        <definition>QPointer&lt;QLabel&gt; UniQKey::VirtualKeyboardButton::mLabels[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>mLabels</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="73" column="18" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1VirtualKeyboardButton_1a4e330204df45ee557886734247b2497b" prot="private" static="no" mutable="no">
+        <type>QFont</type>
+        <definition>QFont UniQKey::VirtualKeyboardButton::mCurrentFont</definition>
+        <argsstring></argsstring>
+        <name>mCurrentFont</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="75" column="15" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1VirtualKeyboardButton_1af88abcbb1aa2daa9e2f828456a14d5b0" prot="private" static="no" mutable="no">
+        <type>QFont</type>
+        <definition>QFont UniQKey::VirtualKeyboardButton::mDefaultFont</definition>
+        <argsstring></argsstring>
+        <name>mDefaultFont</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="75" column="28" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1VirtualKeyboardButton_1a97fe35f950adf164412b5192f68d670d" prot="private" static="no" mutable="no">
+        <type>QColor</type>
+        <definition>QColor UniQKey::VirtualKeyboardButton::mCurrentColor</definition>
+        <argsstring></argsstring>
+        <name>mCurrentColor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="76" column="16" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1VirtualKeyboardButton_1af2fb89a0fcaf7a61005d37dfb80a231e" prot="private" static="no" mutable="no">
+        <type>QColor</type>
+        <definition>QColor UniQKey::VirtualKeyboardButton::mDefaultColor</definition>
+        <argsstring></argsstring>
+        <name>mDefaultColor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="76" column="30" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classUniQKey_1_1VirtualKeyboardButton_1acd36a2e3cd65b4486be449ff8026b307" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UniQKey::VirtualKeyboardButton::mCurrentKey</definition>
+        <argsstring></argsstring>
+        <name>mCurrentKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="78" column="13" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classUniQKey_1_1VirtualKeyboardButton_1afe84a1a29edb6ab1011c80c2b7b67e9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UniQKey::VirtualKeyboardButton::VirtualKeyboardButton</definition>
+        <argsstring>(const Key &amp;key)</argsstring>
+        <name>VirtualKeyboardButton</name>
+        <param>
+          <type>const <ref refid="classUniQKey_1_1Key" kindref="compound">Key</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="49" column="9" bodyfile="UniQKey/VirtualKeyboard.cpp" bodystart="33" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classUniQKey_1_1VirtualKeyboardButton_1ab8e3b2d580928afcb3fb20cee47baaf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UniQKey::VirtualKeyboardButton::~VirtualKeyboardButton</definition>
+        <argsstring>() override</argsstring>
+        <name>~VirtualKeyboardButton</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="50" column="9" bodyfile="UniQKey/VirtualKeyboard.cpp" bodystart="98" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classUniQKey_1_1VirtualKeyboardButton_1aa072bce10b329b8fffda31298166a056" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UniQKey::VirtualKeyboardButton::setCurrentKey</definition>
+        <argsstring>(int index)</argsstring>
+        <name>setCurrentKey</name>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="52" column="14" bodyfile="UniQKey/VirtualKeyboard.cpp" bodystart="106" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classUniQKey_1_1VirtualKeyboardButton_1a18b6d24160e3a9c07bcaff6d27f249f6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int UniQKey::VirtualKeyboardButton::getCurrentKey</definition>
+        <argsstring>() const</argsstring>
+        <name>getCurrentKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="54" column="20" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="54" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classUniQKey_1_1VirtualKeyboardButton_1a265b6194c02a33dddfa892e1e5fd0fd4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classUniQKey_1_1Key" kindref="compound">Key</ref> &amp;</type>
+        <definition>const Key&amp; UniQKey::VirtualKeyboardButton::getKey</definition>
+        <argsstring>() const</argsstring>
+        <name>getKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="58" column="26" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="58" bodyend="60"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="signal">
+      <memberdef kind="signal" id="classUniQKey_1_1VirtualKeyboardButton_1accc90912588e1829e037ce1887b7de69" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UniQKey::VirtualKeyboardButton::virtualKeyPressed</definition>
+        <argsstring>(VirtualKeyboardButton &amp;button, const Key &amp;key)</argsstring>
+        <name>virtualKeyPressed</name>
+        <param>
+          <type><ref refid="classUniQKey_1_1VirtualKeyboardButton" kindref="compound">VirtualKeyboardButton</ref> &amp;</type>
+          <declname>button</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classUniQKey_1_1Key" kindref="compound">Key</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="63" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-slot">
+      <memberdef kind="slot" id="classUniQKey_1_1VirtualKeyboardButton_1afe53ed425b19d33cf71dc49dce4b5f24" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UniQKey::VirtualKeyboardButton::virtualButtonPressed</definition>
+        <argsstring>()</argsstring>
+        <name>virtualButtonPressed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="UniQKey/VirtualKeyboard.h" line="66" column="14" bodyfile="UniQKey/VirtualKeyboard.cpp" bodystart="102" bodyend="104"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>UniQKey::VirtualKeyboardButton</label>
+        <link refid="classUniQKey_1_1VirtualKeyboardButton"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QPushButton</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>UniQKey::VirtualKeyboardButton</label>
+        <link refid="classUniQKey_1_1VirtualKeyboardButton"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>QPushButton</label>
+      </node>
+    </collaborationgraph>
+    <location file="UniQKey/VirtualKeyboard.h" line="45" column="5" bodyfile="UniQKey/VirtualKeyboard.h" bodystart="45" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1a18b6d24160e3a9c07bcaff6d27f249f6" prot="public" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>getCurrentKey</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1a265b6194c02a33dddfa892e1e5fd0fd4" prot="public" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>getKey</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1a97fe35f950adf164412b5192f68d670d" prot="private" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>mCurrentColor</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1a4e330204df45ee557886734247b2497b" prot="private" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>mCurrentFont</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1acd36a2e3cd65b4486be449ff8026b307" prot="private" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>mCurrentKey</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1af2fb89a0fcaf7a61005d37dfb80a231e" prot="private" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>mDefaultColor</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1af88abcbb1aa2daa9e2f828456a14d5b0" prot="private" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>mDefaultFont</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1a183c40f10034530f47f2921ea57faadf" prot="private" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>mGridLayout</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1afc146c09b957cc311ad00d28d275b1e7" prot="private" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>mKey</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1a190fbf24bfd84eabd3e21193c6a1c0c5" prot="private" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>mKeyString</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1aad50bacccaba7fe98cede23131499b27" prot="private" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>mLabels</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1aa072bce10b329b8fffda31298166a056" prot="public" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>setCurrentKey</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1afe53ed425b19d33cf71dc49dce4b5f24" prot="private" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>virtualButtonPressed</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1afe84a1a29edb6ab1011c80c2b7b67e9a" prot="public" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>VirtualKeyboardButton</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1accc90912588e1829e037ce1887b7de69" prot="public" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>virtualKeyPressed</name></member>
+      <member refid="classUniQKey_1_1VirtualKeyboardButton_1ab8e3b2d580928afcb3fb20cee47baaf0" prot="public" virt="non-virtual"><scope>UniQKey::VirtualKeyboardButton</scope><name>~VirtualKeyboardButton</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
