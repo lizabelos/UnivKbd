@@ -11,7 +11,7 @@ env:
   BUILD_TYPE: Release
 
 permissions:
-  contents: read
+  contents: write
   pages: write
 
 jobs:
