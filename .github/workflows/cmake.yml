@@ -43,4 +43,4 @@ jobs:
       with:
         branch: gh-pages
         token: ${{ secrets.GITHUB_TOKEN }}
-        folder: ${{github.workspace}}/build/doc
+        folder: ${{github.workspace}}/build/doc/html
