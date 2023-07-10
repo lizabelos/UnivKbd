@@ -1,10 +1,7 @@
 # UniQKey
-
-(In development)
+Alternative Cross-Platform On-Screen Keyboard for Qt5 and Qt6
 
 ![UniQKey](images/capture.png)
-
-Alternative Cross-Platform On-Screen Keyboard for Qt5 and Qt6
 
 ## How to build
 
@@ -28,7 +25,7 @@ find_package(UniQKey REQUIRED)
 target_link_libraries(myapp PRIVATE UniQKey::UniQKey)
 ```
 
-With autotools, link to the library `libUniQKey.a`.
+With autotools, link to the library `libUniQKey.a` or `libUniQKey.lib`.
 
 To create a floating keyboard that will show up when a widget is focused, use the following code:
 ```cpp

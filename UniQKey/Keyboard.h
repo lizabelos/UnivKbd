@@ -93,15 +93,12 @@ namespace UniQKey {
          * @note You can deserialize mutliple keyboards from a same file.
          */
         inline void deserialize(QFile &file) {
-            qDebug() << "Deserializing keyboard...";
             int size;
             file.read((char*)(&size), sizeof(int));
-            qDebug() << "Keyboard size:" << size;
             mKeys.resize(size);
             for (int i = 0; i < size; ++i) {
-                mKeys[i].deserialize(file);
+                mKeys[i] = Key::deserialize(file);
             }
-            qDebug() << "Deserialized keyboard.";
         }
 
         /**

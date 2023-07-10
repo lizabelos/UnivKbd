@@ -156,11 +156,11 @@ namespace UniQKey {
             return mY;
         }
 
-        void setX(float x) {
+        inline void setX(float x) {
             mX = x;
         }
 
-        void setY(float y) {
+        inline void setY(float y) {
             mY = y;
         }
 
@@ -182,7 +182,6 @@ namespace UniQKey {
                 file.write(mCharacters.toStdString().c_str(), mCharactersSize);
             }
 
-            qDebug() << "Serialized " << mXSpan << " " << mYSpan << " " << mX << " " << mY << " " << mCharactersSize << " " << mCharacters;
         }
 
         /**
@@ -208,7 +207,6 @@ namespace UniQKey {
                 key.mCharacters = QString(mCharactersBuffer);
                 delete[] mCharactersBuffer;
             }
-
             return key;
         }
 

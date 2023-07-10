@@ -181,10 +181,7 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
     connect(mOpenCloseButton, &QPushButton::clicked, this, &VirtualKeyboard::triggerSetEnabled);
 
 
-    qDebug() << "Parent is " << parent;
-
     connect(qApp, &QApplication::focusChanged, [=](QWidget *old, QWidget *now) {
-        qDebug() << "Focus changed from" << old << "to" << now;
         if (now == this || old == this || now == mCountrySelector || now == mLayoutSelector) {
             return;
         }
@@ -194,10 +191,8 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
             }
         }
         if (now == mParent) {
-            qDebug() << "Virtual keyboard got focus";
             parentTakeFocus();
         } else if (old == mParent) {
-            qDebug() << "Virtual keyboard lost focus";
             parentLooseFocus();
         }
     });
@@ -232,8 +227,6 @@ void UniQKey::VirtualKeyboard::addButtonFromKey(const Key &key) {
     int spanx = key.getXSpan() * spanResolution;
     int spany = key.getYSpan() * spanResolution;
 
-    qDebug() << "Adding button : " << x << " " << y << " " << spanx << " " << spany;
-
     VirtualKeyboardButton *btn = new VirtualKeyboardButton(key);
     connect(btn, &VirtualKeyboardButton::virtualKeyPressed, this, &VirtualKeyboard::onVirtualKeyPressed);
     mKeyboardLayout->addWidget(btn, y, x, spany, spanx);
@@ -251,7 +244,6 @@ void UniQKey::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button
     case KeyType::ALT:
     case KeyType::CTRL:
         pressModifier(key);
-        qDebug() << currentKeyType();
         for (auto otherButton : mButtons) {
             if (otherButton == &button) {
                 continue;
