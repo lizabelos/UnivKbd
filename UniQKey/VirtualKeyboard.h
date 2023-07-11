@@ -28,6 +28,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QGridLayout>
 #include <QPointer>
 #include <QLabel>
@@ -59,6 +60,9 @@ namespace UniQKey {
             return mKey;
         }
 
+    protected:
+        void resizeEvent(QResizeEvent *event) override;
+
     signals:
         void virtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
 
@@ -69,11 +73,7 @@ namespace UniQKey {
         Key mKey;
         QString mKeyString[3];
 
-        QPointer<QGridLayout> mGridLayout;
         QPointer<QLabel> mLabels[3];
-
-        QFont mCurrentFont, mDefaultFont;
-        QColor mCurrentColor, mDefaultColor;
 
         int mCurrentKey;
 
@@ -135,6 +135,8 @@ namespace UniQKey {
             return modifiers;
         }
 
+        void attachToCurrentWindowAsDockWidget();
+
     public slots:
         /**
          * @brief Sets the enabled state of the virtual keyboard.
@@ -147,6 +149,9 @@ namespace UniQKey {
          * @brief Triggers the setEnabled() slot to enable or disable the virtual keyboard.
          */
         void triggerSetEnabled();
+
+    protected:
+        void resizeEvent(QResizeEvent *event) override;
 
     private slots:
         void parentTakeFocus();
@@ -172,11 +177,14 @@ namespace UniQKey {
             return (mKeyModifier & ((unsigned long)1 << (int)KeyType::SHIFT)) + (mKeyModifier & ((unsigned long)1 << (int)KeyType::ALT));
         }
 
+        void refreshModifiers(QObject *toIgnore = nullptr);
+
     private:
         QWidget *mParent;
         QList<QPointer<VirtualKeyboardButton>> mButtons;
 
         QPointer<QVBoxLayout> mMainLayout;
+        QPointer<QHBoxLayout> mFunctionsLayout;
         QPointer<QGridLayout> mKeyboardLayout;
 
         QPointer<QComboBox> mCountrySelector;

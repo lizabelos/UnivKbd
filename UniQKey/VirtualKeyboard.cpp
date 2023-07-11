@@ -27,6 +27,8 @@
 #include <QKeyEvent>
 #include <QLabel>
 #include <QTimer>
+#include <QMainWindow>
+#include <QDockWidget>
 
 #include <unordered_set>
 
@@ -38,61 +40,55 @@ UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key
             mKeyString[0] = key.toString(0);
             mKeyString[1] = key.toString(1);
             mKeyString[2] = key.toString(2);
+
             break;
 
         default:
             mKeyString[0] = key.toString();
+            mKeyString[1] = key.toString();
+            mKeyString[2] = key.toString();
             setCheckable(true);
             break;
 
     }
 
-    mGridLayout = new QGridLayout();
-    setMinimumSize(60, 70);
-    setLayout(mGridLayout);
-
-    mCurrentFont.setPointSize(14);
-    mCurrentFont.setBold(true);
-    mCurrentColor = QColor(0, 0, 0);
-
-    mDefaultFont.setPointSize(10);
-    mDefaultColor = QColor(100, 100, 100);
-
-    if (mKeyString[1] == "" && mKeyString[2] == "") {
-        mLabels[0] = new QLabel(mKeyString[0]);
-        mLabels[0]->setAlignment(Qt::AlignCenter);
-        mGridLayout->addWidget(mLabels[0], 0, 0, 1, 2);
-    }
-
-    if (mKeyString[1] != "" && mKeyString[2] == "") {
-        mLabels[0] = new QLabel(mKeyString[0]);
-        mLabels[1] = new QLabel(mKeyString[1]);
-
-        mLabels[0]->setAlignment(Qt::AlignCenter);
-        mLabels[1]->setAlignment(Qt::AlignCenter);
-
-        mGridLayout->addWidget(mLabels[0], 0, 0, 1, 2);
-        mGridLayout->addWidget(mLabels[1], 2, 1);
-    }
-
-    if (mKeyString[1] != "" && mKeyString[2] != "") {
-        mLabels[0] = new QLabel(mKeyString[0]);
-        mLabels[1] = new QLabel(mKeyString[1]);
-        mLabels[2] = new QLabel(mKeyString[2]);
-
-        mLabels[0]->setAlignment(Qt::AlignCenter);
-        mLabels[1]->setAlignment(Qt::AlignCenter);
-        mLabels[2]->setAlignment(Qt::AlignCenter);
-
-        mGridLayout->addWidget(mLabels[0], 0, 0, 1, 2);
-        mGridLayout->addWidget(mLabels[1], 1, 0);
-        mGridLayout->addWidget(mLabels[2], 1, 1);
-    }
-
-
     connect(this, &QPushButton::pressed, this, &VirtualKeyboardButton::virtualButtonPressed);
 
     setCurrentKey(0);
+
+    // Set the default style for the button
+    setStyleSheet("QPushButton {"
+                  "background-color: #FFFFFF;"
+                  "border: 1px solid #CCCCCC;"
+                  // remove every margin and padding
+                    "margin: 0px;"
+                    "padding: 0px;"
+                  "}"
+                  "QPushButton:pressed {"
+                  "background-color: #CCCCCC;"
+                  "}"
+                  "QPushButton:checked {"
+                  "background-color: #FFCC99;"
+                  "}"
+                  "QPushButton:hover {"
+                  "background-color: #CCCCCC;"
+                  "}"
+                  "QPushButton:checked:hover {"
+                    "background-color: #AACC99;"
+                  "}"
+                  "QPushButton:disabled {"
+                  "background-color: #FFFFFF;"
+                  "}"
+                  "QPushButton:disabled:hover {"
+                  "background-color: #FFFFFF;"
+                  "}"
+                  "QPushButton:disabled:pressed {"
+                  "background-color: #FFFFFF;"
+                  "}"
+                  "QPushButton:disabled:checked {"
+                  "background-color: #FFFFFF;"
+                  "}"
+    );
 }
 
 UniQKey::VirtualKeyboardButton::~VirtualKeyboardButton() {
@@ -112,18 +108,17 @@ void UniQKey::VirtualKeyboardButton::setCurrentKey(int index) {
     }
 
     mCurrentKey = std::min(maxIndex, index);
+    setText(mKeyString[index]);
+}
 
-    for (int i = 0; i < 3; i++) {
-        if (mLabels[i] != nullptr) {
-            if (i == mCurrentKey) {
-                mLabels[i]->setFont(mCurrentFont);
-                mLabels[i]->setStyleSheet("color: " + mCurrentColor.name());
-            } else {
-                mLabels[i]->setFont(mDefaultFont);
-                mLabels[i]->setStyleSheet("color: " + mDefaultColor.name());
-            }
-        }
-    }
+void UniQKey::VirtualKeyboardButton::resizeEvent(QResizeEvent *event) {
+    // Change the current and default font size to fit the button
+    int fontSize = event->size().height() / 3;
+    QFont font;
+    font.setPixelSize(fontSize);
+    setFont(font);
+
+    QPushButton::resizeEvent(event);
 }
 
 UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
@@ -135,13 +130,16 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
     mMainLayout = new QVBoxLayout();
     setLayout(mMainLayout);
 
+    mFunctionsLayout = new QHBoxLayout();
+    mMainLayout->addLayout(mFunctionsLayout);
+
     QList<QString> keyboardLayouts = Keyboard::listExportedKeyboards();
     if (keyboardLayouts.size() == 0) {
         throw std::runtime_error("No keyboard layouts found");
     }
     // add a combobox to select the keyboard layout
     mCountrySelector = new QComboBox();
-    mMainLayout->addWidget(mCountrySelector);
+    mFunctionsLayout->addWidget(mCountrySelector);
     for (auto keyboardLayout : keyboardLayouts) {
         mCountrySelector->addItem(keyboardLayout);
     }
@@ -150,7 +148,7 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
 
 
     mLayoutSelector = new QComboBox();
-    mMainLayout->addWidget(mLayoutSelector);
+    mFunctionsLayout->addWidget(mLayoutSelector);
     for (auto layout : getKeyboardLayouts()) {
         mLayoutSelector->addItem(layout);
     }
@@ -172,10 +170,11 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
     
 
     mKeyboardLayout = new QGridLayout();
+    mKeyboardLayout->setSpacing(0);
     mMainLayout->addLayout(mKeyboardLayout);
 
     mOpenCloseButton = new QPushButton("Open/Close", this);
-    mMainLayout->addWidget(mOpenCloseButton);
+    mFunctionsLayout->addWidget(mOpenCloseButton);
     
     // connect to slot triggerSetEnabled
     connect(mOpenCloseButton, &QPushButton::clicked, this, &VirtualKeyboard::triggerSetEnabled);
@@ -206,11 +205,11 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent) : mParent(parent) {
 bool UniQKey::VirtualKeyboard::loadLayoutFromKeyboard(const Keyboard& keyboard) {
 
     // empty the layout
-    QLayoutItem *child;
-    while ((child = mKeyboardLayout->takeAt(0)) != nullptr) {
-        delete child->widget();
-        delete child;
+    for (auto button : mButtons) {
+        mKeyboardLayout->removeWidget(button);
+        delete button;
     }
+    mButtons.clear();
 
     for (const auto& key : keyboard.getKeys()) {
         addButtonFromKey(key);
@@ -228,6 +227,9 @@ void UniQKey::VirtualKeyboard::addButtonFromKey(const Key &key) {
     int spany = key.getYSpan() * spanResolution;
 
     VirtualKeyboardButton *btn = new VirtualKeyboardButton(key);
+    // fit the button to the size of the layout
+    btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
     connect(btn, &VirtualKeyboardButton::virtualKeyPressed, this, &VirtualKeyboard::onVirtualKeyPressed);
     mKeyboardLayout->addWidget(btn, y, x, spany, spanx);
     mButtons.append(btn);
@@ -244,21 +246,19 @@ void UniQKey::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button
     case KeyType::ALT:
     case KeyType::CTRL:
         pressModifier(key);
-        for (auto otherButton : mButtons) {
-            if (otherButton == &button) {
-                continue;
-            }
-            if (otherButton->getKey().getType() == KeyType::REGULAR) {
-                otherButton->setCurrentKey(currentKeyType());
-            } else {
-                otherButton->setChecked(isModifierPressed(otherButton->getKey()));
-            }
-        }
+        refreshModifiers(&button);
         event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), "");
         //mKeySequence = QKeySequence(QKeyCombination(getModifiers()));
+        break;
 
     default:
-        event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), key.getCharacters()[button.getCurrentKey()]);
+        if (key.getCharacters().size() == 0) {
+            event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), key.toString());
+        } else {
+            event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), key.getCharacters()[button.getCurrentKey()]);
+            mKeyModifier = 0;
+            refreshModifiers(&button);
+        }
         //mKeySequence = QKeySequence(QKeyCombination(getModifiers(), key.toQtKey()));
         break;
 
@@ -272,11 +272,11 @@ void UniQKey::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button
 
 
 void UniQKey::VirtualKeyboard::parentTakeFocus() {
-    show();
+    //show();
 }
 
 void UniQKey::VirtualKeyboard::parentLooseFocus() {
-    hide();
+    //hide();
 }
 
 void UniQKey::VirtualKeyboard::setEnabled(bool enabled) {
@@ -307,4 +307,59 @@ void UniQKey::VirtualKeyboard::setEnabled(bool enabled) {
 
 void UniQKey::VirtualKeyboard::triggerSetEnabled() {
     setEnabled(!mIsEnabled);
+}
+
+void UniQKey::VirtualKeyboard::attachToCurrentWindowAsDockWidget() {
+
+    QTimer::singleShot(2000, [this]() {
+        QObject *widget = mParent;
+        QMainWindow *window = nullptr;
+        qDebug() << "Looking for Main Window...";
+        while (true) {
+            if (widget == nullptr) {
+                return;
+            }
+            window = qobject_cast<QMainWindow*>(widget);
+            qDebug() << "Testing " << widget;
+            if (window != nullptr) {
+                qDebug() << "Found it !";
+                break;
+            }
+            widget = widget->parent();
+        }
+
+        QDockWidget *keyboardDock = new QDockWidget;
+        keyboardDock->setWidget(this);
+        keyboardDock->setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable);
+        keyboardDock->setWindowTitle("UniQKey Virtual Keyboard");
+        window->addDockWidget(Qt::BottomDockWidgetArea, keyboardDock);
+    });
+}
+
+
+void UniQKey::VirtualKeyboard::refreshModifiers(QObject *toIgnore) {
+    for (auto button : mButtons) {
+        if (button->getKey().getType() == KeyType::REGULAR) {
+            button->setCurrentKey(currentKeyType());
+        } else if (button != toIgnore) {
+            button->setChecked(isModifierPressed(button->getKey()));
+        }
+    }
+}
+
+void UniQKey::VirtualKeyboard::resizeEvent(QResizeEvent *event) {
+    // if the size is too small, hide the first line of the keyboard
+    bool firstLineHidden = event->size().height() < 400;
+    for (auto button : mButtons) {
+        if (button->getKey().getY() != 0) {
+            continue;
+        }
+        if (firstLineHidden) {
+            // remove the button from the layout
+            mKeyboardLayout->removeWidget(button);
+        } else {
+            // add the button to the layout
+            mKeyboardLayout->addWidget(button, 0, button->getKey().getX() * 4, 4, button->getKey().getXSpan() * 4);
+        }
+    }
 }

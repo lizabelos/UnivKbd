@@ -50,6 +50,7 @@ UniQKey::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
 
 
     VirtualKeyboard *keyboard = new VirtualKeyboard(mTextEditor);
+    keyboard->attachToCurrentWindowAsDockWidget();
     
 
     /*** Font Actions ***/
@@ -100,7 +101,7 @@ UniQKey::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
     /*** Use a layout to add the keyboard in the bottom of the scrollArea */
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(scrollArea);
-    layout->addWidget(keyboard);
+    //layout->addWidget(keyboard);
     
     QWidget *centralWidget = new QWidget;
     centralWidget->setLayout(layout);

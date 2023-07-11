@@ -78,6 +78,7 @@ install(FILES
         UniQKey/SimpleTextEditor.h
         UniQKey/VirtualKeyboard.h
         UniQKey/Keyboard.h
+        UniQKey/Key.h
         UniQKey/UniQKey
         DESTINATION include/UniQKey
         )

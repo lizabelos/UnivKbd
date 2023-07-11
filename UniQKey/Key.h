@@ -220,7 +220,7 @@ namespace UniQKey {
             switch (getType()) {
 
                 case KeyType::REGULAR:
-                    return getCharacters()[i];
+                    return getCharacters()[std::min((int)i, (int)getCharacters().size() - 1)];
                     break;
 
                 case KeyType::SHIFT:
