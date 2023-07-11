@@ -1,4 +1,4 @@
-name: Build and Deploy Documentation
+name: Build, Deploy and Archive
 
 on:
   push:
@@ -44,3 +44,33 @@ jobs:
         branch: gh-pages
         token: ${{ secrets.GITHUB_TOKEN }}
         folder: ${{github.workspace}}/build/doc/html
+
+    - name: Clean build directory
+      run: rm -rf ${{github.workspace}}/build
+
+    - name: Archive Repo
+      run: |
+        sleep 10
+        tar -czvf /tmp/repository-archive.tgz .
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}
+        release_name: Release v${{ github.run_number }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} 
+        asset_path: /tmp/repository-archive.tgz
+        asset_name: repository-archive.tgz
+        asset_content_type: application/gzip
