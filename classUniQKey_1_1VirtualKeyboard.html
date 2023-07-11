@@ -68,6 +68,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classUniQKey_1_1VirtualKeyboard-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">UniQKey::VirtualKeyboard Class Reference</div>  </div>
@@ -103,6 +104,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2c294fbabbb116d6abb4d99012d54642"><td class="memItemLeft" align="right" valign="top">Qt::KeyboardModifiers&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUniQKey_1_1VirtualKeyboard.html#a2c294fbabbb116d6abb4d99012d54642">getModifiers</a> () const</td></tr>
 <tr class="memdesc:a2c294fbabbb116d6abb4d99012d54642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Qt keyboard modifiers.  <a href="classUniQKey_1_1VirtualKeyboard.html#a2c294fbabbb116d6abb4d99012d54642">More...</a><br /></td></tr>
 <tr class="separator:a2c294fbabbb116d6abb4d99012d54642"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f97342270846988b33c92c3e7170896"><td class="memItemLeft" align="right" valign="top"><a id="a6f97342270846988b33c92c3e7170896"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>attachToCurrentWindowAsDockWidget</b> ()</td></tr>
+<tr class="separator:a6f97342270846988b33c92c3e7170896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a21c786f540fc386d97261ca81a3f545c"><td class="memItemLeft" align="right" valign="top"><a id="a21c786f540fc386d97261ca81a3f545c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>resizeEvent</b> (QResizeEvent *event) override</td></tr>
+<tr class="separator:a21c786f540fc386d97261ca81a3f545c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a virtual keyboard that can be used as an input method for widgets. </p>
@@ -113,7 +123,7 @@ Public Member Functions</h2></td></tr>
 <div class="line">QWidget *anyWidget = ...;</div>
 <div class="line"><a class="code" href="classUniQKey_1_1VirtualKeyboard.html">UniQKey::VirtualKeyboard</a> *keyboard = <span class="keyword">new</span> <a class="code" href="classUniQKey_1_1VirtualKeyboard.html#adde68389ae3c8358e794e7cdc9bc3fbb">VirtualKeyboard</a>(anyWidget);</div>
 <div class="ttc" id="aclassUniQKey_1_1VirtualKeyboard_html"><div class="ttname"><a href="classUniQKey_1_1VirtualKeyboard.html">UniQKey::VirtualKeyboard</a></div><div class="ttdoc">Represents a virtual keyboard that can be used as an input method for widgets.</div><div class="ttdef"><b>Definition:</b> VirtualKeyboard.h:108</div></div>
-<div class="ttc" id="aclassUniQKey_1_1VirtualKeyboard_html_adde68389ae3c8358e794e7cdc9bc3fbb"><div class="ttname"><a href="classUniQKey_1_1VirtualKeyboard.html#adde68389ae3c8358e794e7cdc9bc3fbb">UniQKey::VirtualKeyboard::VirtualKeyboard</a></div><div class="ttdeci">VirtualKeyboard(QWidget *parent=nullptr)</div><div class="ttdoc">Constructor for the VirtualKeyboard class.</div><div class="ttdef"><b>Definition:</b> VirtualKeyboard.cpp:129</div></div>
+<div class="ttc" id="aclassUniQKey_1_1VirtualKeyboard_html_adde68389ae3c8358e794e7cdc9bc3fbb"><div class="ttname"><a href="classUniQKey_1_1VirtualKeyboard.html#adde68389ae3c8358e794e7cdc9bc3fbb">UniQKey::VirtualKeyboard::VirtualKeyboard</a></div><div class="ttdeci">VirtualKeyboard(QWidget *parent=nullptr)</div><div class="ttdoc">Constructor for the VirtualKeyboard class.</div><div class="ttdef"><b>Definition:</b> VirtualKeyboard.cpp:124</div></div>
 </div><!-- fragment --><p>If you don't want the keyboard to float, you can add it to your widget's layout using the <code>addWidget()</code> function:</p>
 <div class="fragment"><div class="line">anyWidget-&gt;layout()-&gt;addWidget(keyboard);</div>
 </div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
