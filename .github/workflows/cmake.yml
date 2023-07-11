@@ -1,4 +1,4 @@
-name: Build, Archive and Deploy
+name: Build, Deploy and Archive
 
 on:
   push:
@@ -38,6 +38,16 @@ jobs:
     - name: Build Documentation
       run: cmake --build ${{github.workspace}}/build --target doc --config ${{env.BUILD_TYPE}}
 
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.5
+      with:
+        branch: gh-pages
+        token: ${{ secrets.GITHUB_TOKEN }}
+        folder: ${{github.workspace}}/build/doc/html
+
+    - name: Clean build directory
+      run: rm -rf ${{github.workspace}}/build
+
     - name: Archive Repo
       run: tar -czvf repository-archive.tgz .
 
@@ -62,10 +72,3 @@ jobs:
         asset_path: ./repository-archive.tgz
         asset_name: repository-archive.tgz
         asset_content_type: application/gzip
-
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@4.1.5
-      with:
-        branch: gh-pages
-        token: ${{ secrets.GITHUB_TOKEN }}
-        folder: ${{github.workspace}}/build/doc/html
