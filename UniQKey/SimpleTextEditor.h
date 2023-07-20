@@ -41,6 +41,7 @@
 #include <QSlider>
 #include <QWheelEvent>
 #include <QScrollArea>
+#include <QLineEdit>
 
 
 namespace UniQKey {
@@ -72,6 +73,7 @@ namespace UniQKey {
 
     private:
         QPointer<QTextEdit> mTextEditor;
+        QPointer<QLineEdit> mSearchLine;
         QPointer<QTextDocument> mTextDocument;
 
         QPointer<QAction> boldAction;

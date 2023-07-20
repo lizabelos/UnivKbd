@@ -43,18 +43,25 @@ namespace UniQKey {
         BACKSPACE = 5,
         SPACE = 6,
         ENTER = 7,
-        FN1 = 8,
-        FN2 = 9,
-        FN3 = 10,
-        FN4 = 11,
-        FN5 = 12,
-        FN6 = 13,
-        FN7 = 14,
-        FN8 = 15,
-        FN9 = 16,
-        FN10 = 17,
-        FN11 = 18,
-        FN12 = 19    
+        CAPS_LOCK = 8,
+        UP = 9,
+        DOWN = 10,
+        LEFT = 11,
+        RIGHT = 12,
+        FN1 = 13,
+        FN2 = 14,
+        FN3 = 15,
+        FN4 = 16,
+        FN5 = 17,
+        FN6 = 18,
+        FN7 = 19,
+        FN8 = 20,
+        FN9 = 21,
+        FN10 = 22,
+        FN11 = 23,
+        FN12 = 24,
+        CONFIG = 25,
+        OPENCLOSE = 26
     };
 
 
@@ -221,87 +228,87 @@ namespace UniQKey {
 
                 case KeyType::REGULAR:
                     return getCharacters()[std::min((int)i, (int)getCharacters().size() - 1)];
-                    break;
 
                 case KeyType::SHIFT:
                     return "Shift";
-                    break;
 
                 case KeyType::CTRL:
                     return "Ctrl";
-                    break;
 
                 case KeyType::ALT:
                     return "Alt";
-                    break;
 
                 case KeyType::ESC:
                     return "Esc";
-                    break;
 
                 case KeyType::TAB:
                     return "Tab";
-                    break;
 
                 case KeyType::BACKSPACE:
                     return "Backspace";
-                    break;
 
                 case KeyType::SPACE:
                     return "Space";
-                    break;
 
                 case KeyType::ENTER:
                     return "Enter";
-                    break;
+
+                case KeyType::CAPS_LOCK:
+                    return "Caps Lock";
+
+                case KeyType::UP:
+                    return "↑";
+
+                case KeyType::DOWN:
+                    return "↓";
+
+                case KeyType::LEFT:
+                    return "←";
+
+                case KeyType::RIGHT:
+                    return "→";
 
                 case KeyType::FN1:
-                    return "Fn1";
-                    break;
+                    return "F1";
 
                 case KeyType::FN2:
-                    return "Fn2";
-                    break;
+                    return "F2";
 
                 case KeyType::FN3:
-                    return "Fn3";
-                    break;
+                    return "F3";
 
                 case KeyType::FN4:
-                    return "Fn4";
-                    break;
+                    return "F4";
 
                 case KeyType::FN5:
-                    return "Fn5";
-                    break;
+                    return "F5";
 
                 case KeyType::FN6:
-                    return "Fn6";
-                    break;
+                    return "F6";
 
                 case KeyType::FN7:
-                    return "Fn7";
-                    break;
+                    return "F7";
 
                 case KeyType::FN8:
-                    return "Fn8";
-                    break;
+                    return "F8";
 
                 case KeyType::FN9:
-                    return "Fn9";
-                    break;
+                    return "F9";
 
                 case KeyType::FN10:
-                    return "Fn10";
-                    break;
+                    return "F10";
 
                 case KeyType::FN11:
-                    return "Fn11";
-                    break;
+                    return "F11";
 
                 case KeyType::FN12:
-                    return "Fn12";
-                    break;
+                    return "F12";
+
+                case KeyType::CONFIG:
+                    return "Config";
+
+                case KeyType::OPENCLOSE:
+                    return "Open/Close";
 
                 default:
                     return "";
@@ -319,88 +326,82 @@ namespace UniQKey {
                     
                     case KeyType::REGULAR:
                         return static_cast<Qt::Key>(getCharacters()[0].unicode());
-                        break;
-    
+
                     case KeyType::SHIFT:
                         return Qt::Key_Shift;
-                        break;
-    
+
                     case KeyType::CTRL:
                         return Qt::Key_Control;
-                        break;
-    
+
                     case KeyType::ALT:
                         return Qt::Key_Alt;
-                        break;
-    
+
                     case KeyType::ESC:
                         return Qt::Key_Escape;
-                        break;
-    
+
                     case KeyType::TAB:
                         return Qt::Key_Tab;
-                        break;
-    
+
                     case KeyType::BACKSPACE:
                         return Qt::Key_Backspace;
-                        break;
 
                     case KeyType::SPACE:
                         return Qt::Key_Space;
-                        break;
-    
+
                     case KeyType::ENTER:
                         return Qt::Key_Enter;
-                        break;
-    
+
+                    case KeyType::CAPS_LOCK:
+                        return Qt::Key_CapsLock;
+
+                    case KeyType::UP:
+                        return Qt::Key_Up;
+
+                    case KeyType::DOWN:
+                        return Qt::Key_Down;
+
+                    case KeyType::LEFT:
+                        return Qt::Key_Left;
+
+                    case KeyType::RIGHT:
+                        return Qt::Key_Right;
+
                     case KeyType::FN1:
                         return Qt::Key_F1;
-                        break;
-    
+
                     case KeyType::FN2:
                         return Qt::Key_F2;
-                        break;
-    
+
                     case KeyType::FN3:
                         return Qt::Key_F3;
-                        break;
-    
+
                     case KeyType::FN4:
                         return Qt::Key_F4;
-                        break;
-    
+
                     case KeyType::FN5:
                         return Qt::Key_F5;
-                        break;
-    
+
                     case KeyType::FN6:
                         return Qt::Key_F6;
-                        break;
-    
+
                     case KeyType::FN7:
                         return Qt::Key_F7;
-                        break;
-    
+
                     case KeyType::FN8:
                         return Qt::Key_F8;
-                        break;
-    
+
                     case KeyType::FN9:
                         return Qt::Key_F9;
-                        break;
-    
+
                     case KeyType::FN10:
                         return Qt::Key_F10;
-                        break;
-    
+
                     case KeyType::FN11:
                         return Qt::Key_F11;
-                        break;
-    
+
                     case KeyType::FN12:
                         return Qt::Key_F12;
-                        break;
-    
+
                     default:
                         return Qt::Key_unknown;
                 }

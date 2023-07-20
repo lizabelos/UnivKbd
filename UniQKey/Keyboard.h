@@ -37,6 +37,7 @@
  */
 inline void UNIQKEY_INIT_RESOURCE() {
     Q_INIT_RESOURCE(keyboards);
+    Q_INIT_RESOURCE(icons);
 }
 
 namespace UniQKey {

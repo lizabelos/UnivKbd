@@ -57,6 +57,9 @@ UniQKey::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
     boldAction = new QAction("Bold", this);
     italicAction = new QAction("Italic", this);
     underlineAction = new QAction("Underline", this);
+    mSearchLine = new QLineEdit(this);
+
+    VirtualKeyboard *searchKeyboard = new VirtualKeyboard(mSearchLine);
 
     boldAction->setCheckable(true);
     italicAction->setCheckable(true);
@@ -77,6 +80,7 @@ UniQKey::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
     toolbar->addAction(boldAction);
     toolbar->addAction(italicAction);
     toolbar->addAction(underlineAction);
+    toolbar->addWidget(mSearchLine);
 
     // Zoom slider in status bar
     QSlider *zoomSlider = new QSlider(Qt::Horizontal, this);

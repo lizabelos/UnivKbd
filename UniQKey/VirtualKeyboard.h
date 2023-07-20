@@ -36,47 +36,22 @@
 #include <QColor>
 #include <QList>
 #include <QComboBox>
+#include <QDockWidget>
 
 #include <unordered_set>
 
+#include "VirtualKeyboardButton.h"
+#include "VirtualKeyboardInnerWidget.h"
 #include "Keyboard.h"
+#include "CustomDockWidget.h"
 
 namespace UniQKey {
 
-    class VirtualKeyboardButton : public QPushButton {
-    Q_OBJECT
 
-    public:
-        VirtualKeyboardButton(const Key &key);
-        ~VirtualKeyboardButton() override;
-
-        void setCurrentKey(int index);
-
-        inline int getCurrentKey() const {
-            return mCurrentKey;
-        }
-
-        inline const Key &getKey() const {
-            return mKey;
-        }
-
-    protected:
-        void resizeEvent(QResizeEvent *event) override;
-
-    signals:
-        void virtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
-
-    private slots:
-        void virtualButtonPressed();
-
-    private:
-        Key mKey;
-        QString mKeyString[3];
-
-        QPointer<QLabel> mLabels[3];
-
-        int mCurrentKey;
-
+    enum class VirtualKeyboardAttachMode {
+        Auto,
+        Floating,
+        Docked
     };
 
     /**
@@ -104,6 +79,12 @@ namespace UniQKey {
      * ```cpp
      * anyWidget->layout()->addWidget(keyboard);
      * ```
+     *
+     * During typing, show your own suggestions on top of the keyboard using the `setSuggestions()`
+     * ```cpp
+     * keyboard->setSuggestions(QStringList() << "suggestion1" << "suggestion2");
+     * connect(keyboard, &VirtualKeyboard::suggestionPressed, this, &MyWidget::onSuggestionPressed);
+     * ```
      */
     class VirtualKeyboard : public QWidget {
     Q_OBJECT
@@ -114,7 +95,7 @@ namespace UniQKey {
          *
          * @param parent The parent widget with which the keyboard will be associated. When this widget will be in focus, the keyboard will be shown. automatically
          */
-        VirtualKeyboard(QWidget *parent = nullptr);
+        VirtualKeyboard(QWidget *parent = nullptr, VirtualKeyboardAttachMode attachMode = VirtualKeyboardAttachMode::Auto);
 
         /**
          * @brief Returns the Qt keyboard modifiers.
@@ -122,20 +103,28 @@ namespace UniQKey {
          * @return The keyboard modifiers indicating which modifier keys are currently pressed (Ctrl, Alt, Shift).
          */
         inline Qt::KeyboardModifiers getModifiers() const {
-            Qt::KeyboardModifiers modifiers = Qt::NoModifier;
-            if (isModifierPressed(KeyType::CTRL)) {
-                modifiers |= Qt::ControlModifier;
-            }
-            if (isModifierPressed(KeyType::ALT)) {
-                modifiers |= Qt::AltModifier;
-            }
-            if (isModifierPressed(KeyType::SHIFT)) {
-                modifiers |= Qt::ShiftModifier;
-            }
-            return modifiers;
+            return gInnerWidget->getModifiers();
         }
 
+        /**
+         * @brief Automatically attaches the keyboard to the current window as a dock widget.
+         */
         void attachToCurrentWindowAsDockWidget();
+
+        /**
+         * @brief Set the suggestions words to be displayed on top of the keyboard.
+         */
+        inline void setSuggestions(const QStringList &suggestions) {
+            gCurrentKeyboard->setSuggestions(suggestions);
+        }
+
+    signals:
+        /**
+         * @brief This signal is emitted when a suggestion is pressed on the virtual keyboard.
+         *
+         * @param suggestion The suggestion that was pressed.
+         */
+        void suggestionPressed(const QString &suggestion);
 
     public slots:
         /**
@@ -151,7 +140,7 @@ namespace UniQKey {
         void triggerSetEnabled();
 
     protected:
-        void resizeEvent(QResizeEvent *event) override;
+        void findWindowAndAttachDockWidget();
 
     private slots:
         void parentTakeFocus();
@@ -160,37 +149,15 @@ namespace UniQKey {
 
         void onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
 
-    private:
-        bool loadLayoutFromKeyboard(const Keyboard &keyboard);
-
-        void addButtonFromKey(const Key &key);
-
-        inline void pressModifier(const Key &key) {
-            mKeyModifier ^= (unsigned long)1 << (int)key.getType();
-        }
-
-        inline bool isModifierPressed(const Key &key) const {
-            return (mKeyModifier & ((unsigned long)1 << (int)key.getType())) != 0;
-        }
-
-        inline int currentKeyType() const {
-            return (mKeyModifier & ((unsigned long)1 << (int)KeyType::SHIFT)) + (mKeyModifier & ((unsigned long)1 << (int)KeyType::ALT));
-        }
-
-        void refreshModifiers(QObject *toIgnore = nullptr);
+        void onAppFocusChanged(QObject *old, QObject *now);
 
     private:
         QWidget *mParent;
-        QList<QPointer<VirtualKeyboardButton>> mButtons;
+        VirtualKeyboardAttachMode mAttachMode;
 
-        QPointer<QVBoxLayout> mMainLayout;
-        QPointer<QHBoxLayout> mFunctionsLayout;
-        QPointer<QGridLayout> mKeyboardLayout;
-
-        QPointer<QComboBox> mCountrySelector;
-        QPointer<QComboBox> mLayoutSelector;
-
-        QPointer<QPushButton> mOpenCloseButton;
+        static QPointer<VirtualKeyboardInnerWidget> gInnerWidget;
+        static QPointer<CustomDockWidget> gDockWidget;
+        static QPointer<VirtualKeyboard> gCurrentKeyboard;
 
         unsigned long mKeyModifier = 0;
         QKeySequence mKeySequence;

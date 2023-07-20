@@ -251,13 +251,15 @@ std::vector<std::vector<Key>> convertKeyboardToLayout(std::vector<std::vector<Ke
 std::vector<std::vector<Key>> generateLayout(HKL outputLayout, const QString &layout) {
 
     std::vector<std::vector<Key>> frenchKeys = {
-        {{KeyType::ESC, 1, 1}, {KeyType::FN1, 1, 1}, {KeyType::FN2, 1, 1}, {KeyType::FN3, 1, 1}, {KeyType::FN4, 1, 1}, {KeyType::FN5, 1, 1}, {KeyType::FN6, 1, 1}, {KeyType::FN7, 1, 1}, {KeyType::FN8, 1, 1}, {KeyType::FN9, 1, 1}, {KeyType::FN10, 1, 1}, {KeyType::FN11, 1, 1}, {KeyType::FN12, 1, 1}},
-        {{"²", 1, 1}, {"&1", 1, 1}, {"é2~", 1, 1}, {"\"3#", 1, 1}, {"'4{", 1, 1}, {"(5[", 1, 1}, {"-6|", 1, 1}, {"è7`", 1, 1}, {"_8\\", 1, 1}, {"ç9^", 1, 1}, {"à0@", 1, 1}, {")°]", 1, 1}, {"=+}", 1, 1}, {KeyType::BACKSPACE, 3, 1}},
-        {{KeyType::TAB, 1.25f, 1}, {"aA", 1, 1}, {"zZ", 1, 1}, {"eE", 1, 1}, {"rR", 1, 1}, {"tT", 1, 1}, {"yY", 1, 1}, {"uU", 1, 1}, {"iI", 1, 1}, {"oO", 1, 1}, {"pP", 1, 1}, {"^¨", 1, 1}, {"$£", 1, 1}, {KeyType::ENTER, 2, 2}},
-        {{KeyType::SHIFT, 1.75f, 1}, {"qQ", 1, 1}, {"sS", 1, 1}, {"dD", 1, 1}, {"fF", 1, 1}, {"gG", 1, 1}, {"hH", 1, 1}, {"jJ", 1, 1}, {"kK", 1, 1}, {"lL", 1, 1}, {"mM", 1, 1}, {"ù%", 1, 1}, {"*µ", 1, 1}},
-        {{KeyType::SHIFT, 2, 1}, {"wW", 1, 1}, {"xX", 1, 1}, {"cC", 1, 1}, {"vV", 1, 1}, {"bB", 1, 1}, {"nN", 1, 1}, {",?", 1, 1}, {".:", 1, 1}, {";/", 1, 1}, {":!", 1, 1}, {"§", 1, 1}, {KeyType::SHIFT, 1, 1}},
-        {{KeyType::CTRL, 1.25f, 1}, {KeyType::ALT, 1.25f, 1}, {KeyType::SPACE, 5.25f, 1}, {KeyType::ALT, 1.25f, 1}, {KeyType::CTRL, 1.25f, 1}}
+            {{KeyType::ESC, 1, 1}, {KeyType::FN1, 1, 1}, {KeyType::FN2, 1, 1}, {KeyType::FN3, 1, 1}, {KeyType::FN4, 1, 1}, {KeyType::FN5, 1, 1}, {KeyType::FN6, 1, 1}, {KeyType::FN7, 1, 1}, {KeyType::FN8, 1, 1}, {KeyType::FN9, 1, 1}, {KeyType::FN10, 1, 1}, {KeyType::FN11, 1, 1}, {KeyType::FN12, 1, 1}, {KeyType::CONFIG, 1, 1}, {KeyType::OPENCLOSE, 1, 1}},
+            {{"²", 1, 1}, {"&1", 1, 1}, {"é2~", 1, 1}, {"\"3#", 1, 1}, {"'4{", 1, 1}, {"(-[", 1, 1}, {"è_6\\", 1, 1}, {"ç7|", 1, 1}, {"à8`", 1, 1}, {")9^", 1, 1}, {"°0@", 1, 1}, {"=+}", 1, 1}, {KeyType::BACKSPACE, 3.25f, 1}},
+            {{KeyType::TAB, 1.25f, 1}, {"aA", 1, 1}, {"zZ", 1, 1}, {"eE", 1, 1}, {"\"rR", 1, 1}, {"'tT", 1, 1}, {"yY", 1, 1}, {"uU", 1, 1}, {"iI", 1, 1}, {"oO", 1, 1}, {"pP", 1, 1}, {"^¨", 1, 1}, {"$£", 1, 1}, {KeyType::ENTER, 2, 2}},
+            {{KeyType::CAPS_LOCK, 1.75f, 1}, {"qQ", 1, 1}, {"sS", 1, 1}, {"dD", 1, 1}, {"fF", 1, 1}, {"gG", 1, 1}, {"hH", 1, 1}, {"jJ", 1, 1}, {"kK", 1, 1}, {"lL", 1, 1}, {"mM", 1, 1}, {"%ù", 1, 1}, {"*µ", 1, 1}},
+            {{KeyType::SHIFT, 2, 1}, {"<>", 1, 1}, {"wW", 1, 1}, {"xX", 1, 1}, {"cC", 1, 1}, {"vV", 1, 1}, {"bB", 1, 1}, {"nN", 1, 1}, {",?", 1, 1}, {";.", 1, 1}, {":/", 1, 1}, {"!§", 1, 1}, {KeyType::UP, 3.25f, 1}},
+            {{KeyType::CTRL, 1.75f, 1}, {KeyType::ALT, 1.75f, 1}, {KeyType::SPACE, 5.25f, 1}, {KeyType::ALT, 1.75f, 1}, {KeyType::CTRL, 1.75f, 1}, {KeyType::LEFT, 1, 1}, {KeyType::DOWN, 1, 1}, {KeyType::RIGHT, 1, 1}}
     };
+
+
 
     QString frenchLayoutName = keyboardCountryToHexadecimal("French");
     HKL frenchLayout = LoadKeyboardLayout(frenchLayoutName.toStdWString().c_str(), 0);

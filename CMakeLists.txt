@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.0)
 project(UniQKey)
 
 set(CMAKE_AUTOMOC ON)
@@ -40,12 +40,24 @@ add_library(UniQKey STATIC
         UniQKey/VirtualKeyboard.cpp
         UniQKey/Keyboard.h
         UniQKey/Key.h
+        UniQKey/VirtualKeyboardButton.cpp
+        UniQKey/VirtualKeyboardButton.h
+        UniQKey/VirtualKeyboardInnerWidget.cpp
+        UniQKey/VirtualKeyboardInnerWidget.h
+        UniQKey/VirtualKeyboardConfigurationWidget.cpp
+        UniQKey/VirtualKeyboardConfigurationWidget.h
+        UniQKey/CustomDockWidget.h
         )
 
 generate_qrc(UniQKey "${CMAKE_CURRENT_LIST_DIR}/keyboards" "keyboards")
+generate_qrc(UniQKey "${CMAKE_CURRENT_LIST_DIR}/icons" "icons")
+
+if (MINGW)
+    target_compile_options(UniQKey PRIVATE -municode)
+endif()
 
 # OS Dependant sources
-if (WIN32 AND NOT MINGW)
+if (WIN32)
     target_sources(UniQKey PRIVATE
             UniQKey/Keyboard.windows.cpp
     )
@@ -80,6 +92,10 @@ install(FILES
         UniQKey/Keyboard.h
         UniQKey/Key.h
         UniQKey/UniQKey
+        UniQKey/VirtualKeyboardButton.h
+        UniQKey/VirtualKeyboardInnerWidget.h
+        UniQKey/VirtualKeyboardConfigurationWidget.h
+        UniQKey/CustomDockWidget.h
         DESTINATION include/UniQKey
         )
 
