@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['simpletexteditor_27',['SimpleTextEditor',['../classUniQKey_1_1SimpleTextEditor.html',1,'UniQKey']]]
+  ['key_33',['Key',['../classUniQKey_1_1Key.html',1,'UniQKey']]],
+  ['keyboard_34',['Keyboard',['../classUniQKey_1_1Keyboard.html',1,'UniQKey']]]
 ];

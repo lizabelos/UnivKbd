@@ -1,5 +1,14 @@
 var searchData=
 [
-  ['key_14',['Key',['../classUniQKey_1_1Key.html#af9f95bdf622f3cbfaa19003b06af78fb',1,'UniQKey::Key::Key(KeyType type, float xSpan=1, float ySpan=1)'],['../classUniQKey_1_1Key.html#a584c8958390dc57bbccb99a7e749a73f',1,'UniQKey::Key::Key(const QString &amp;characters, float xSpan=1, float ySpan=1)'],['../classUniQKey_1_1Key.html',1,'UniQKey::Key']]],
-  ['keyboard_15',['Keyboard',['../classUniQKey_1_1Keyboard.html',1,'UniQKey']]]
+  ['getcharacters_4',['getCharacters',['../classUniQKey_1_1Key.html#a6cff6acd28d55e52e71593bcbc8f4071',1,'UniQKey::Key']]],
+  ['getdefaultkeyboardfromoperatingsystem_5',['getDefaultKeyboardFromOperatingSystem',['../classUniQKey_1_1Keyboard.html#a746c9e2827672a0bc81f54b86c61023f',1,'UniQKey::Keyboard']]],
+  ['getkeyboardfromoperatingsystem_6',['getKeyboardFromOperatingSystem',['../classUniQKey_1_1Keyboard.html#aac22929ea2fc18109cbd48067203f8fd',1,'UniQKey::Keyboard']]],
+  ['getkeys_7',['getKeys',['../classUniQKey_1_1Keyboard.html#ab3abef6110e8e1b2c14cf43a883210f1',1,'UniQKey::Keyboard']]],
+  ['getmodifiers_8',['getModifiers',['../classUniQKey_1_1VirtualKeyboard.html#a2c294fbabbb116d6abb4d99012d54642',1,'UniQKey::VirtualKeyboard::getModifiers()'],['../classUniQKey_1_1VirtualKeyboardInnerWidget.html#a168dc1718d78e5aef8ec928b79c5ebb3',1,'UniQKey::VirtualKeyboardInnerWidget::getModifiers()']]],
+  ['getoperatingsystemkeyboards_9',['getOperatingSystemKeyboards',['../classUniQKey_1_1Keyboard.html#a41865f8d78a127407dbab849f4d9b027',1,'UniQKey::Keyboard']]],
+  ['gettype_10',['getType',['../classUniQKey_1_1Key.html#a18428f7348b0019002e4633a7c4fc5e8',1,'UniQKey::Key']]],
+  ['getx_11',['getX',['../classUniQKey_1_1Key.html#a8fae80625d1a0b43f82275d7a0c4ff33',1,'UniQKey::Key']]],
+  ['getxspan_12',['getXSpan',['../classUniQKey_1_1Key.html#a1a22c215d31b708f9b7c42c6c6dec15d',1,'UniQKey::Key']]],
+  ['gety_13',['getY',['../classUniQKey_1_1Key.html#a93a7420c5be246c94c6b02b1e2bea5c6',1,'UniQKey::Key']]],
+  ['getyspan_14',['getYSpan',['../classUniQKey_1_1Key.html#ab5cd234cc873c9b47154d402a9f2b878',1,'UniQKey::Key']]]
 ];

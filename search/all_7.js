@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['toqtkey_20',['toQtKey',['../classUniQKey_1_1Key.html#ada07e7cc452a0bd82f274a1f510df956',1,'UniQKey::Key']]],
-  ['tostring_21',['toString',['../classUniQKey_1_1Key.html#aebcc37f362cd98a1a7d2ab3874dcf709',1,'UniQKey::Key']]],
-  ['triggersetenabled_22',['triggerSetEnabled',['../classUniQKey_1_1VirtualKeyboard.html#ad011eb8c059c3744844e6e9eee1d7bd2',1,'UniQKey::VirtualKeyboard']]]
+  ['listexportedkeyboards_18',['listExportedKeyboards',['../classUniQKey_1_1Keyboard.html#ae5c3d5cfed35b21b4377b5be4b2b25d1',1,'UniQKey::Keyboard']]]
 ];

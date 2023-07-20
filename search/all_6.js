@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['serialize_17',['serialize',['../classUniQKey_1_1Key.html#ac185cfe6751e184b5f1fbada516ea2d0',1,'UniQKey::Key::serialize()'],['../classUniQKey_1_1Keyboard.html#ad52bbc92992aee6bcae1300cac7ff7af',1,'UniQKey::Keyboard::serialize()']]],
-  ['setenabled_18',['setEnabled',['../classUniQKey_1_1VirtualKeyboard.html#a357565a85b54b9535f544b226c1b5d3f',1,'UniQKey::VirtualKeyboard']]],
-  ['simpletexteditor_19',['SimpleTextEditor',['../classUniQKey_1_1SimpleTextEditor.html',1,'UniQKey']]]
+  ['key_16',['Key',['../classUniQKey_1_1Key.html#af9f95bdf622f3cbfaa19003b06af78fb',1,'UniQKey::Key::Key(KeyType type, float xSpan=1, float ySpan=1)'],['../classUniQKey_1_1Key.html#a584c8958390dc57bbccb99a7e749a73f',1,'UniQKey::Key::Key(const QString &amp;characters, float xSpan=1, float ySpan=1)'],['../classUniQKey_1_1Key.html',1,'UniQKey::Key']]],
+  ['keyboard_17',['Keyboard',['../classUniQKey_1_1Keyboard.html',1,'UniQKey']]]
 ];
