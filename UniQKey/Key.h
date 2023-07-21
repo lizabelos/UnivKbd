@@ -186,7 +186,7 @@ namespace UniQKey {
             int mCharactersSize = mCharacters.size();
             file.write((const char*)(&mCharactersSize), sizeof(int));
             if (mCharactersSize > 0) {
-                file.write(mCharacters.toStdString().c_str(), mCharactersSize);
+                file.write((char*)mCharacters.utf16(), mCharactersSize * sizeof(uchar));
             }
 
         }
@@ -209,9 +209,9 @@ namespace UniQKey {
             int mCharactersSize;
             file.read((char*)(&mCharactersSize), sizeof(int));
             if (mCharactersSize > 0) {
-                char* mCharactersBuffer = new char[mCharactersSize];
-                file.read(mCharactersBuffer, mCharactersSize);
-                key.mCharacters = QString(mCharactersBuffer);
+                ushort *mCharactersBuffer = new ushort[mCharactersSize];
+                file.read((char*)mCharactersBuffer, mCharactersSize * sizeof(uchar));
+                key.mCharacters = QString::fromUtf16(mCharactersBuffer, mCharactersSize);
                 delete[] mCharactersBuffer;
             }
             return key;

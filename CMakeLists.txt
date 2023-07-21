@@ -4,7 +4,15 @@ project(UniQKey)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
+set(QT_VERSION 6)
+find_package(Qt6 COMPONENTS Core Gui Widgets QUIET)
+if (NOT Qt6_FOUND)
+    set(QT_VERSION 5)
+    find_package(Qt5 COMPONENTS Core Gui Widgets QUIET)
+endif()
+if (NOT Qt5_FOUND AND NOT Qt6_FOUND)
+    message(FATAL_ERROR "Qt5 or Qt6 not found")
+endif()
 
 # QRC Function
 function(generate_qrc TARGET_NAME SOURCE_DIR QRC_FILE_NAME)
@@ -67,7 +75,11 @@ else()
     )
 endif()
 
-target_link_libraries(UniQKey Qt6::Core Qt6::Gui Qt6::Widgets)
+if (QT_VERSION EQUAL 5)
+    target_link_libraries(UniQKey Qt5::Core Qt5::Gui Qt5::Widgets)
+else()
+    target_link_libraries(UniQKey Qt6::Core Qt6::Gui Qt6::Widgets)
+endif()
 
 # Test
 

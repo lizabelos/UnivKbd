@@ -94,7 +94,6 @@ bool UniQKey::VirtualKeyboardInnerWidget::loadLayoutFromKeyboard(const Keyboard&
     // empty the layout
     for (const auto& button : mButtons) {
         mKeyboardLayout->removeWidget(button);
-        delete button;
     }
     mButtons.clear();
 

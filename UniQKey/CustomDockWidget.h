@@ -24,6 +24,8 @@
 #ifndef CustomDockWidget_H
 #define CustomDockWidget_H
 
+#include <QWidget>
+#include <QPointer>
 #include <QDockWidget>
 #include <QMouseEvent>
 #include <QLabel>

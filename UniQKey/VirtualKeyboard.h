@@ -158,6 +158,7 @@ namespace UniQKey {
         static QPointer<VirtualKeyboardInnerWidget> gInnerWidget;
         static QPointer<CustomDockWidget> gDockWidget;
         static QPointer<VirtualKeyboard> gCurrentKeyboard;
+        static QMainWindow *gCurrentWindow;
 
         unsigned long mKeyModifier = 0;
         QKeySequence mKeySequence;

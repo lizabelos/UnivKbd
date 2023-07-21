@@ -35,6 +35,7 @@
 QPointer<UniQKey::VirtualKeyboardInnerWidget> UniQKey::VirtualKeyboard::gInnerWidget;
 QPointer<UniQKey::CustomDockWidget> UniQKey::VirtualKeyboard::gDockWidget;
 QPointer<UniQKey::VirtualKeyboard> UniQKey::VirtualKeyboard::gCurrentKeyboard;
+QMainWindow *UniQKey::VirtualKeyboard::gCurrentWindow = nullptr;
 
 UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent, VirtualKeyboardAttachMode attachMode) : mParent(parent), mAttachMode(attachMode) {
 
@@ -136,6 +137,11 @@ void UniQKey::VirtualKeyboard::triggerSetEnabled() {
 
 void UniQKey::VirtualKeyboard::findWindowAndAttachDockWidget() {
 
+    if (gDockWidget.isNull()) {
+        gDockWidget = new CustomDockWidget();
+        gDockWidget->setCustomWidget(gInnerWidget);
+    }
+
     QObject *widget = mParent;
     QMainWindow *window = nullptr;
     qDebug() << "Looking for Main Window...";
@@ -152,17 +158,22 @@ void UniQKey::VirtualKeyboard::findWindowAndAttachDockWidget() {
         widget = widget->parent();
     }
 
-    if (gDockWidget.isNull()) {
-        gDockWidget = new CustomDockWidget();
-        gDockWidget->setCustomWidget(gInnerWidget);
+    if (gCurrentWindow == window) {
+        return;
     }
+
+    if (gCurrentWindow != nullptr) {
+        gCurrentWindow->removeDockWidget(gDockWidget);
+    }
+
     window->addDockWidget(Qt::BottomDockWidgetArea, gDockWidget);
+    gCurrentWindow = window;
 
 }
 
 void UniQKey::VirtualKeyboard::onAppFocusChanged(QObject *old, QObject *now) {
 
-    if (old == nullptr || now == nullptr) {
+    if (now == nullptr) {
         return;
     }
 
@@ -201,6 +212,9 @@ void UniQKey::VirtualKeyboard::onAppFocusChanged(QObject *old, QObject *now) {
 }
 
 void UniQKey::VirtualKeyboard::attachToCurrentWindowAsDockWidget() {
+    if (mAttachMode == VirtualKeyboardAttachMode::Docked) {
+        return;
+    }
     if (gCurrentKeyboard != nullptr) {
         gCurrentKeyboard->parentLooseFocus();
     }

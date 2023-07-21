@@ -87,7 +87,7 @@ namespace UniQKey {
          * @brief Set the suggestions words to be displayed on top of the keyboard.
          */
         inline void setSuggestions(const QStringList &suggestions) {
-            for (int i = 0; i < std::min(3LL, suggestions.size()); i++) {
+            for (int i = 0; i < std::min((int)3, (int)suggestions.size()); i++) {
                 mSuggestionButtons[i]->setText(suggestions[i]);
             }
         }
@@ -137,13 +137,13 @@ namespace UniQKey {
             return (mKeyModifier & ((unsigned long)1 << (int)key.getType())) != 0;
         }
 
-        inline int currentKeyType() const {
-            int type = 0;
+        inline unsigned long currentKeyType() const {
+            unsigned long type = 0;
             if (isModifierPressed(KeyType::SHIFT) || isModifierPressed(KeyType::CAPS_LOCK)) {
-                type += (int)KeyType::SHIFT;
+                type += (unsigned long)KeyType::SHIFT + 1;
             }
             if (isModifierPressed(KeyType::ALT)) {
-                type += (int)KeyType::ALT;
+                type += (unsigned long)KeyType::ALT + 1;
             }
             return type;
         }
