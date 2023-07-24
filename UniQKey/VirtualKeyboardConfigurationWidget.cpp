@@ -1,6 +1,8 @@
 #include "VirtualKeyboardConfigurationWidget.h"
 #include "Keyboard.h"
 
+#include <QScroller>
+
 UniQKey::VirtualKeyboardConfigurationWidget::VirtualKeyboardConfigurationWidget(QWidget *parent) : QTabWidget(parent) {
     mLanguagesTab = new QWidget(this);
     mLanguagesTabLayout = new QHBoxLayout();
@@ -40,6 +42,13 @@ UniQKey::VirtualKeyboardConfigurationWidget::VirtualKeyboardConfigurationWidget(
     connect(mLayoutSelector->selectionModel(), &QItemSelectionModel::currentChanged, [=](const QModelIndex &index) {
         emit requestKeyboard(mCountrySelector->currentIndex().data().toString(), index.data().toString());
     });
+
+    // one finger scrolling on the list views
+    QScroller::grabGesture(mCountrySelector, QScroller::LeftMouseButtonGesture);
+    QScroller::grabGesture(mLayoutSelector, QScroller::LeftMouseButtonGesture);
+
+    // swipe gesture to change tabs
+    QScroller::grabGesture(this, QScroller::LeftMouseButtonGesture);
 
 }
 

@@ -60,6 +60,13 @@ namespace UniQKey {
             return mKey;
         }
 
+        qreal recommendedTextSize() const;
+
+        inline void setTextSize(float size) {
+            mTextSize = size;
+        }
+
+
     protected:
         void paintEvent(QPaintEvent *event) override;
 
@@ -76,6 +83,8 @@ namespace UniQKey {
         int mCurrentKey;
 
         QPixmap mPixmap;
+
+        float mTextSize = 0;
 
     };
 

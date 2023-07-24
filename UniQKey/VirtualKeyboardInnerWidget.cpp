@@ -87,6 +87,7 @@ UniQKey::VirtualKeyboardInnerWidget::VirtualKeyboardInnerWidget() {
 
     Keyboard keyboard = Keyboard::importKeyboard("US", "qwertyuiopasdfghjklzxcvbnm");
     loadLayoutFromKeyboard(keyboard);
+
 }
 
 bool UniQKey::VirtualKeyboardInnerWidget::loadLayoutFromKeyboard(const Keyboard& keyboard) {
@@ -94,12 +95,14 @@ bool UniQKey::VirtualKeyboardInnerWidget::loadLayoutFromKeyboard(const Keyboard&
     // empty the layout
     for (const auto& button : mButtons) {
         mKeyboardLayout->removeWidget(button);
+        delete button;
     }
     mButtons.clear();
 
     for (const auto& key : keyboard.getKeys()) {
         addButtonFromKey(key);
     }
+
     return true;
 }
 
@@ -184,5 +187,15 @@ void UniQKey::VirtualKeyboardInnerWidget::refreshModifiers(QObject *toIgnore) {
         } else if (button != toIgnore) {
             button->setChecked(isModifierPressed(button->getKey()));
         }
+    }
+}
+
+void UniQKey::VirtualKeyboardInnerWidget::paintEvent(QPaintEvent *event) {
+    qreal textHeight = 99999;
+    for (auto button : mButtons) {
+        textHeight = std::min(textHeight, button->recommendedTextSize());
+    }
+    for (auto button : mButtons) {
+        button->setTextSize(textHeight);
     }
 }

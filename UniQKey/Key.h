@@ -126,6 +126,18 @@ namespace UniQKey {
         }
 
         /**
+         * @brief Set the characters associated to the key.
+         *
+         * @param characters The characters associated to the key.
+         * @return The key with the new characters.
+         **/
+        inline Key withCharacters(const QString& characters) const {
+            Key key = *this;
+            key.mCharacters = characters;
+            return key;
+        }
+
+        /**
          * @brief Get the width of the key.
          * 
          * @return The width of the key in the keyboard.

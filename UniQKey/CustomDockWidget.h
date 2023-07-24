@@ -54,7 +54,7 @@ namespace UniQKey {
         void setCustomWidget(QWidget *widget) {
             mContentWidget = new QWidget(this);
             mContentLayout = new QVBoxLayout;
-            mContentLayout->setContentsMargins(0, 20, 0, 0); // Provide enough space for the title bar.
+            mContentLayout->setContentsMargins(0, 40, 0, 0); // Provide enough space for the title bar.
             mContentWidget->setLayout(mContentLayout);
             setWidget(mContentWidget);
             mContentLayout->addWidget(widget);
@@ -105,8 +105,25 @@ namespace UniQKey {
         }
 
         void mouseReleaseEvent(QMouseEvent *event) override {
+            (void) event;
             mDrag = false;
             mResize = false;
+        }
+
+        // two finger touch events
+        /*void touchEvent(QTouchEvent *event) override {
+            if (event->touchPoints().size() == 2) {
+                if (event->touchPointStates() & Qt::TouchPointPressed) {
+                    setFloating(false);
+                }
+            }
+        }*/
+        // use event() to support qt5
+        bool event(QEvent *event) override {
+            if (event->type() == QEvent::TouchBegin && static_cast<QTouchEvent *>(event)->touchPoints().size() == 2) {
+                setFloating(false);
+            }
+            return QDockWidget::event(event);
         }
 
         void paintEvent(QPaintEvent *) override {
@@ -131,11 +148,11 @@ namespace UniQKey {
         bool mResize = false;
 
         QRect titleBarRect() const {
-            return QRect(20, 0, width() - 20, 20);
+            return QRect(resizeHandleRect().width(), 0, QWidget::width() - resizeHandleRect().width(), 40);
         }
 
         QRect resizeHandleRect() const {
-            return QRect(0, 0, 20, 20);
+            return QRect(0, 0, QWidget::width() / 2, 40);
         }
 
     };

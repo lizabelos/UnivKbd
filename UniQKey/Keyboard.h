@@ -177,7 +177,6 @@ namespace UniQKey {
          * @return Keyboard The imported keyboard.
          */
         static inline Keyboard importKeyboard(const QString &name, const QString &layout) {
-            // todo : layout
             QFile file(":/" + name + ".keyboard");
             file.open(QIODevice::ReadOnly);
             if (!file.isOpen()) {
@@ -187,7 +186,42 @@ namespace UniQKey {
             Keyboard keyboard;
             keyboard.deserialize(file);
             file.close();
-            return keyboard;
+            qDebug() << "Converting imported keyboard" << name << "from" << getKeyboardLayouts()[0] << "to" << layout;
+            return convertLayout(keyboard, getKeyboardLayouts()[0], layout);
+        }
+
+        static QString convertLayout(const QString &text, const std::map<QChar, QChar> &charMap) {
+            QString convertedText = "";
+            for (int i = 0; i < text.size(); i++) {
+                if (charMap.find(text.at(i)) != charMap.end()) {
+                    convertedText += charMap.at(text.at(i));
+                } else {
+                    convertedText += text.at(i);
+                }
+            }
+            return convertedText;
+        }
+
+        static Keyboard convertLayout(Keyboard &keyboard, const std::map<QChar, QChar> &charMap) {
+            Keyboard convertedKeyboard;
+            for (int i = 0; i < keyboard.getKeys().size(); i++) {
+                Key key = keyboard.getKeys()[i];
+                if (key.getType() == KeyType::REGULAR) {
+                    key = key.withCharacters(convertLayout(key.getCharacters(), charMap));
+                }
+                convertedKeyboard.mKeys.push_back(key);
+            }
+            return convertedKeyboard;
+        }
+
+        static Keyboard convertLayout(Keyboard &keyboard, const QString &from, const QString &to) {
+            // create a QChar map from inputLayout to outputLayout
+            std::map<QChar, QChar> charMap;
+            for (int i = 0; i < from.size(); i++) {
+                charMap[from.at(i)] = to.at(i);
+                charMap[QChar(from.at(i)).toUpper()] = QChar(to.at(i)).toUpper();
+            }
+            return convertLayout(keyboard, charMap);
         }
 
     protected:

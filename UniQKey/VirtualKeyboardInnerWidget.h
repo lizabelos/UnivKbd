@@ -121,6 +121,9 @@ namespace UniQKey {
          */
         void suggestionPressed(const QString &suggestion);
 
+    protected:
+        void paintEvent(QPaintEvent *event) override;
+
     private slots:
         void onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
 

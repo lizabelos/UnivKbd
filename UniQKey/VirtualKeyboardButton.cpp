@@ -93,6 +93,9 @@ void UniQKey::VirtualKeyboardButton::setCurrentKey(int index) {
 
 void UniQKey::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
 
+    // unused parameter
+    (void)event;
+
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
@@ -114,15 +117,35 @@ void UniQKey::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
         painter.fillRect(rect(), QColor(0xFF, 0xFF, 0xFF));
     }
 
-
+    if (mTextSize == 0) {
+        mTextSize = recommendedTextSize();
+    }
 
     if (mPixmap.isNull()) {
-        // Calculate the font size based on the button's dimensions and text width
         QFont font = painter.font();
+        font.setPointSizeF(mTextSize);
+        painter.setFont(font);
+
+        painter.setPen(Qt::black);
+        painter.drawText(rect(), Qt::AlignCenter, text());
+    } else {
+        QRect svgSize = mPixmap.rect();
+        qreal svgHeight = mTextSize;
+        qreal svgWidth = svgHeight * svgSize.width() / svgSize.height();
+
+        QRect svgRect(rect().center().x() - svgWidth / 2, rect().center().y() - svgHeight / 2, svgWidth, svgHeight);
+        painter.drawPixmap(svgRect, mPixmap);
+    }
+
+}
+
+qreal UniQKey::VirtualKeyboardButton::recommendedTextSize() const {
+    if (mPixmap.isNull()) {
+        // Calculate the font size based on the button's dimensions and text width
+        QFont font;
         qreal maxFontSize = qMin(0.6 * rect().width(), 0.6 * rect().height()); // Maximum font size based on button width and height
         qreal fontPointSize = 0.8 * maxFontSize; // Initial font size based on the maximum font size
         font.setPointSizeF(fontPointSize);
-        painter.setFont(font);
 
         QFontMetrics fontMetrics(font);
         qreal textWidth = fontMetrics.horizontalAdvance(text()); // Width of the button's text
@@ -139,12 +162,8 @@ void UniQKey::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
             fontPointSize = maxFontSize;
         }
 
-        font.setPointSizeF(fontPointSize);
-        painter.setFont(font);
+        return fontPointSize;
 
-        // Draw the text
-        painter.setPen(Qt::black);
-        painter.drawText(rect(), Qt::AlignCenter, text());
     } else {
         QRect svgSize = mPixmap.rect();
         // make it's height 0.6 of the button's height
@@ -156,8 +175,7 @@ void UniQKey::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
             svgHeight = svgWidth * svgSize.height() / svgSize.width();
         }
 
-        QRect svgRect(rect().center().x() - svgWidth / 2, rect().center().y() - svgHeight / 2, svgWidth, svgHeight);
-        painter.drawPixmap(svgRect, mPixmap);
+        return svgHeight;
     }
-
 }
+
