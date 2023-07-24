@@ -1,6 +1,6 @@
 /*
 * --------------------------------------------------------------
-* Project: UniQKey
+* Project: UnivKbd
 * Author: Liza Belos
 * Year: 2023
 * 
@@ -10,7 +10,7 @@
 * --------------------------------------------------------------
 *
 * NOTICE:
-* This file is part of the original distribution of the UniQKey project. 
+* This file is part of the original distribution of the UnivKbd project.
 * All changes and redistributions of this file must retain this notice, 
 * the list of contributors, and the entire copyright notice including the
 * MIT License information.
@@ -32,12 +32,12 @@
 
 #include <unordered_set>
 
-QPointer<UniQKey::VirtualKeyboardInnerWidget> UniQKey::VirtualKeyboard::gInnerWidget;
-QPointer<UniQKey::CustomDockWidget> UniQKey::VirtualKeyboard::gDockWidget;
-QPointer<UniQKey::VirtualKeyboard> UniQKey::VirtualKeyboard::gCurrentKeyboard;
-QMainWindow *UniQKey::VirtualKeyboard::gCurrentWindow = nullptr;
+QPointer<UnivKbd::VirtualKeyboardInnerWidget> UnivKbd::VirtualKeyboard::gInnerWidget;
+QPointer<UnivKbd::CustomDockWidget> UnivKbd::VirtualKeyboard::gDockWidget;
+QPointer<UnivKbd::VirtualKeyboard> UnivKbd::VirtualKeyboard::gCurrentKeyboard;
+QMainWindow *UnivKbd::VirtualKeyboard::gCurrentWindow = nullptr;
 
-UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent, VirtualKeyboardAttachMode attachMode) : mParent(parent), mAttachMode(attachMode) {
+UnivKbd::VirtualKeyboard::VirtualKeyboard(QWidget *parent, VirtualKeyboardAttachMode attachMode) : mParent(parent), mAttachMode(attachMode) {
 
     if (gInnerWidget.isNull()) {
         gInnerWidget = new VirtualKeyboardInnerWidget;
@@ -54,7 +54,7 @@ UniQKey::VirtualKeyboard::VirtualKeyboard(QWidget *parent, VirtualKeyboardAttach
 
 }
 
-void UniQKey::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key) {
+void UnivKbd::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key) {
 
     if (gCurrentKeyboard != this) {
         return;
@@ -84,7 +84,7 @@ void UniQKey::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button
 }
 
 
-void UniQKey::VirtualKeyboard::parentTakeFocus() {
+void UnivKbd::VirtualKeyboard::parentTakeFocus() {
     qDebug() << "VirtualKeyboard::parentTakeFocus()";
     if (gCurrentKeyboard != nullptr && gCurrentKeyboard != this) {
         gCurrentKeyboard->parentLooseFocus();
@@ -108,7 +108,7 @@ void UniQKey::VirtualKeyboard::parentTakeFocus() {
     }
 }
 
-void UniQKey::VirtualKeyboard::parentLooseFocus() {
+void UnivKbd::VirtualKeyboard::parentLooseFocus() {
     gCurrentKeyboard = nullptr;
     qDebug() << "VirtualKeyboard::parentLooseFocus()";
     switch (mAttachMode) {
@@ -127,15 +127,15 @@ void UniQKey::VirtualKeyboard::parentLooseFocus() {
     }
 }
 
-void UniQKey::VirtualKeyboard::setEnabled(bool enabled) {
+void UnivKbd::VirtualKeyboard::setEnabled(bool enabled) {
     gInnerWidget->setEnabled(enabled);
 }
 
-void UniQKey::VirtualKeyboard::triggerSetEnabled() {
+void UnivKbd::VirtualKeyboard::triggerSetEnabled() {
     gInnerWidget->triggerSetEnabled();
 }
 
-void UniQKey::VirtualKeyboard::findWindowAndAttachDockWidget() {
+void UnivKbd::VirtualKeyboard::findWindowAndAttachDockWidget() {
 
     if (gDockWidget.isNull()) {
         gDockWidget = new CustomDockWidget();
@@ -171,7 +171,7 @@ void UniQKey::VirtualKeyboard::findWindowAndAttachDockWidget() {
 
 }
 
-void UniQKey::VirtualKeyboard::onAppFocusChanged(QObject *old, QObject *now) {
+void UnivKbd::VirtualKeyboard::onAppFocusChanged(QObject *old, QObject *now) {
 
     if (now == nullptr) {
         return;
@@ -211,7 +211,7 @@ void UniQKey::VirtualKeyboard::onAppFocusChanged(QObject *old, QObject *now) {
 
 }
 
-void UniQKey::VirtualKeyboard::attachToCurrentWindowAsDockWidget() {
+void UnivKbd::VirtualKeyboard::attachToCurrentWindowAsDockWidget() {
     if (mAttachMode == VirtualKeyboardAttachMode::Docked) {
         return;
     }

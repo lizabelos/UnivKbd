@@ -3,7 +3,7 @@
 
 #include <QScroller>
 
-UniQKey::VirtualKeyboardConfigurationWidget::VirtualKeyboardConfigurationWidget(QWidget *parent) : QTabWidget(parent) {
+UnivKbd::VirtualKeyboardConfigurationWidget::VirtualKeyboardConfigurationWidget(QWidget *parent) : QTabWidget(parent) {
     mLanguagesTab = new QWidget(this);
     mLanguagesTabLayout = new QHBoxLayout();
     mCountrySelector = new QListView();
@@ -52,7 +52,7 @@ UniQKey::VirtualKeyboardConfigurationWidget::VirtualKeyboardConfigurationWidget(
 
 }
 
-void UniQKey::VirtualKeyboardConfigurationWidget::onTabChanged(int index) {
+void UnivKbd::VirtualKeyboardConfigurationWidget::onTabChanged(int index) {
     if (this->tabText(index) == "Close") {
         emit close();
         setCurrentIndex(0);

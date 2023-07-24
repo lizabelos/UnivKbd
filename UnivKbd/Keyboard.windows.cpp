@@ -1,6 +1,6 @@
 /*
 * --------------------------------------------------------------
-* Project: UniQKey
+* Project: UnivKbd
 * Author: Liza Belos
 * Year: 2023
 * 
@@ -10,7 +10,7 @@
 * --------------------------------------------------------------
 *
 * NOTICE:
-* This file is part of the original distribution of the UniQKey project. 
+* This file is part of the original distribution of the UnivKbd project.
 * All changes and redistributions of this file must retain this notice, 
 * the list of contributors, and the entire copyright notice including the
 * MIT License information.
@@ -27,7 +27,7 @@
 #include <qDebug>
 #include <Windows.h>
 
-namespace UniQKey {
+namespace UnivKbd {
 
 QString keyboardCountryToHexadecimal(QString layout) {
     HKEY hKey;
@@ -283,7 +283,7 @@ std::vector<std::vector<Key>> generateLayout(HKL outputLayout, const QString &la
 
 }
 
-QList<QString> UniQKey::Keyboard::getOperatingSystemKeyboards() {
+QList<QString> UnivKbd::Keyboard::getOperatingSystemKeyboards() {
     QList<QString> layouts;
     HKEY hKey;
     WCHAR data[255];
@@ -322,7 +322,7 @@ QList<QString> UniQKey::Keyboard::getOperatingSystemKeyboards() {
     return layouts;
 }
 
-UniQKey::Keyboard UniQKey::Keyboard::getKeyboardFromOperatingSystem(const QString &country, const QString &layout) {
+UnivKbd::Keyboard UnivKbd::Keyboard::getKeyboardFromOperatingSystem(const QString &country, const QString &layout) {
    
     qDebug() << "Converting country " << country << " to hexadecimal layout";
     QString hexadecimalLayout = keyboardCountryToHexadecimal(country);
@@ -373,6 +373,6 @@ UniQKey::Keyboard UniQKey::Keyboard::getKeyboardFromOperatingSystem(const QStrin
 
 }
 
-UniQKey::Keyboard UniQKey::Keyboard::getDefaultKeyboardFromOperatingSystem() {
+UnivKbd::Keyboard UnivKbd::Keyboard::getDefaultKeyboardFromOperatingSystem() {
     return getKeyboardFromOperatingSystem("US", getKeyboardLayouts()[0]);
 }

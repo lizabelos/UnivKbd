@@ -1,6 +1,6 @@
 /*
 * --------------------------------------------------------------
-* Project: UniQKey
+* Project: UnivKbd
 * Author: Liza Belos
 * Year: 2023
 * 
@@ -10,7 +10,7 @@
 * --------------------------------------------------------------
 *
 * NOTICE:
-* This file is part of the original distribution of the UniQKey project. 
+* This file is part of the original distribution of the UnivKbd project.
 * All changes and redistributions of this file must retain this notice, 
 * the list of contributors, and the entire copyright notice including the
 * MIT License information.
@@ -45,7 +45,7 @@
 #include "Keyboard.h"
 #include "CustomDockWidget.h"
 
-namespace UniQKey {
+namespace UnivKbd {
 
 
     enum class VirtualKeyboardAttachMode {
@@ -67,10 +67,10 @@ namespace UniQKey {
      * following code:
      *
      * ```cpp
-     * #include <UniQKey/UniQKey>
+     * #include <UnivKbd/UnivKbd>
      *
      * QWidget *anyWidget = ...;
-     * UniQKey::VirtualKeyboard *keyboard = new VirtualKeyboard(anyWidget);
+     * UnivKbd::VirtualKeyboard *keyboard = new VirtualKeyboard(anyWidget);
      * ```
      *
      * If you don't want the keyboard to float, you can add it to your widget's layout

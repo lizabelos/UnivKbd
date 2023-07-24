@@ -1,6 +1,6 @@
 /*
 * --------------------------------------------------------------
-* Project: UniQKey
+* Project: UnivKbd
 * Author: Liza Belos
 * Year: 2023
 *
@@ -10,7 +10,7 @@
 * --------------------------------------------------------------
 *
 * NOTICE:
-* This file is part of the original distribution of the UniQKey project.
+* This file is part of the original distribution of the UnivKbd project.
 * All changes and redistributions of this file must retain this notice,
 * the list of contributors, and the entire copyright notice including the
 * MIT License information.
@@ -33,7 +33,7 @@
 #include <QPainter>
 #include <QStyle>
 
-namespace UniQKey {
+namespace UnivKbd {
 
     /**
      * @class CustomDockWidget
@@ -157,7 +157,7 @@ namespace UniQKey {
 
     };
 
-}  // namespace UniQKey
+}  // namespace UnivKbd
 
 
 #endif // CustomDockWidget_H

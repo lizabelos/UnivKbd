@@ -1,6 +1,6 @@
 /*
 * --------------------------------------------------------------
-* Project: UniQKey
+* Project: UnivKbd
 * Author: Liza Belos
 * Year: 2023
 * 
@@ -10,7 +10,7 @@
 * --------------------------------------------------------------
 *
 * NOTICE:
-* This file is part of the original distribution of the UniQKey project. 
+* This file is part of the original distribution of the UnivKbd project.
 * All changes and redistributions of this file must retain this notice, 
 * the list of contributors, and the entire copyright notice including the
 * MIT License information.
@@ -21,8 +21,8 @@
 * the use of this software.
 */
 
-#ifndef UNIQKEY_KEYBOARD_H
-#define UNIQKEY_KEYBOARD_H
+#ifndef UNIVKBD_KEYBOARD_H
+#define UNIVKBD_KEYBOARD_H
 
 #include <QString>
 #include <QFile>
@@ -33,14 +33,14 @@
 #include "Key.h"
 
 /**
- * @brief Internal function to initializes the UniQKey Qt resources.
+ * @brief Internal function to initializes the UnivKbd Qt resources.
  */
-inline void UNIQKEY_INIT_RESOURCE() {
+inline void UNIVKBD_INIT_RESOURCE() {
     Q_INIT_RESOURCE(keyboards);
     Q_INIT_RESOURCE(icons);
 }
 
-namespace UniQKey {
+namespace UnivKbd {
 
     /**
      * @brief Returns a list of available keyboard layouts.
@@ -156,7 +156,7 @@ namespace UniQKey {
          */
         static inline QList<QString> listExportedKeyboards(QString path=":/") {
             // initialize keyboards resources
-            UNIQKEY_INIT_RESOURCE();
+            UNIVKBD_INIT_RESOURCE();
             QDir dir(path);
             if (!dir.exists()) {
                 return QList<QString>();
@@ -233,6 +233,6 @@ namespace UniQKey {
 
 
 
-}  // namespace UniQKey
+}  // namespace UnivKbd
 
-#endif  // UNIQKEY_KEYBOARD_H
+#endif  // UNIVKBD_KEYBOARD_H

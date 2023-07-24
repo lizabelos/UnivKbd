@@ -1,6 +1,6 @@
 /*
 * --------------------------------------------------------------
-* Project: UniQKey
+* Project: UnivKbd
 * Author: Liza Belos
 * Year: 2023
 * 
@@ -10,7 +10,7 @@
 * --------------------------------------------------------------
 *
 * NOTICE:
-* This file is part of the original distribution of the UniQKey project. 
+* This file is part of the original distribution of the UnivKbd project.
 * All changes and redistributions of this file must retain this notice, 
 * the list of contributors, and the entire copyright notice including the
 * MIT License information.
@@ -26,7 +26,7 @@
 
 #include <QWidget>
 
-UniQKey::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
+UnivKbd::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
 
     /*** Text Document ***/
     mTextDocument = new QTextDocument(this);
@@ -114,31 +114,31 @@ UniQKey::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
     
 } 
 
-void UniQKey::SimpleTextEditor::makeTextBold() {
+void UnivKbd::SimpleTextEditor::makeTextBold() {
     QFont font = mTextEditor->currentFont();
     font.setBold(!font.bold());
     mTextEditor->setCurrentFont(font);
 }
 
-void UniQKey::SimpleTextEditor::makeTextItalic() {
+void UnivKbd::SimpleTextEditor::makeTextItalic() {
     QFont font = mTextEditor->currentFont();
     font.setItalic(!font.italic());
     mTextEditor->setCurrentFont(font);
 }
 
-void UniQKey::SimpleTextEditor::makeTextUnderlined() {
+void UnivKbd::SimpleTextEditor::makeTextUnderlined() {
     QFont font = mTextEditor->currentFont();
     font.setUnderline(!font.underline());
     mTextEditor->setCurrentFont(font);
 }
 
-void UniQKey::SimpleTextEditor::updateFormatActions(const QTextCharFormat &format) {
+void UnivKbd::SimpleTextEditor::updateFormatActions(const QTextCharFormat &format) {
     boldAction->setChecked(format.font().bold());
     italicAction->setChecked(format.font().italic());
     underlineAction->setChecked(format.font().underline());
 }
 
-void UniQKey::SimpleTextEditor::wheelEvent(QWheelEvent *event) {
+void UnivKbd::SimpleTextEditor::wheelEvent(QWheelEvent *event) {
     if (QApplication::keyboardModifiers() == Qt::ControlModifier) {
         if (event->angleDelta().y() > 0) {
             zoomIn();
@@ -151,7 +151,7 @@ void UniQKey::SimpleTextEditor::wheelEvent(QWheelEvent *event) {
     }
 }
 
-void UniQKey::SimpleTextEditor::zoom(int level) {
+void UnivKbd::SimpleTextEditor::zoom(int level) {
     qreal factor = level / 3.0;
     mZoomFactor = factor;
     QFont font = mTextEditor->font();
@@ -162,7 +162,7 @@ void UniQKey::SimpleTextEditor::zoom(int level) {
 
 }
 
-void UniQKey::SimpleTextEditor::zoomIn() {
+void UnivKbd::SimpleTextEditor::zoomIn() {
     mZoomFactor += 0.1;
     QFont font = mTextEditor->font();
     font.setPointSizeF(12 * mZoomFactor);
@@ -171,7 +171,7 @@ void UniQKey::SimpleTextEditor::zoomIn() {
 
 }
 
-void UniQKey::SimpleTextEditor::zoomOut() {
+void UnivKbd::SimpleTextEditor::zoomOut() {
     mZoomFactor -= 0.1;
     QFont font = mTextEditor->font();
     font.setPointSizeF(12 * mZoomFactor);

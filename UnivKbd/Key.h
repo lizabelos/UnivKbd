@@ -1,6 +1,6 @@
 /*
 * --------------------------------------------------------------
-* Project: UniQKey
+* Project: UnivKbd
 * Author: Liza Belos
 * Year: 2023
 * 
@@ -10,7 +10,7 @@
 * --------------------------------------------------------------
 *
 * NOTICE:
-* This file is part of the original distribution of the UniQKey project. 
+* This file is part of the original distribution of the UnivKbd project.
 * All changes and redistributions of this file must retain this notice, 
 * the list of contributors, and the entire copyright notice including the
 * MIT License information.
@@ -21,12 +21,12 @@
 * the use of this software.
 */
 
-#ifndef UNIQKEY_KEY_H
-#define UNIQKEY_KEY_H
+#ifndef UNIVKBD_KEY_H
+#define UNIVKBD_KEY_H
 
 #include <QString>
 
-namespace UniQKey {
+namespace UnivKbd {
 
     /**
      * @brief The KeyType enum

@@ -1,7 +1,7 @@
-# UniQKey
+# UnivKbd
 Alternative Cross-Platform On-Screen Keyboard for Qt5 and Qt6
 
-![UniQKey](images/capture.png)
+![UnivKbd](images/capture.png)
 
 ## How to build
 
@@ -21,18 +21,18 @@ cmake --install .
 
 To link with cmake : 
 ```cmake
-find_package(UniQKey REQUIRED)
-target_link_libraries(myapp PRIVATE UniQKey::UniQKey)
+find_package(UnivKbd REQUIRED)
+target_link_libraries(myapp PRIVATE UnivKbd::UnivKbd)
 ```
 
-With autotools, link to the library `libUniQKey.a` or `libUniQKey.lib`.
+With autotools, link to the library `libUnivKbd.a` or `libUnivKbd.lib`.
 
 To create a floating keyboard that will show up when a widget is focused, use the following code:
 ```cpp
-#include <UniQKey/UniQKey>
+#include <UnivKbd/UnivKbd>
 
 QWidget *anyWidget = ...;
-UniQKey::VirtualKeyboard *keyboard = new VirtualKeyboard(mTextEditor);
+UnivKbd::VirtualKeyboard *keyboard = new VirtualKeyboard(mTextEditor);
 ```
 
 If you don't want the keyboard to float, you can add it whenever you want to your widget's layout:

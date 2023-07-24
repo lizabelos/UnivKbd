@@ -1,6 +1,6 @@
 /*
 * --------------------------------------------------------------
-* Project: UniQKey
+* Project: UnivKbd
 * Author: Liza Belos
 * Year: 2023
 * 
@@ -10,7 +10,7 @@
 * --------------------------------------------------------------
 *
 * NOTICE:
-* This file is part of the original distribution of the UniQKey project. 
+* This file is part of the original distribution of the UnivKbd project.
 * All changes and redistributions of this file must retain this notice, 
 * the list of contributors, and the entire copyright notice including the
 * MIT License information.
@@ -32,7 +32,7 @@
 
 #include <unordered_set>
 
-UniQKey::VirtualKeyboardInnerWidget::VirtualKeyboardInnerWidget() {
+UnivKbd::VirtualKeyboardInnerWidget::VirtualKeyboardInnerWidget() {
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Tool);
     setAttribute(Qt::WA_TranslucentBackground);
 
@@ -90,7 +90,7 @@ UniQKey::VirtualKeyboardInnerWidget::VirtualKeyboardInnerWidget() {
 
 }
 
-bool UniQKey::VirtualKeyboardInnerWidget::loadLayoutFromKeyboard(const Keyboard& keyboard) {
+bool UnivKbd::VirtualKeyboardInnerWidget::loadLayoutFromKeyboard(const Keyboard& keyboard) {
 
     // empty the layout
     for (const auto& button : mButtons) {
@@ -106,7 +106,7 @@ bool UniQKey::VirtualKeyboardInnerWidget::loadLayoutFromKeyboard(const Keyboard&
     return true;
 }
 
-void UniQKey::VirtualKeyboardInnerWidget::addButtonFromKey(const Key &key) {
+void UnivKbd::VirtualKeyboardInnerWidget::addButtonFromKey(const Key &key) {
 
     const int spanResolution = 4;
 
@@ -124,7 +124,7 @@ void UniQKey::VirtualKeyboardInnerWidget::addButtonFromKey(const Key &key) {
     mButtons.append(btn);
 }
 
-void UniQKey::VirtualKeyboardInnerWidget::onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key) {
+void UnivKbd::VirtualKeyboardInnerWidget::onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key) {
 
     switch (key.getType()) {
 
@@ -167,7 +167,7 @@ void UniQKey::VirtualKeyboardInnerWidget::onVirtualKeyPressed(VirtualKeyboardBut
 }
 
 
-void UniQKey::VirtualKeyboardInnerWidget::setEnabled(bool enabled) {
+void UnivKbd::VirtualKeyboardInnerWidget::setEnabled(bool enabled) {
     mIsEnabled = enabled;
     if (enabled) {
         mMainLayout->setCurrentWidget(mKeyboardWidget);
@@ -176,11 +176,11 @@ void UniQKey::VirtualKeyboardInnerWidget::setEnabled(bool enabled) {
     }
 }
 
-void UniQKey::VirtualKeyboardInnerWidget::triggerSetEnabled() {
+void UnivKbd::VirtualKeyboardInnerWidget::triggerSetEnabled() {
     setEnabled(!mIsEnabled);
 }
 
-void UniQKey::VirtualKeyboardInnerWidget::refreshModifiers(QObject *toIgnore) {
+void UnivKbd::VirtualKeyboardInnerWidget::refreshModifiers(QObject *toIgnore) {
     for (auto button : mButtons) {
         if (button->getKey().getType() == KeyType::REGULAR) {
             button->setCurrentKey(currentKeyType());
@@ -190,7 +190,7 @@ void UniQKey::VirtualKeyboardInnerWidget::refreshModifiers(QObject *toIgnore) {
     }
 }
 
-void UniQKey::VirtualKeyboardInnerWidget::paintEvent(QPaintEvent *event) {
+void UnivKbd::VirtualKeyboardInnerWidget::paintEvent(QPaintEvent *event) {
     qreal textHeight = 99999;
     for (auto button : mButtons) {
         textHeight = std::min(textHeight, button->recommendedTextSize());

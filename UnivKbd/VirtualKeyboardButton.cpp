@@ -1,6 +1,6 @@
 /*
 * --------------------------------------------------------------
-* Project: UniQKey
+* Project: UnivKbd
 * Author: Liza Belos
 * Year: 2023
 * 
@@ -10,7 +10,7 @@
 * --------------------------------------------------------------
 *
 * NOTICE:
-* This file is part of the original distribution of the UniQKey project. 
+* This file is part of the original distribution of the UnivKbd project.
 * All changes and redistributions of this file must retain this notice, 
 * the list of contributors, and the entire copyright notice including the
 * MIT License information.
@@ -33,7 +33,7 @@
 
 #include <unordered_set>
 
-UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key) {
+UnivKbd::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key) {
 
     switch (key.getType()) {
 
@@ -71,15 +71,15 @@ UniQKey::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key
 
 }
 
-UniQKey::VirtualKeyboardButton::~VirtualKeyboardButton() {
+UnivKbd::VirtualKeyboardButton::~VirtualKeyboardButton() {
 
 }
 
-void UniQKey::VirtualKeyboardButton::virtualButtonPressed() {
+void UnivKbd::VirtualKeyboardButton::virtualButtonPressed() {
     emit virtualKeyPressed(*this, mKey);
 }
 
-void UniQKey::VirtualKeyboardButton::setCurrentKey(int index) {
+void UnivKbd::VirtualKeyboardButton::setCurrentKey(int index) {
     int maxIndex = 0;
     for (; maxIndex < 2; maxIndex++) {
         if (mKeyString[maxIndex + 1] == "") {
@@ -91,7 +91,7 @@ void UniQKey::VirtualKeyboardButton::setCurrentKey(int index) {
     setText(mKeyString[index]);
 }
 
-void UniQKey::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
+void UnivKbd::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
 
     // unused parameter
     (void)event;
@@ -139,7 +139,7 @@ void UniQKey::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
 
 }
 
-qreal UniQKey::VirtualKeyboardButton::recommendedTextSize() const {
+qreal UnivKbd::VirtualKeyboardButton::recommendedTextSize() const {
     if (mPixmap.isNull()) {
         // Calculate the font size based on the button's dimensions and text width
         QFont font;

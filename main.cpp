@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "UniQKey/UniQKey"
+#include "UnivKbd/UnivKbd"
 
 int main(int argc, char **argv) {
     QApplication app(argc, argv);
@@ -10,14 +10,14 @@ int main(int argc, char **argv) {
     app.setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
-    //UniQKey::Keyboard::exportOperatingSystemKeyboards();
+    //UnivKbd::Keyboard::exportOperatingSystemKeyboards();
 
-    qDebug() << "Launching UniQKey SimpleTextEditor...";
-    UniQKey::SimpleTextEditor editor;
+    qDebug() << "Launching UnivKbd SimpleTextEditor...";
+    UnivKbd::SimpleTextEditor editor;
 
-    qDebug() << "Showing UniQKey SimpleTextEditor...";
+    qDebug() << "Showing UnivKbd SimpleTextEditor...";
     editor.show();
 
-    qDebug() << "Running UniQKey SimpleTextEditor...";
+    qDebug() << "Running UnivKbd SimpleTextEditor...";
     return app.exec();
 }

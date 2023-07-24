@@ -5,8 +5,8 @@ endif()
 
 # Provide the package name
 set(@PACKAGE_NAME@_FOUND TRUE)
-set(@PACKAGE_NAME@_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include/UniQKey")
-set(@PACKAGE_NAME@_LIBRARIES "${CMAKE_INSTALL_PREFIX}/lib/libUniQKey.a")
+set(@PACKAGE_NAME@_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include/UnivKbd")
+set(@PACKAGE_NAME@_LIBRARIES "${CMAKE_INSTALL_PREFIX}/lib/libUnivKbd.a")
 
 # Create imported target
 add_library(@PACKAGE_FIND_PACKAGE_NAME@ INTERFACE)
