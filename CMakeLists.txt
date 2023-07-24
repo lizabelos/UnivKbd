@@ -4,9 +4,6 @@ project(UnivKbd)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 17)
 
-set(QT_VERSION 5)
-find_package(Qt5 COMPONENTS Core Gui Widgets QUIET)
-
 set(QT_VERSION 6)
 find_package(Qt6 COMPONENTS Core Gui Widgets QUIET)
 if (NOT Qt6_FOUND)
