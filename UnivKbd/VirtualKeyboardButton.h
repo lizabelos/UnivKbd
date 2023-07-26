@@ -43,11 +43,32 @@
 
 namespace UnivKbd {
 
+
+    class VirtualKeyboardSpecialsWidget : public QWidget {
+    Q_OBJECT
+
+    friend class VirtualKeyboardButton;
+
+    private:
+        VirtualKeyboardSpecialsWidget(QStringList specials, QWidget *parent);
+
+        void paintEvent(QPaintEvent *event) override;
+
+    signals:
+        void specialKeyPressed(const QString &key);
+
+    private:
+        QStringList mSpecials;
+        QPointer<QHBoxLayout> mLayout;
+        QList<QPointer<QPushButton>> mButtons;
+        QWidget *mDirectParent;
+    };
+
     class VirtualKeyboardButton : public QAbstractButton {
     Q_OBJECT
 
     public:
-        VirtualKeyboardButton(const Key &key);
+        VirtualKeyboardButton(const Key &key, QWidget *parent);
         ~VirtualKeyboardButton() override;
 
         void setCurrentKey(int index);
@@ -73,6 +94,8 @@ namespace UnivKbd {
     signals:
         void virtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
 
+        void specialKeyPressed(VirtualKeyboardButton &button, const Key &key, const QString &special);
+
     private slots:
         void virtualButtonPressed();
 
@@ -85,6 +108,8 @@ namespace UnivKbd {
         QPixmap mPixmap;
 
         float mTextSize = 0;
+
+        QList<QPointer<VirtualKeyboardSpecialsWidget>> mSpecialsWidget;
 
     };
 

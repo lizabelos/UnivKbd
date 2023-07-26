@@ -33,7 +33,7 @@
 
 #include <unordered_set>
 
-UnivKbd::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key) {
+UnivKbd::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key, QWidget *parent) : QAbstractButton(parent), mKey(key) {
 
     switch (key.getType()) {
 
@@ -68,6 +68,18 @@ UnivKbd::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key) : mKey(key
         mPixmap = QPixmap(svgPath);
     }
 
+    for (int i = 0; i < key.getCharacters().size(); i++) {
+        if (key.getSpecials(i).size() == 0) {
+            mSpecialsWidget.append(nullptr);
+        } else {
+            QPointer<VirtualKeyboardSpecialsWidget> specialsWidget = new VirtualKeyboardSpecialsWidget(key.getSpecials(i), this);
+            specialsWidget->hide();
+            mSpecialsWidget.append(specialsWidget);
+            connect(specialsWidget, &VirtualKeyboardSpecialsWidget::specialKeyPressed, [=](const QString &special) {
+                emit specialKeyPressed(*this, mKey, special);
+            });
+        }
+    }
 
 }
 
@@ -115,6 +127,18 @@ void UnivKbd::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
     else
     {
         painter.fillRect(rect(), QColor(0xFF, 0xFF, 0xFF));
+    }
+
+    if (underMouse()) {
+        if (mSpecialsWidget.size() > mCurrentKey && mSpecialsWidget[mCurrentKey] != nullptr) {
+            mSpecialsWidget[mCurrentKey]->show();
+        }
+    } else {
+        if (mSpecialsWidget.size() > mCurrentKey && mSpecialsWidget[mCurrentKey] != nullptr) {
+            if (!mSpecialsWidget[mCurrentKey]->underMouse()) {
+                mSpecialsWidget[mCurrentKey]->hide();
+            }
+        }
     }
 
     if (mTextSize == 0) {
@@ -177,5 +201,40 @@ qreal UnivKbd::VirtualKeyboardButton::recommendedTextSize() const {
 
         return svgHeight;
     }
+}
+
+UnivKbd::VirtualKeyboardSpecialsWidget::VirtualKeyboardSpecialsWidget(QStringList specials, QWidget *parent) : QWidget(parent->parentWidget()), mDirectParent(parent), mSpecials(specials) {
+    //QPointer<QHBoxLayout> mLayout;
+    //QList<QPointer<QPushButton>> mButtons;
+    qDebug() << "Creating specials widget with parent " << parent;
+
+    mLayout = new QHBoxLayout();
+    mLayout->setContentsMargins(0, 0, 0, 0);
+    mLayout->setSpacing(0);
+
+    for (int i = 0; i < specials.size(); i++) {
+        QPointer<QPushButton> button = new QPushButton(specials[i]);
+        mButtons.push_back(button);
+        mLayout->addWidget(button);
+        connect(button, &QPushButton::pressed, [=]() {
+            emit specialKeyPressed(specials[i]);
+        });
+    }
+
+    setLayout(mLayout);
+
+    setStyleSheet("background-color: red;");
+}
+
+void UnivKbd::VirtualKeyboardSpecialsWidget::paintEvent(QPaintEvent *event) {
+    // position the widget in the top center of the parent rect on its parent widget
+    QRect parentDrawRect = mDirectParent->rect().translated(mDirectParent->pos());
+    QRect drawRect = rect().translated(parentDrawRect.center().x() - rect().center().x(), parentDrawRect.top() - rect().height());
+    move(drawRect.topLeft());
+
+    qDebug() << "Painting specials widget with parent " << mDirectParent << " at " << drawRect.topLeft();
+
+    // update parent
+    mDirectParent->update();
 }
 

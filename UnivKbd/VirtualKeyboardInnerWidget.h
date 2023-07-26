@@ -115,6 +115,15 @@ namespace UnivKbd {
         void virtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
 
         /**
+         * @brief This signal is emitted when a special key is pressed on the virtual keyboard.
+         *
+         * @param button The button that was pressed.
+         * @param key The associated key to the button that was pressed.
+         * @param special The special key that was pressed.
+         */
+        void specialKeyPressed(VirtualKeyboardButton &button, const Key &key, const QString &special);
+
+        /**
          * @brief This signal is emitted when a suggestion is pressed on the virtual keyboard.
          *
          * @param suggestion The suggestion that was pressed.
@@ -126,6 +135,8 @@ namespace UnivKbd {
 
     private slots:
         void onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
+
+        void onSpecialKeyPressed(VirtualKeyboardButton &button, const Key &key, const QString &special);
 
     private:
         bool loadLayoutFromKeyboard(const Keyboard &keyboard);

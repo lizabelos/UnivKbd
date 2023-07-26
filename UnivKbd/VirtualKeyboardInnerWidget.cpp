@@ -115,11 +115,12 @@ void UnivKbd::VirtualKeyboardInnerWidget::addButtonFromKey(const Key &key) {
     int spanx = key.getXSpan() * spanResolution;
     int spany = key.getYSpan() * spanResolution;
 
-    VirtualKeyboardButton *btn = new VirtualKeyboardButton(key);
+    VirtualKeyboardButton *btn = new VirtualKeyboardButton(key, this);
     // fit the button to the size of the layout
     btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     connect(btn, &VirtualKeyboardButton::virtualKeyPressed, this, &VirtualKeyboardInnerWidget::onVirtualKeyPressed);
+    connect(btn, &VirtualKeyboardButton::specialKeyPressed, this, &VirtualKeyboardInnerWidget::onSpecialKeyPressed);
     mKeyboardLayout->addWidget(btn, y, x, spany, spanx);
     mButtons.append(btn);
 }
@@ -166,6 +167,11 @@ void UnivKbd::VirtualKeyboardInnerWidget::onVirtualKeyPressed(VirtualKeyboardBut
     }
 }
 
+void UnivKbd::VirtualKeyboardInnerWidget::onSpecialKeyPressed(VirtualKeyboardButton &button, const Key &key, const QString &special) {
+    emit specialKeyPressed(button, key, special);
+    mKeyModifier = 0;
+    refreshModifiers(&button);
+}
 
 void UnivKbd::VirtualKeyboardInnerWidget::setEnabled(bool enabled) {
     mIsEnabled = enabled;

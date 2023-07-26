@@ -44,6 +44,7 @@ UnivKbd::VirtualKeyboard::VirtualKeyboard(QWidget *parent, VirtualKeyboardAttach
     }
 
     connect(gInnerWidget, &VirtualKeyboardInnerWidget::virtualKeyPressed, this, &VirtualKeyboard::onVirtualKeyPressed, Qt::DirectConnection);
+    connect(gInnerWidget, &VirtualKeyboardInnerWidget::specialKeyPressed, this, &VirtualKeyboard::onSpecialKeyPressed, Qt::DirectConnection);
     connect(qApp, &QApplication::focusChanged, this, &VirtualKeyboard::onAppFocusChanged);
 
     // forward the signal gCurrentKeyboard suggestionPressed to a lambda that emit suggestionPressed of this class
@@ -83,6 +84,17 @@ void UnivKbd::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button
     QCoreApplication::postEvent(mParent, event);
 }
 
+
+void UnivKbd::VirtualKeyboard::onSpecialKeyPressed(UnivKbd::VirtualKeyboardButton &button, const UnivKbd::Key &key, const QString &special) {
+
+    if (gCurrentKeyboard != this) {
+        return;
+    }
+
+    QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), special);
+    QCoreApplication::postEvent(mParent, event);
+
+}
 
 void UnivKbd::VirtualKeyboard::parentTakeFocus() {
     qDebug() << "VirtualKeyboard::parentTakeFocus()";
@@ -223,5 +235,4 @@ void UnivKbd::VirtualKeyboard::attachToCurrentWindowAsDockWidget() {
         gCurrentKeyboard->parentTakeFocus();
     }
 }
-
 

@@ -149,6 +149,8 @@ namespace UnivKbd {
 
         void onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
 
+        void onSpecialKeyPressed(VirtualKeyboardButton &button, const Key &key, const QString &special);
+
         void onAppFocusChanged(QObject *old, QObject *now);
 
     private:

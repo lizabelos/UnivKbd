@@ -187,7 +187,9 @@ namespace UnivKbd {
             keyboard.deserialize(file);
             file.close();
             qDebug() << "Converting imported keyboard" << name << "from" << getKeyboardLayouts()[0] << "to" << layout;
-            return convertLayout(keyboard, getKeyboardLayouts()[0], layout);
+            keyboard = convertLayout(keyboard, getKeyboardLayouts()[0], layout);
+            keyboard.loadSpecials();
+            return keyboard;
         }
 
         static QString convertLayout(const QString &text, const std::map<QChar, QChar> &charMap) {
@@ -222,6 +224,48 @@ namespace UnivKbd {
                 charMap[QChar(from.at(i)).toUpper()] = QChar(to.at(i)).toUpper();
             }
             return convertLayout(keyboard, charMap);
+        }
+
+        void loadSpecials(QString path = ":/specials.txt") {
+            QFile file(path);
+            file.open(QIODevice::ReadOnly);
+            if (!file.isOpen()) {
+                qDebug() << "Could not open specials file";
+                return;
+            }
+            /* File format :
+            a : à, â, ä, æ, ã, å, ā, ą, α (alpha)
+            b : ß, β (bêta)
+            c : ç, ć, č, ĉ, ċ, χ (chi)
+             */
+            std::map<QChar, QStringList> mSpecials;
+            while (!file.atEnd()) {
+                QString line = file.readLine();
+                QStringList parts = line.split(":");
+                if (parts.size() != 2) {
+                    continue;
+                }
+                QString key = parts[0].trimmed();
+                QStringList values = parts[1].split(",");
+                for (int i = 0; i < values.size(); i++) {
+                    values[i] = values[i].trimmed();
+                }
+                mSpecials[key.at(0)] = values;
+            }
+
+            // apply specials to keys
+            for (int i = 0; i < mKeys.size(); i++) {
+                Key &key = mKeys[i];
+                if (key.getType() != KeyType::REGULAR) {
+                    continue;
+                }
+                QString characters = key.getCharacters();
+                for (int j = 0; j < characters.size(); j++) {
+                    if (mSpecials.find(characters.at(j)) != mSpecials.end()) {
+                        key.setSpecials(j, mSpecials[characters.at(j)]);
+                    }
+                }
+            }
         }
 
     protected:

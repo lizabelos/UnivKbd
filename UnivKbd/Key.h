@@ -103,7 +103,7 @@ namespace UnivKbd {
          * @see KeyType
         */
         Key(const QString& characters, float xSpan = 1, float ySpan = 1) : mType(KeyType::REGULAR), mCharacters(characters), mXSpan(xSpan), mYSpan(ySpan) {
-
+            mSpecials.resize(characters.size());
         }
 
         /**
@@ -134,7 +134,27 @@ namespace UnivKbd {
         inline Key withCharacters(const QString& characters) const {
             Key key = *this;
             key.mCharacters = characters;
+            key.mSpecials.resize(characters.size());
             return key;
+        }
+
+        /**
+         * @brief Get the special characters associated to the key.
+         *
+         * @return The special characters associated to the key. If the key is not regular, it returns an empty string.
+         **/
+        inline const QStringList& getSpecials(int i) const {
+            return mSpecials[i];
+        }
+
+        /**
+         * @brief Set the special characters associated to the key.
+         *
+         * @param specials The special characters associated to the key.
+         * @return The key with the new special characters.
+         **/
+        inline void setSpecials(int i, const QStringList& specials) {
+            mSpecials[i] = specials;
         }
 
         /**
@@ -422,6 +442,7 @@ namespace UnivKbd {
     private:
         KeyType mType;
         QString mCharacters;
+        QVector<QStringList> mSpecials;
         float mXSpan, mYSpan, mX, mY;
     };
 
