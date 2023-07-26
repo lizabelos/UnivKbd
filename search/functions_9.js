@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['virtualkeyboard_65',['VirtualKeyboard',['../classUniQKey_1_1VirtualKeyboard.html#aecd97562c746db51f994635a2a5bdde1',1,'UniQKey::VirtualKeyboard']]],
-  ['virtualkeyboardinnerwidget_66',['VirtualKeyboardInnerWidget',['../classUniQKey_1_1VirtualKeyboardInnerWidget.html#a525d60179d2b420c8f63f8ee92a7f10b',1,'UniQKey::VirtualKeyboardInnerWidget']]],
-  ['virtualkeypressed_67',['virtualKeyPressed',['../classUniQKey_1_1VirtualKeyboardInnerWidget.html#a9e0fed84f2fc4328cb9428445b2c45dc',1,'UniQKey::VirtualKeyboardInnerWidget']]]
+  ['virtualkeyboard_73',['VirtualKeyboard',['../classUnivKbd_1_1VirtualKeyboard.html#a1573aef08493614d6a7969e0ee80dc11',1,'UnivKbd::VirtualKeyboard']]],
+  ['virtualkeyboardinnerwidget_74',['VirtualKeyboardInnerWidget',['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a27fc3c932739b93322934615e974265c',1,'UnivKbd::VirtualKeyboardInnerWidget']]],
+  ['virtualkeypressed_75',['virtualKeyPressed',['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#aa7978e2d08a682c67952283e187c18ff',1,'UnivKbd::VirtualKeyboardInnerWidget']]]
 ];

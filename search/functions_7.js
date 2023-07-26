@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['serialize_58',['serialize',['../classUniQKey_1_1Key.html#ac185cfe6751e184b5f1fbada516ea2d0',1,'UniQKey::Key::serialize()'],['../classUniQKey_1_1Keyboard.html#ad52bbc92992aee6bcae1300cac7ff7af',1,'UniQKey::Keyboard::serialize()']]],
-  ['setenabled_59',['setEnabled',['../classUniQKey_1_1VirtualKeyboard.html#a357565a85b54b9535f544b226c1b5d3f',1,'UniQKey::VirtualKeyboard::setEnabled()'],['../classUniQKey_1_1VirtualKeyboardInnerWidget.html#a178b707b1e1111eaa9399ee4056f5edd',1,'UniQKey::VirtualKeyboardInnerWidget::setEnabled()']]],
-  ['setsuggestions_60',['setSuggestions',['../classUniQKey_1_1VirtualKeyboard.html#a8f664c60ac69e697e8a743fb8355c6d7',1,'UniQKey::VirtualKeyboard::setSuggestions()'],['../classUniQKey_1_1VirtualKeyboardInnerWidget.html#af5df3b3de75068f09491daaa51a8f9b5',1,'UniQKey::VirtualKeyboardInnerWidget::setSuggestions()']]],
-  ['suggestionpressed_61',['suggestionPressed',['../classUniQKey_1_1VirtualKeyboard.html#afff5f05b6ee76a8d9750371912d3a63c',1,'UniQKey::VirtualKeyboard::suggestionPressed()'],['../classUniQKey_1_1VirtualKeyboardInnerWidget.html#a0d25a90fa29e7a906b5244e2ac6c3911',1,'UniQKey::VirtualKeyboardInnerWidget::suggestionPressed()']]]
+  ['serialize_64',['serialize',['../classUnivKbd_1_1Key.html#a1268ebd4b27c9aeb989784d8577a5516',1,'UnivKbd::Key::serialize()'],['../classUnivKbd_1_1Keyboard.html#a7a98eba3f20cf030e6b9c7df44eb2d4c',1,'UnivKbd::Keyboard::serialize()']]],
+  ['setenabled_65',['setEnabled',['../classUnivKbd_1_1VirtualKeyboard.html#a4aa68c4415674c29e580cbc4944d682c',1,'UnivKbd::VirtualKeyboard::setEnabled()'],['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a1ce5edad738bd48c3c5d710782726fb8',1,'UnivKbd::VirtualKeyboardInnerWidget::setEnabled()']]],
+  ['setspecials_66',['setSpecials',['../classUnivKbd_1_1Key.html#ac8c70f779cb4f7387a55b7a9c69d74f7',1,'UnivKbd::Key']]],
+  ['setsuggestions_67',['setSuggestions',['../classUnivKbd_1_1VirtualKeyboard.html#a267f967bb280d15d12410e288a7648f0',1,'UnivKbd::VirtualKeyboard::setSuggestions()'],['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a1f7d74749a7acbef554592dcbf41db72',1,'UnivKbd::VirtualKeyboardInnerWidget::setSuggestions(const QStringList &amp;suggestions)']]],
+  ['specialkeypressed_68',['specialKeyPressed',['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a1fdb63e399a278a2e5e4864ec7ee8a99',1,'UnivKbd::VirtualKeyboardInnerWidget']]],
+  ['suggestionpressed_69',['suggestionPressed',['../classUnivKbd_1_1VirtualKeyboard.html#a44c3023a11e0a06a0b5c78256e1ba728',1,'UnivKbd::VirtualKeyboard::suggestionPressed()'],['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#ae7e1ced54c14c333579eb494ef5a24ef',1,'UnivKbd::VirtualKeyboardInnerWidget::suggestionPressed()']]]
 ];

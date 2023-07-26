@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['key_34',['Key',['../classUniQKey_1_1Key.html',1,'UniQKey']]],
-  ['keyboard_35',['Keyboard',['../classUniQKey_1_1Keyboard.html',1,'UniQKey']]]
+  ['key_38',['Key',['../classUnivKbd_1_1Key.html',1,'UnivKbd']]],
+  ['keyboard_39',['Keyboard',['../classUnivKbd_1_1Keyboard.html',1,'UnivKbd']]]
 ];

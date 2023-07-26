@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>UniQKey: UniQKey/Keyboard.h Source File</title>
+<title>UnivKbd: UnivKbd/Keyboard.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">UniQKey
+   <div id="projectname">UnivKbd
    </div>
   </td>
  </tr>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_49df835dfe6b3440edb6581e02cd90f5.html">UniQKey</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_e412146111aeef07535482768f3c7d4e.html">UnivKbd</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -71,7 +71,7 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">* --------------------------------------------------------------</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">* Project: UniQKey</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">* Project: UnivKbd</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">* Author: Liza Belos</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">* Year: 2023</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">* </span></div>
@@ -81,7 +81,7 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">* --------------------------------------------------------------</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">*</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">* NOTICE:</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">* This file is part of the original distribution of the UniQKey project. </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">* This file is part of the original distribution of the UnivKbd project.</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">* All changes and redistributions of this file must retain this notice, </span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">* the list of contributors, and the entire copyright notice including the</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">* MIT License information.</span></div>
@@ -92,8 +92,8 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">* the use of this software.</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#ifndef UNIQKEY_KEYBOARD_H</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define UNIQKEY_KEYBOARD_H</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#ifndef UNIVKBD_KEYBOARD_H</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define UNIVKBD_KEYBOARD_H</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;QFile&gt;</span></div>
@@ -103,12 +103,12 @@ $(function() {
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;Key.h&quot;</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> UNIQKEY_INIT_RESOURCE() {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> UNIVKBD_INIT_RESOURCE() {</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    Q_INIT_RESOURCE(keyboards);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    Q_INIT_RESOURCE(icons);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">namespace </span>UniQKey {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">namespace </span>UnivKbd {</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">inline</span> QStringList getKeyboardLayouts() {</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        QStringList layouts;</div>
@@ -117,14 +117,14 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">return</span> layouts;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classUniQKey_1_1Keyboard.html">   62</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classUniQKey_1_1Keyboard.html">Keyboard</a> {</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classUnivKbd_1_1Keyboard.html">   62</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classUnivKbd_1_1Keyboard.html">Keyboard</a> {</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classUniQKey_1_1Keyboard.html#ab3abef6110e8e1b2c14cf43a883210f1">   70</a></span>&#160;        <span class="keyword">inline</span> <span class="keyword">const</span> std::vector&lt;Key&gt;&amp; <a class="code" href="classUniQKey_1_1Keyboard.html#ab3abef6110e8e1b2c14cf43a883210f1">getKeys</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classUnivKbd_1_1Keyboard.html#a29cb30fe01635b4d1b8cbb4a47146ee7">   70</a></span>&#160;        <span class="keyword">inline</span> <span class="keyword">const</span> std::vector&lt;Key&gt;&amp; <a class="code" href="classUnivKbd_1_1Keyboard.html#a29cb30fe01635b4d1b8cbb4a47146ee7">getKeys</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">return</span> mKeys;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        }</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classUniQKey_1_1Keyboard.html#ad52bbc92992aee6bcae1300cac7ff7af">   81</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classUniQKey_1_1Keyboard.html#ad52bbc92992aee6bcae1300cac7ff7af">serialize</a>(QFile &amp;file) {</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classUnivKbd_1_1Keyboard.html#a7a98eba3f20cf030e6b9c7df44eb2d4c">   81</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classUnivKbd_1_1Keyboard.html#a7a98eba3f20cf030e6b9c7df44eb2d4c">serialize</a>(QFile &amp;file) {</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordtype">int</span> size = mKeys.size();</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            file.write((<span class="keywordtype">char</span>*)(&amp;size), <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; ++i) {</div>
@@ -132,22 +132,22 @@ $(function() {
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            }</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classUniQKey_1_1Keyboard.html#a15db5f1ccdd5e8d3c71d06bd5d2e094f">   96</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classUniQKey_1_1Keyboard.html#a15db5f1ccdd5e8d3c71d06bd5d2e094f">deserialize</a>(QFile &amp;file) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classUnivKbd_1_1Keyboard.html#a92473685eac99e420274f30df38e358a">   96</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classUnivKbd_1_1Keyboard.html#a92473685eac99e420274f30df38e358a">deserialize</a>(QFile &amp;file) {</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordtype">int</span> size;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            file.read((<span class="keywordtype">char</span>*)(&amp;size), <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            mKeys.resize(size);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; ++i) {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                mKeys[i] = <a class="code" href="classUniQKey_1_1Key.html#ae178134c4405620f34e750bb2210106d">Key::deserialize</a>(file);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                mKeys[i] = <a class="code" href="classUnivKbd_1_1Key.html#aacab2b46d8a2ae728d38a932f6de934e">Key::deserialize</a>(file);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            }</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keyword">static</span> QList&lt;QString&gt; <a class="code" href="classUniQKey_1_1Keyboard.html#a41865f8d78a127407dbab849f4d9b027">getOperatingSystemKeyboards</a>();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keyword">static</span> QList&lt;QString&gt; <a class="code" href="classUnivKbd_1_1Keyboard.html#aa782ffa40f94d897c36fcc4702c9eb23">getOperatingSystemKeyboards</a>();</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keyword">static</span> <a class="code" href="classUniQKey_1_1Keyboard.html">Keyboard</a> <a class="code" href="classUniQKey_1_1Keyboard.html#aac22929ea2fc18109cbd48067203f8fd">getKeyboardFromOperatingSystem</a>(<span class="keyword">const</span> QString &amp;country, <span class="keyword">const</span> QString &amp;layout);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keyword">static</span> <a class="code" href="classUnivKbd_1_1Keyboard.html">Keyboard</a> <a class="code" href="classUnivKbd_1_1Keyboard.html#a8ffaec4a964bd328c4d3a568fbf7473c">getKeyboardFromOperatingSystem</a>(<span class="keyword">const</span> QString &amp;country, <span class="keyword">const</span> QString &amp;layout);</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keyword">static</span> <a class="code" href="classUniQKey_1_1Keyboard.html">Keyboard</a> <a class="code" href="classUniQKey_1_1Keyboard.html#a746c9e2827672a0bc81f54b86c61023f">getDefaultKeyboardFromOperatingSystem</a>();</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keyword">static</span> <a class="code" href="classUnivKbd_1_1Keyboard.html">Keyboard</a> <a class="code" href="classUnivKbd_1_1Keyboard.html#a29d66dfed5236052d2d9229a25b9e75e">getDefaultKeyboardFromOperatingSystem</a>();</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classUniQKey_1_1Keyboard.html#a9ba7847788ce47f72f21f044acb1c0e9">  131</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classUniQKey_1_1Keyboard.html#a9ba7847788ce47f72f21f044acb1c0e9">exportOperatingSystemKeyboards</a>() {</div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classUnivKbd_1_1Keyboard.html#a2b5829921bc4fdab6043fa990c83d94f">  131</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classUnivKbd_1_1Keyboard.html#a2b5829921bc4fdab6043fa990c83d94f">exportOperatingSystemKeyboards</a>() {</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="comment">// create directory keyboards</span></div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            QDir dir(<span class="stringliteral">&quot;keyboards&quot;</span>);</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keywordflow">if</span> (!dir.exists()) {</div>
@@ -155,21 +155,21 @@ $(function() {
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            }</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="comment">// export keyboards</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            QList&lt;QString&gt; keyboards = <a class="code" href="classUniQKey_1_1Keyboard.html#a41865f8d78a127407dbab849f4d9b027">getOperatingSystemKeyboards</a>();</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            QList&lt;QString&gt; keyboards = <a class="code" href="classUnivKbd_1_1Keyboard.html#aa782ffa40f94d897c36fcc4702c9eb23">getOperatingSystemKeyboards</a>();</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; keyboards.size(); ++i) {</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                qDebug() &lt;&lt; <span class="stringliteral">&quot;Loading keyboard&quot;</span> &lt;&lt; keyboards[i];</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                <a class="code" href="classUniQKey_1_1Keyboard.html">Keyboard</a> keyboard = <a class="code" href="classUniQKey_1_1Keyboard.html#aac22929ea2fc18109cbd48067203f8fd">getKeyboardFromOperatingSystem</a>(keyboards[i], getKeyboardLayouts()[0]);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                <a class="code" href="classUnivKbd_1_1Keyboard.html">Keyboard</a> keyboard = <a class="code" href="classUnivKbd_1_1Keyboard.html#a8ffaec4a964bd328c4d3a568fbf7473c">getKeyboardFromOperatingSystem</a>(keyboards[i], getKeyboardLayouts()[0]);</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                qDebug() &lt;&lt; <span class="stringliteral">&quot;Exporting keyboard&quot;</span> &lt;&lt; keyboards[i];</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                QFile file(<span class="stringliteral">&quot;keyboards/&quot;</span> + keyboards[i] + <span class="stringliteral">&quot;.keyboard&quot;</span>);</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                file.open(QIODevice::WriteOnly);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                keyboard.<a class="code" href="classUniQKey_1_1Keyboard.html#ad52bbc92992aee6bcae1300cac7ff7af">serialize</a>(file);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                keyboard.<a class="code" href="classUnivKbd_1_1Keyboard.html#a7a98eba3f20cf030e6b9c7df44eb2d4c">serialize</a>(file);</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                file.close();</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            }</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        }</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classUniQKey_1_1Keyboard.html#ae5c3d5cfed35b21b4377b5be4b2b25d1">  157</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> QList&lt;QString&gt; <a class="code" href="classUniQKey_1_1Keyboard.html#ae5c3d5cfed35b21b4377b5be4b2b25d1">listExportedKeyboards</a>(QString path=<span class="stringliteral">&quot;:/&quot;</span>) {</div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classUnivKbd_1_1Keyboard.html#af89e28148e3e270acb3558fae47705e0">  157</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> QList&lt;QString&gt; <a class="code" href="classUnivKbd_1_1Keyboard.html#af89e28148e3e270acb3558fae47705e0">listExportedKeyboards</a>(QString path=<span class="stringliteral">&quot;:/&quot;</span>) {</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="comment">// initialize keyboards resources</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            UNIQKEY_INIT_RESOURCE();</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            UNIVKBD_INIT_RESOURCE();</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            QDir dir(path);</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <span class="keywordflow">if</span> (!dir.exists()) {</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                <span class="keywordflow">return</span> QList&lt;QString&gt;();</div>
@@ -182,77 +182,121 @@ $(function() {
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <span class="keywordflow">return</span> keyboards;</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        }</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="classUniQKey_1_1Keyboard.html#a07f906af112069f04f747c5f27620b9a">  179</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="classUniQKey_1_1Keyboard.html">Keyboard</a> <a class="code" href="classUniQKey_1_1Keyboard.html#a07f906af112069f04f747c5f27620b9a">importKeyboard</a>(<span class="keyword">const</span> QString &amp;name, <span class="keyword">const</span> QString &amp;layout) {</div>
+<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="classUnivKbd_1_1Keyboard.html#aa6b14d607eb7b169545b47c84babf98b">  179</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code" href="classUnivKbd_1_1Keyboard.html">Keyboard</a> <a class="code" href="classUnivKbd_1_1Keyboard.html#aa6b14d607eb7b169545b47c84babf98b">importKeyboard</a>(<span class="keyword">const</span> QString &amp;name, <span class="keyword">const</span> QString &amp;layout) {</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            QFile file(<span class="stringliteral">&quot;:/&quot;</span> + name + <span class="stringliteral">&quot;.keyboard&quot;</span>);</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            file.open(QIODevice::ReadOnly);</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            <span class="keywordflow">if</span> (!file.isOpen()) {</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                qDebug() &lt;&lt; <span class="stringliteral">&quot;Could not open keyboard&quot;</span> &lt;&lt; name;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classUniQKey_1_1Keyboard.html">Keyboard</a>();</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classUnivKbd_1_1Keyboard.html">Keyboard</a>();</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            }</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <a class="code" href="classUniQKey_1_1Keyboard.html">Keyboard</a> keyboard;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            keyboard.<a class="code" href="classUniQKey_1_1Keyboard.html#a15db5f1ccdd5e8d3c71d06bd5d2e094f">deserialize</a>(file);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <a class="code" href="classUnivKbd_1_1Keyboard.html">Keyboard</a> keyboard;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            keyboard.<a class="code" href="classUnivKbd_1_1Keyboard.html#a92473685eac99e420274f30df38e358a">deserialize</a>(file);</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            file.close();</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            qDebug() &lt;&lt; <span class="stringliteral">&quot;Converting imported keyboard&quot;</span> &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot;from&quot;</span> &lt;&lt; getKeyboardLayouts()[0] &lt;&lt; <span class="stringliteral">&quot;to&quot;</span> &lt;&lt; layout;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <span class="keywordflow">return</span> convertLayout(keyboard, getKeyboardLayouts()[0], layout);</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        }</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keyword">static</span> QString convertLayout(<span class="keyword">const</span> QString &amp;text, <span class="keyword">const</span> std::map&lt;QChar, QChar&gt; &amp;charMap) {</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            QString convertedText = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; text.size(); i++) {</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                <span class="keywordflow">if</span> (charMap.find(text.at(i)) != charMap.end()) {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                    convertedText += charMap.at(text.at(i));</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                    convertedText += text.at(i);</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                }</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            }</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            <span class="keywordflow">return</span> convertedText;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        }</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keyword">static</span> Keyboard convertLayout(Keyboard &amp;keyboard, <span class="keyword">const</span> std::map&lt;QChar, QChar&gt; &amp;charMap) {</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            Keyboard convertedKeyboard;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; keyboard.getKeys().size(); i++) {</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;                Key key = keyboard.getKeys()[i];</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                <span class="keywordflow">if</span> (key.getType() == KeyType::REGULAR) {</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                    key = key.withCharacters(convertLayout(key.getCharacters(), charMap));</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                }</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                convertedKeyboard.mKeys.push_back(key);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            }</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keywordflow">return</span> convertedKeyboard;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        }</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <span class="keyword">static</span> Keyboard convertLayout(Keyboard &amp;keyboard, <span class="keyword">const</span> QString &amp;from, <span class="keyword">const</span> QString &amp;to) {</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            <span class="comment">// create a QChar map from inputLayout to outputLayout</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            std::map&lt;QChar, QChar&gt; charMap;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; from.size(); i++) {</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                charMap[from.at(i)] = to.at(i);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                charMap[QChar(from.at(i)).toUpper()] = QChar(to.at(i)).toUpper();</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            }</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            <span class="keywordflow">return</span> convertLayout(keyboard, charMap);</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        }</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        Keyboard() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        std::vector&lt;Key&gt; mKeys;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    };</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;}  <span class="comment">// namespace UniQKey</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// UNIQKEY_KEYBOARD_H</span></div>
-<div class="ttc" id="aclassUniQKey_1_1Key_html_ae178134c4405620f34e750bb2210106d"><div class="ttname"><a href="classUniQKey_1_1Key.html#ae178134c4405620f34e750bb2210106d">UniQKey::Key::deserialize</a></div><div class="ttdeci">static Key deserialize(QFile &amp;file)</div><div class="ttdoc">Deserialize a key from a file.</div><div class="ttdef"><b>Definition:</b> Key.h:212</div></div>
-<div class="ttc" id="aclassUniQKey_1_1Keyboard_html"><div class="ttname"><a href="classUniQKey_1_1Keyboard.html">UniQKey::Keyboard</a></div><div class="ttdoc">Represents a keyboard.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:62</div></div>
-<div class="ttc" id="aclassUniQKey_1_1Keyboard_html_a07f906af112069f04f747c5f27620b9a"><div class="ttname"><a href="classUniQKey_1_1Keyboard.html#a07f906af112069f04f747c5f27620b9a">UniQKey::Keyboard::importKeyboard</a></div><div class="ttdeci">static Keyboard importKeyboard(const QString &amp;name, const QString &amp;layout)</div><div class="ttdoc">Imports a keyboard from a file.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:179</div></div>
-<div class="ttc" id="aclassUniQKey_1_1Keyboard_html_a15db5f1ccdd5e8d3c71d06bd5d2e094f"><div class="ttname"><a href="classUniQKey_1_1Keyboard.html#a15db5f1ccdd5e8d3c71d06bd5d2e094f">UniQKey::Keyboard::deserialize</a></div><div class="ttdeci">void deserialize(QFile &amp;file)</div><div class="ttdoc">Deserializes the keyboard from a file.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:96</div></div>
-<div class="ttc" id="aclassUniQKey_1_1Keyboard_html_a41865f8d78a127407dbab849f4d9b027"><div class="ttname"><a href="classUniQKey_1_1Keyboard.html#a41865f8d78a127407dbab849f4d9b027">UniQKey::Keyboard::getOperatingSystemKeyboards</a></div><div class="ttdeci">static QList&lt; QString &gt; getOperatingSystemKeyboards()</div><div class="ttdoc">Returns a list of keyboards grabbed from the operating system.</div><div class="ttdef"><b>Definition:</b> Keyboard.default.cpp:27</div></div>
-<div class="ttc" id="aclassUniQKey_1_1Keyboard_html_a746c9e2827672a0bc81f54b86c61023f"><div class="ttname"><a href="classUniQKey_1_1Keyboard.html#a746c9e2827672a0bc81f54b86c61023f">UniQKey::Keyboard::getDefaultKeyboardFromOperatingSystem</a></div><div class="ttdeci">static Keyboard getDefaultKeyboardFromOperatingSystem()</div><div class="ttdoc">Returns the default keyboard from the operating system.</div><div class="ttdef"><b>Definition:</b> Keyboard.default.cpp:35</div></div>
-<div class="ttc" id="aclassUniQKey_1_1Keyboard_html_a9ba7847788ce47f72f21f044acb1c0e9"><div class="ttname"><a href="classUniQKey_1_1Keyboard.html#a9ba7847788ce47f72f21f044acb1c0e9">UniQKey::Keyboard::exportOperatingSystemKeyboards</a></div><div class="ttdeci">static void exportOperatingSystemKeyboards()</div><div class="ttdoc">Exports operating system keyboards to files.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:131</div></div>
-<div class="ttc" id="aclassUniQKey_1_1Keyboard_html_aac22929ea2fc18109cbd48067203f8fd"><div class="ttname"><a href="classUniQKey_1_1Keyboard.html#aac22929ea2fc18109cbd48067203f8fd">UniQKey::Keyboard::getKeyboardFromOperatingSystem</a></div><div class="ttdeci">static Keyboard getKeyboardFromOperatingSystem(const QString &amp;country, const QString &amp;layout)</div><div class="ttdoc">Returns a keyboard based on the country and layout from the operating system.</div><div class="ttdef"><b>Definition:</b> Keyboard.default.cpp:31</div></div>
-<div class="ttc" id="aclassUniQKey_1_1Keyboard_html_ab3abef6110e8e1b2c14cf43a883210f1"><div class="ttname"><a href="classUniQKey_1_1Keyboard.html#ab3abef6110e8e1b2c14cf43a883210f1">UniQKey::Keyboard::getKeys</a></div><div class="ttdeci">const std::vector&lt; Key &gt; &amp; getKeys() const</div><div class="ttdoc">Returns the keys of the keyboard.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:70</div></div>
-<div class="ttc" id="aclassUniQKey_1_1Keyboard_html_ad52bbc92992aee6bcae1300cac7ff7af"><div class="ttname"><a href="classUniQKey_1_1Keyboard.html#ad52bbc92992aee6bcae1300cac7ff7af">UniQKey::Keyboard::serialize</a></div><div class="ttdeci">void serialize(QFile &amp;file)</div><div class="ttdoc">Serializes the keyboard into a file.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:81</div></div>
-<div class="ttc" id="aclassUniQKey_1_1Keyboard_html_ae5c3d5cfed35b21b4377b5be4b2b25d1"><div class="ttname"><a href="classUniQKey_1_1Keyboard.html#ae5c3d5cfed35b21b4377b5be4b2b25d1">UniQKey::Keyboard::listExportedKeyboards</a></div><div class="ttdeci">static QList&lt; QString &gt; listExportedKeyboards(QString path=&quot;:/&quot;)</div><div class="ttdoc">Lists the exported keyboards.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:157</div></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            keyboard = convertLayout(keyboard, getKeyboardLayouts()[0], layout);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            keyboard.loadSpecials();</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="keywordflow">return</span> keyboard;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        }</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keyword">static</span> QString convertLayout(<span class="keyword">const</span> QString &amp;text, <span class="keyword">const</span> std::map&lt;QChar, QChar&gt; &amp;charMap) {</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            QString convertedText = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; text.size(); i++) {</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                <span class="keywordflow">if</span> (charMap.find(text.at(i)) != charMap.end()) {</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                    convertedText += charMap.at(text.at(i));</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                    convertedText += text.at(i);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                }</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            }</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            <span class="keywordflow">return</span> convertedText;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        }</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keyword">static</span> Keyboard convertLayout(Keyboard &amp;keyboard, <span class="keyword">const</span> std::map&lt;QChar, QChar&gt; &amp;charMap) {</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            Keyboard convertedKeyboard;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; keyboard.getKeys().size(); i++) {</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                Key key = keyboard.getKeys()[i];</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                <span class="keywordflow">if</span> (key.getType() == KeyType::REGULAR) {</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                    key = key.withCharacters(convertLayout(key.getCharacters(), charMap));</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                }</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                convertedKeyboard.mKeys.push_back(key);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            }</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            <span class="keywordflow">return</span> convertedKeyboard;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        }</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        <span class="keyword">static</span> Keyboard convertLayout(Keyboard &amp;keyboard, <span class="keyword">const</span> QString &amp;from, <span class="keyword">const</span> QString &amp;to) {</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;            <span class="comment">// create a QChar map from inputLayout to outputLayout</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            std::map&lt;QChar, QChar&gt; charMap;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; from.size(); i++) {</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                charMap[from.at(i)] = to.at(i);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                charMap[QChar(from.at(i)).toUpper()] = QChar(to.at(i)).toUpper();</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            }</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="keywordflow">return</span> convertLayout(keyboard, charMap);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        }</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="keywordtype">void</span> loadSpecials(QString path = <span class="stringliteral">&quot;:/specials.txt&quot;</span>) {</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            QFile file(path);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            file.open(QIODevice::ReadOnly);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            <span class="keywordflow">if</span> (!file.isOpen()) {</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                qDebug() &lt;&lt; <span class="stringliteral">&quot;Could not open specials file&quot;</span>;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            }</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            <span class="comment">/* File format :</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">            a : à, â, ä, æ, ã, å, ā, ą, α (alpha)</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">            b : ß, β (bêta)</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">            c : ç, ć, č, ĉ, ċ, χ (chi)</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">             */</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            std::map&lt;QChar, QStringList&gt; mSpecials;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            <span class="keywordflow">while</span> (!file.atEnd()) {</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                QString line = file.readLine();</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                QStringList parts = line.split(<span class="stringliteral">&quot;:&quot;</span>);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                <span class="keywordflow">if</span> (parts.size() != 2) {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                }</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                QString key = parts[0].trimmed();</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                QStringList values = parts[1].split(<span class="stringliteral">&quot;,&quot;</span>);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; values.size(); i++) {</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                    values[i] = values[i].trimmed();</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                }</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                mSpecials[key.at(0)] = values;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            }</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            <span class="comment">// apply specials to keys</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; mKeys.size(); i++) {</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                Key &amp;key = mKeys[i];</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                <span class="keywordflow">if</span> (key.getType() != KeyType::REGULAR) {</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                }</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                QString characters = key.getCharacters();</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; characters.size(); j++) {</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                    <span class="keywordflow">if</span> (mSpecials.find(characters.at(j)) != mSpecials.end()) {</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                        key.setSpecials(j, mSpecials[characters.at(j)]);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                    }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                }</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            }</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        }</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        Keyboard() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        std::vector&lt;Key&gt; mKeys;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    };</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;}  <span class="comment">// namespace UnivKbd</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// UNIVKBD_KEYBOARD_H</span></div>
+<div class="ttc" id="aclassUnivKbd_1_1Key_html_aacab2b46d8a2ae728d38a932f6de934e"><div class="ttname"><a href="classUnivKbd_1_1Key.html#aacab2b46d8a2ae728d38a932f6de934e">UnivKbd::Key::deserialize</a></div><div class="ttdeci">static Key deserialize(QFile &amp;file)</div><div class="ttdoc">Deserialize a key from a file.</div><div class="ttdef"><b>Definition:</b> Key.h:232</div></div>
+<div class="ttc" id="aclassUnivKbd_1_1Keyboard_html"><div class="ttname"><a href="classUnivKbd_1_1Keyboard.html">UnivKbd::Keyboard</a></div><div class="ttdoc">Represents a keyboard.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:62</div></div>
+<div class="ttc" id="aclassUnivKbd_1_1Keyboard_html_a29cb30fe01635b4d1b8cbb4a47146ee7"><div class="ttname"><a href="classUnivKbd_1_1Keyboard.html#a29cb30fe01635b4d1b8cbb4a47146ee7">UnivKbd::Keyboard::getKeys</a></div><div class="ttdeci">const std::vector&lt; Key &gt; &amp; getKeys() const</div><div class="ttdoc">Returns the keys of the keyboard.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:70</div></div>
+<div class="ttc" id="aclassUnivKbd_1_1Keyboard_html_a29d66dfed5236052d2d9229a25b9e75e"><div class="ttname"><a href="classUnivKbd_1_1Keyboard.html#a29d66dfed5236052d2d9229a25b9e75e">UnivKbd::Keyboard::getDefaultKeyboardFromOperatingSystem</a></div><div class="ttdeci">static Keyboard getDefaultKeyboardFromOperatingSystem()</div><div class="ttdoc">Returns the default keyboard from the operating system.</div><div class="ttdef"><b>Definition:</b> Keyboard.default.cpp:35</div></div>
+<div class="ttc" id="aclassUnivKbd_1_1Keyboard_html_a2b5829921bc4fdab6043fa990c83d94f"><div class="ttname"><a href="classUnivKbd_1_1Keyboard.html#a2b5829921bc4fdab6043fa990c83d94f">UnivKbd::Keyboard::exportOperatingSystemKeyboards</a></div><div class="ttdeci">static void exportOperatingSystemKeyboards()</div><div class="ttdoc">Exports operating system keyboards to files.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:131</div></div>
+<div class="ttc" id="aclassUnivKbd_1_1Keyboard_html_a7a98eba3f20cf030e6b9c7df44eb2d4c"><div class="ttname"><a href="classUnivKbd_1_1Keyboard.html#a7a98eba3f20cf030e6b9c7df44eb2d4c">UnivKbd::Keyboard::serialize</a></div><div class="ttdeci">void serialize(QFile &amp;file)</div><div class="ttdoc">Serializes the keyboard into a file.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:81</div></div>
+<div class="ttc" id="aclassUnivKbd_1_1Keyboard_html_a8ffaec4a964bd328c4d3a568fbf7473c"><div class="ttname"><a href="classUnivKbd_1_1Keyboard.html#a8ffaec4a964bd328c4d3a568fbf7473c">UnivKbd::Keyboard::getKeyboardFromOperatingSystem</a></div><div class="ttdeci">static Keyboard getKeyboardFromOperatingSystem(const QString &amp;country, const QString &amp;layout)</div><div class="ttdoc">Returns a keyboard based on the country and layout from the operating system.</div><div class="ttdef"><b>Definition:</b> Keyboard.default.cpp:31</div></div>
+<div class="ttc" id="aclassUnivKbd_1_1Keyboard_html_a92473685eac99e420274f30df38e358a"><div class="ttname"><a href="classUnivKbd_1_1Keyboard.html#a92473685eac99e420274f30df38e358a">UnivKbd::Keyboard::deserialize</a></div><div class="ttdeci">void deserialize(QFile &amp;file)</div><div class="ttdoc">Deserializes the keyboard from a file.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:96</div></div>
+<div class="ttc" id="aclassUnivKbd_1_1Keyboard_html_aa6b14d607eb7b169545b47c84babf98b"><div class="ttname"><a href="classUnivKbd_1_1Keyboard.html#aa6b14d607eb7b169545b47c84babf98b">UnivKbd::Keyboard::importKeyboard</a></div><div class="ttdeci">static Keyboard importKeyboard(const QString &amp;name, const QString &amp;layout)</div><div class="ttdoc">Imports a keyboard from a file.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:179</div></div>
+<div class="ttc" id="aclassUnivKbd_1_1Keyboard_html_aa782ffa40f94d897c36fcc4702c9eb23"><div class="ttname"><a href="classUnivKbd_1_1Keyboard.html#aa782ffa40f94d897c36fcc4702c9eb23">UnivKbd::Keyboard::getOperatingSystemKeyboards</a></div><div class="ttdeci">static QList&lt; QString &gt; getOperatingSystemKeyboards()</div><div class="ttdoc">Returns a list of keyboards grabbed from the operating system.</div><div class="ttdef"><b>Definition:</b> Keyboard.default.cpp:27</div></div>
+<div class="ttc" id="aclassUnivKbd_1_1Keyboard_html_af89e28148e3e270acb3558fae47705e0"><div class="ttname"><a href="classUnivKbd_1_1Keyboard.html#af89e28148e3e270acb3558fae47705e0">UnivKbd::Keyboard::listExportedKeyboards</a></div><div class="ttdeci">static QList&lt; QString &gt; listExportedKeyboards(QString path=&quot;:/&quot;)</div><div class="ttdoc">Lists the exported keyboards.</div><div class="ttdef"><b>Definition:</b> Keyboard.h:157</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

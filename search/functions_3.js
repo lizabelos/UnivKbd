@@ -1,14 +1,15 @@
 var searchData=
 [
-  ['getcharacters_44',['getCharacters',['../classUniQKey_1_1Key.html#a6cff6acd28d55e52e71593bcbc8f4071',1,'UniQKey::Key']]],
-  ['getdefaultkeyboardfromoperatingsystem_45',['getDefaultKeyboardFromOperatingSystem',['../classUniQKey_1_1Keyboard.html#a746c9e2827672a0bc81f54b86c61023f',1,'UniQKey::Keyboard']]],
-  ['getkeyboardfromoperatingsystem_46',['getKeyboardFromOperatingSystem',['../classUniQKey_1_1Keyboard.html#aac22929ea2fc18109cbd48067203f8fd',1,'UniQKey::Keyboard']]],
-  ['getkeys_47',['getKeys',['../classUniQKey_1_1Keyboard.html#ab3abef6110e8e1b2c14cf43a883210f1',1,'UniQKey::Keyboard']]],
-  ['getmodifiers_48',['getModifiers',['../classUniQKey_1_1VirtualKeyboard.html#a2c294fbabbb116d6abb4d99012d54642',1,'UniQKey::VirtualKeyboard::getModifiers()'],['../classUniQKey_1_1VirtualKeyboardInnerWidget.html#a168dc1718d78e5aef8ec928b79c5ebb3',1,'UniQKey::VirtualKeyboardInnerWidget::getModifiers()']]],
-  ['getoperatingsystemkeyboards_49',['getOperatingSystemKeyboards',['../classUniQKey_1_1Keyboard.html#a41865f8d78a127407dbab849f4d9b027',1,'UniQKey::Keyboard']]],
-  ['gettype_50',['getType',['../classUniQKey_1_1Key.html#a18428f7348b0019002e4633a7c4fc5e8',1,'UniQKey::Key']]],
-  ['getx_51',['getX',['../classUniQKey_1_1Key.html#a8fae80625d1a0b43f82275d7a0c4ff33',1,'UniQKey::Key']]],
-  ['getxspan_52',['getXSpan',['../classUniQKey_1_1Key.html#a1a22c215d31b708f9b7c42c6c6dec15d',1,'UniQKey::Key']]],
-  ['gety_53',['getY',['../classUniQKey_1_1Key.html#a93a7420c5be246c94c6b02b1e2bea5c6',1,'UniQKey::Key']]],
-  ['getyspan_54',['getYSpan',['../classUniQKey_1_1Key.html#ab5cd234cc873c9b47154d402a9f2b878',1,'UniQKey::Key']]]
+  ['getcharacters_49',['getCharacters',['../classUnivKbd_1_1Key.html#ad52053b9e751fa6e3272586b0cf2c70d',1,'UnivKbd::Key']]],
+  ['getdefaultkeyboardfromoperatingsystem_50',['getDefaultKeyboardFromOperatingSystem',['../classUnivKbd_1_1Keyboard.html#a29d66dfed5236052d2d9229a25b9e75e',1,'UnivKbd::Keyboard']]],
+  ['getkeyboardfromoperatingsystem_51',['getKeyboardFromOperatingSystem',['../classUnivKbd_1_1Keyboard.html#a8ffaec4a964bd328c4d3a568fbf7473c',1,'UnivKbd::Keyboard']]],
+  ['getkeys_52',['getKeys',['../classUnivKbd_1_1Keyboard.html#a29cb30fe01635b4d1b8cbb4a47146ee7',1,'UnivKbd::Keyboard']]],
+  ['getmodifiers_53',['getModifiers',['../classUnivKbd_1_1VirtualKeyboard.html#ab8e819fb68031673996b764eb6c9eac8',1,'UnivKbd::VirtualKeyboard::getModifiers()'],['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a42f1197e744b59b89d1dd4fc797915d1',1,'UnivKbd::VirtualKeyboardInnerWidget::getModifiers()']]],
+  ['getoperatingsystemkeyboards_54',['getOperatingSystemKeyboards',['../classUnivKbd_1_1Keyboard.html#aa782ffa40f94d897c36fcc4702c9eb23',1,'UnivKbd::Keyboard']]],
+  ['getspecials_55',['getSpecials',['../classUnivKbd_1_1Key.html#adf7a215044f330aa17a869ee33deb841',1,'UnivKbd::Key']]],
+  ['gettype_56',['getType',['../classUnivKbd_1_1Key.html#a8f1341366bd49a15cd920677ea31fab5',1,'UnivKbd::Key']]],
+  ['getx_57',['getX',['../classUnivKbd_1_1Key.html#aa42ef5d1d589e6b9858e128a5053dbfb',1,'UnivKbd::Key']]],
+  ['getxspan_58',['getXSpan',['../classUnivKbd_1_1Key.html#a5aca6eecaa5c0d0d540e5c13dba3310e',1,'UnivKbd::Key']]],
+  ['gety_59',['getY',['../classUnivKbd_1_1Key.html#a3113698f0dfe457d17bcb0da32c2f2ee',1,'UnivKbd::Key']]],
+  ['getyspan_60',['getYSpan',['../classUnivKbd_1_1Key.html#a5c7e6b65830799de62321d3ffd339f9b',1,'UnivKbd::Key']]]
 ];

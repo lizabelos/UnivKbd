@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exportoperatingsystemkeyboards_43',['exportOperatingSystemKeyboards',['../classUniQKey_1_1Keyboard.html#a9ba7847788ce47f72f21f044acb1c0e9',1,'UniQKey::Keyboard']]]
+  ['exportoperatingsystemkeyboards_48',['exportOperatingSystemKeyboards',['../classUnivKbd_1_1Keyboard.html#a2b5829921bc4fdab6043fa990c83d94f',1,'UnivKbd::Keyboard']]]
 ];

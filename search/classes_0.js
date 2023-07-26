@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['customdockwidget_33',['CustomDockWidget',['../classUniQKey_1_1CustomDockWidget.html',1,'UniQKey']]]
+  ['customdockwidget_37',['CustomDockWidget',['../classUnivKbd_1_1CustomDockWidget.html',1,'UnivKbd']]]
 ];

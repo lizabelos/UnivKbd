@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['toqtkey_24',['toQtKey',['../classUniQKey_1_1Key.html#ada07e7cc452a0bd82f274a1f510df956',1,'UniQKey::Key']]],
-  ['tostring_25',['toString',['../classUniQKey_1_1Key.html#aebcc37f362cd98a1a7d2ab3874dcf709',1,'UniQKey::Key']]],
-  ['triggersetenabled_26',['triggerSetEnabled',['../classUniQKey_1_1VirtualKeyboard.html#ad011eb8c059c3744844e6e9eee1d7bd2',1,'UniQKey::VirtualKeyboard::triggerSetEnabled()'],['../classUniQKey_1_1VirtualKeyboardInnerWidget.html#ac9986222a0dcc619c3e98d0dcf2d0422',1,'UniQKey::VirtualKeyboardInnerWidget::triggerSetEnabled()']]]
+  ['toqtkey_27',['toQtKey',['../classUnivKbd_1_1Key.html#a5a91d4bf151379aa51a81fd97a6cfb5c',1,'UnivKbd::Key']]],
+  ['tostring_28',['toString',['../classUnivKbd_1_1Key.html#a80df55c2f43414bbf7cfeeab50e6a137',1,'UnivKbd::Key']]],
+  ['triggersetenabled_29',['triggerSetEnabled',['../classUnivKbd_1_1VirtualKeyboard.html#ac854609066bea2766e405f0551099d7f',1,'UnivKbd::VirtualKeyboard::triggerSetEnabled()'],['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#abc3c09e5bf27365e78c0f8e216f982a0',1,'UnivKbd::VirtualKeyboardInnerWidget::triggerSetEnabled()']]]
 ];

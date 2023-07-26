@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['withcharacters_32',['withCharacters',['../classUniQKey_1_1Key.html#a6959a8a59b5d8a3741c0cec1c3925140',1,'UniQKey::Key']]]
+  ['withcharacters_36',['withCharacters',['../classUnivKbd_1_1Key.html#a3dc8a5971891f2ec96e40702dc834f89',1,'UnivKbd::Key']]]
 ];

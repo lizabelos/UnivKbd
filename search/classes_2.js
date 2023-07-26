@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['simpletexteditor_36',['SimpleTextEditor',['../classUniQKey_1_1SimpleTextEditor.html',1,'UniQKey']]]
+  ['simpletexteditor_40',['SimpleTextEditor',['../classUnivKbd_1_1SimpleTextEditor.html',1,'UnivKbd']]]
 ];

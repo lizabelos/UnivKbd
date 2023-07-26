@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['attachtocurrentwindowasdockwidget_41',['attachToCurrentWindowAsDockWidget',['../classUniQKey_1_1VirtualKeyboard.html#a6f97342270846988b33c92c3e7170896',1,'UniQKey::VirtualKeyboard']]]
+  ['attachtocurrentwindowasdockwidget_46',['attachToCurrentWindowAsDockWidget',['../classUnivKbd_1_1VirtualKeyboard.html#a7b1153a7b58d7931482a76de89a7fabc',1,'UnivKbd::VirtualKeyboard']]]
 ];
