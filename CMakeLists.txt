@@ -90,12 +90,15 @@ endif()
 
 # Test
 
+option(BUILD_TESTS "Build tests" OFF)
+if (BUILD_TESTS)
 add_executable(
         UnivKbdTest
         main.cpp
 )
 
 target_link_libraries(UnivKbdTest UnivKbd)
+endif ()
 
 # Install
 

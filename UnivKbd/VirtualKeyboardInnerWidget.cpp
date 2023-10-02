@@ -115,7 +115,7 @@ void UnivKbd::VirtualKeyboardInnerWidget::addButtonFromKey(const Key &key) {
     int spanx = key.getXSpan() * spanResolution;
     int spany = key.getYSpan() * spanResolution;
 
-    VirtualKeyboardButton *btn = new VirtualKeyboardButton(key, this);
+    VirtualKeyboardButton *btn = new VirtualKeyboardButton(key, nullptr, this);
     // fit the button to the size of the layout
     btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -197,11 +197,42 @@ void UnivKbd::VirtualKeyboardInnerWidget::refreshModifiers(QObject *toIgnore) {
 }
 
 void UnivKbd::VirtualKeyboardInnerWidget::paintEvent(QPaintEvent *event) {
-    qreal textHeight = 99999;
-    for (auto button : mButtons) {
-        textHeight = std::min(textHeight, button->recommendedTextSize());
+    (void)event;
+
+    // Compute minimal rect with and height
+    int minWidth = std::numeric_limits<int>::max();
+    int minHeight = std::numeric_limits<int>::max();
+
+    for (const auto& button : mButtons) {
+        minWidth = std::min(minWidth, button->rect().width());
+        minHeight = std::min(minHeight, button->rect().height());
     }
+
+
+    // Calculate the font size based on the button's dimensions and text width
+    std::shared_ptr<QFont> font = std::make_shared<QFont>();
+    qreal maxFontSize = qMin(0.6 * minWidth, 0.6 * minHeight); // Maximum font size based on button width and height
+    qreal fontPointSize = 0.8 * maxFontSize; // Initial font size based on the maximum font size
+    font->setPointSizeF(fontPointSize);
+
+    QFontMetrics fontMetrics(*font);
+    qreal textWidth = fontMetrics.horizontalAdvance("A"); // Width of the button's text
+
+    // Adjust the font size to fit the text within the button's width
+    if (textWidth > 0.6 * minWidth)
+    {
+        fontPointSize *= (0.6 * minWidth) / textWidth;
+    }
+
+    // Adjust the font size to fit the text within the button's height
+    if (fontPointSize > maxFontSize)
+    {
+        fontPointSize = maxFontSize;
+    }
+
+
+
     for (auto button : mButtons) {
-        button->setTextSize(textHeight);
+        button->setFont(font);
     }
 }

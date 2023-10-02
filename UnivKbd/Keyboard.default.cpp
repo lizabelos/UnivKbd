@@ -29,6 +29,8 @@ QList<QString> UnivKbd::Keyboard::getOperatingSystemKeyboards() {
 }
 
 UnivKbd::Keyboard UnivKbd::Keyboard::getKeyboardFromOperatingSystem(const QString &country, const QString &layout) {
+    (void)country;
+    (void)layout;
     throw std::runtime_error("OS Not supported");
 }
 

@@ -38,11 +38,11 @@
 #include <QComboBox>
 
 #include <unordered_set>
+#include <utility>
 
 #include "Keyboard.h"
 
 namespace UnivKbd {
-
 
     class VirtualKeyboardSpecialsWidget : public QWidget {
     Q_OBJECT
@@ -68,7 +68,7 @@ namespace UnivKbd {
     Q_OBJECT
 
     public:
-        VirtualKeyboardButton(const Key &key, QWidget *parent);
+        VirtualKeyboardButton(const Key &key, std::shared_ptr<QFont> font, QWidget *parent);
         ~VirtualKeyboardButton() override;
 
         void setCurrentKey(int index);
@@ -81,10 +81,14 @@ namespace UnivKbd {
             return mKey;
         }
 
-        qreal recommendedTextSize() const;
+        //qreal recommendedTextSize() const;
 
-        inline void setTextSize(float size) {
-            mTextSize = size;
+        //inline void setTextSize(float size) {
+        //    mTextSize = size;
+        //}
+
+        inline void setFont(std::shared_ptr<QFont> font) {
+            mFont = std::move(font);
         }
 
 
@@ -107,9 +111,8 @@ namespace UnivKbd {
 
         QPixmap mPixmap;
 
-        float mTextSize = 0;
-
         QList<QPointer<VirtualKeyboardSpecialsWidget>> mSpecialsWidget;
+        std::shared_ptr<QFont> mFont;
 
     };
 

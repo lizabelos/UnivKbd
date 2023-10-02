@@ -28,6 +28,8 @@
 
 UnivKbd::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
 
+    (void)parent;
+
     /*** Text Document ***/
     mTextDocument = new QTextDocument(this);
     // Set the page size to A4
@@ -60,6 +62,7 @@ UnivKbd::SimpleTextEditor::SimpleTextEditor(QWidget *parent) {
     mSearchLine = new QLineEdit(this);
 
     VirtualKeyboard *searchKeyboard = new VirtualKeyboard(mSearchLine);
+    (void)searchKeyboard;
 
     boldAction->setCheckable(true);
     italicAction->setCheckable(true);

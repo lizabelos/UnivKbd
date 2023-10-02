@@ -77,7 +77,12 @@ namespace UnivKbd {
 
             // start resizing if mouse pressed on the resize handle
             if (event->button() == Qt::LeftButton && resizeHandleRect().contains(event->pos())) {
+                // on qt6, use globalPosition() instead of globalPos()
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                mResizeStartPosition = event->globalPosition().toPoint();
+#else
                 mResizeStartPosition = event->globalPos();
+#endif
                 mResize = true;
             }
         }
@@ -91,11 +96,21 @@ namespace UnivKbd {
 
             // resize the widget
             if (mResize) {
+                // on qt6, use globalPosition() instead of globalPos()
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QPoint diff = mResizeStartPosition - event->globalPosition().toPoint();
+#else
                 QPoint diff = mResizeStartPosition - event->globalPos();
+#endif
                 QSize newSize = mContentWidget->size() + QSize(diff.x(), diff.y());
                 mContentWidget->setFixedHeight(newSize.height());
                 mContentWidget->setFixedWidth(newSize.width());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                mResizeStartPosition = event->globalPosition().toPoint();
+#else
                 mResizeStartPosition = event->globalPos();
+#endif
+
 
                 // also move the widget if it is floating, to follow the mouse cursor
                 if (isFloating()) {
@@ -120,7 +135,12 @@ namespace UnivKbd {
         }*/
         // use event() to support qt5
         bool event(QEvent *event) override {
+            // on qt6, use touchBegin instead of touchEvent, and points() instead of touchPoints()
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            if (event->type() == QEvent::TouchBegin && static_cast<QTouchEvent *>(event)->points().size() == 2) {
+#else
             if (event->type() == QEvent::TouchBegin && static_cast<QTouchEvent *>(event)->touchPoints().size() == 2) {
+#endif
                 setFloating(false);
             }
             return QDockWidget::event(event);

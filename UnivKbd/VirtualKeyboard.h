@@ -115,7 +115,7 @@ namespace UnivKbd {
          * @brief Set the suggestions words to be displayed on top of the keyboard.
          */
         inline void setSuggestions(const QStringList &suggestions) {
-            gCurrentKeyboard->setSuggestions(suggestions);
+            gInnerWidget->setSuggestions(suggestions);
         }
 
     signals:

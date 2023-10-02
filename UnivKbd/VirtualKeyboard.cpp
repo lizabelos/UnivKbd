@@ -87,6 +87,8 @@ void UnivKbd::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button
 
 void UnivKbd::VirtualKeyboard::onSpecialKeyPressed(UnivKbd::VirtualKeyboardButton &button, const UnivKbd::Key &key, const QString &special) {
 
+    (void)button;
+
     if (gCurrentKeyboard != this) {
         return;
     }

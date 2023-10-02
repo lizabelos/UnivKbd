@@ -33,7 +33,7 @@
 
 #include <unordered_set>
 
-UnivKbd::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key, QWidget *parent) : QAbstractButton(parent), mKey(key) {
+UnivKbd::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key, std::shared_ptr<QFont> font, QWidget *parent) : QAbstractButton(parent), mKey(key), mFont(font) {
 
     switch (key.getType()) {
 
@@ -108,6 +108,10 @@ void UnivKbd::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
     // unused parameter
     (void)event;
 
+    if (mFont == nullptr) {
+        return;
+    }
+
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
@@ -141,20 +145,14 @@ void UnivKbd::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
         }
     }
 
-    if (mTextSize == 0) {
-        mTextSize = recommendedTextSize();
-    }
-
     if (mPixmap.isNull()) {
-        QFont font = painter.font();
-        font.setPointSizeF(mTextSize);
-        painter.setFont(font);
+        painter.setFont(*mFont);
 
         painter.setPen(Qt::black);
         painter.drawText(rect(), Qt::AlignCenter, text());
     } else {
         QRect svgSize = mPixmap.rect();
-        qreal svgHeight = mTextSize;
+        qreal svgHeight = mFont->pointSizeF() * 0.8;
         qreal svgWidth = svgHeight * svgSize.width() / svgSize.height();
 
         QRect svgRect(rect().center().x() - svgWidth / 2, rect().center().y() - svgHeight / 2, svgWidth, svgHeight);
@@ -163,47 +161,7 @@ void UnivKbd::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
 
 }
 
-qreal UnivKbd::VirtualKeyboardButton::recommendedTextSize() const {
-    if (mPixmap.isNull()) {
-        // Calculate the font size based on the button's dimensions and text width
-        QFont font;
-        qreal maxFontSize = qMin(0.6 * rect().width(), 0.6 * rect().height()); // Maximum font size based on button width and height
-        qreal fontPointSize = 0.8 * maxFontSize; // Initial font size based on the maximum font size
-        font.setPointSizeF(fontPointSize);
-
-        QFontMetrics fontMetrics(font);
-        qreal textWidth = fontMetrics.horizontalAdvance(text()); // Width of the button's text
-
-        // Adjust the font size to fit the text within the button's width
-        if (textWidth > 0.6 * rect().width())
-        {
-            fontPointSize *= (0.6 * rect().width()) / textWidth;
-        }
-
-        // Adjust the font size to fit the text within the button's height
-        if (fontPointSize > maxFontSize)
-        {
-            fontPointSize = maxFontSize;
-        }
-
-        return fontPointSize;
-
-    } else {
-        QRect svgSize = mPixmap.rect();
-        // make it's height 0.6 of the button's height
-        qreal svgHeight = 0.6 * rect().height();
-        qreal svgWidth = svgHeight * svgSize.width() / svgSize.height();
-
-        if (svgWidth > 0.6 * rect().width()) {
-            svgWidth = 0.6 * rect().width();
-            svgHeight = svgWidth * svgSize.height() / svgSize.width();
-        }
-
-        return svgHeight;
-    }
-}
-
-UnivKbd::VirtualKeyboardSpecialsWidget::VirtualKeyboardSpecialsWidget(QStringList specials, QWidget *parent) : QWidget(parent->parentWidget()), mDirectParent(parent), mSpecials(specials) {
+UnivKbd::VirtualKeyboardSpecialsWidget::VirtualKeyboardSpecialsWidget(QStringList specials, QWidget *parent) : QWidget(parent->parentWidget()), mSpecials(specials), mDirectParent(parent) {
     //QPointer<QHBoxLayout> mLayout;
     //QList<QPointer<QPushButton>> mButtons;
     qDebug() << "Creating specials widget with parent " << parent;
@@ -227,6 +185,9 @@ UnivKbd::VirtualKeyboardSpecialsWidget::VirtualKeyboardSpecialsWidget(QStringLis
 }
 
 void UnivKbd::VirtualKeyboardSpecialsWidget::paintEvent(QPaintEvent *event) {
+    // event is unused
+    (void)event;
+
     // position the widget in the top center of the parent rect on its parent widget
     QRect parentDrawRect = mDirectParent->rect().translated(mDirectParent->pos());
     QRect drawRect = rect().translated(parentDrawRect.center().x() - rect().center().x(), parentDrawRect.top() - rect().height());

@@ -243,7 +243,12 @@ namespace UnivKbd {
             if (mCharactersSize > 0) {
                 ushort *mCharactersBuffer = new ushort[mCharactersSize];
                 file.read((char*)mCharactersBuffer, mCharactersSize * sizeof(uchar));
+                // on qt6, use char16_t overload
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                 key.mCharacters = QString::fromUtf16(mCharactersBuffer, mCharactersSize);
+#else
+                key.mCharacters = QString::fromUtf16((char16_t*)mCharactersBuffer, mCharactersSize);
+#endif
                 delete[] mCharactersBuffer;
             }
             return key;

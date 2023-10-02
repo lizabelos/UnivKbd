@@ -206,7 +206,7 @@ namespace UnivKbd {
 
         static Keyboard convertLayout(Keyboard &keyboard, const std::map<QChar, QChar> &charMap) {
             Keyboard convertedKeyboard;
-            for (int i = 0; i < keyboard.getKeys().size(); i++) {
+            for (std::vector<Key>::size_type i = 0; i < keyboard.getKeys().size(); i++) {
                 Key key = keyboard.getKeys()[i];
                 if (key.getType() == KeyType::REGULAR) {
                     key = key.withCharacters(convertLayout(key.getCharacters(), charMap));
@@ -254,7 +254,7 @@ namespace UnivKbd {
             }
 
             // apply specials to keys
-            for (int i = 0; i < mKeys.size(); i++) {
+            for (std::vector<Key>::size_type i = 0; i < mKeys.size(); i++) {
                 Key &key = mKeys[i];
                 if (key.getType() != KeyType::REGULAR) {
                     continue;
