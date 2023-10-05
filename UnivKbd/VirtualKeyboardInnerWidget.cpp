@@ -216,7 +216,7 @@ void UnivKbd::VirtualKeyboardInnerWidget::paintEvent(QPaintEvent *event) {
     font->setPointSizeF(fontPointSize);
 
     QFontMetrics fontMetrics(*font);
-    qreal textWidth = fontMetrics.horizontalAdvance("A"); // Width of the button's text
+    qreal textWidth = fontMetrics.horizontalAdvance("F10"); // Width of the button's text
 
     // Adjust the font size to fit the text within the button's width
     if (textWidth > 0.6 * minWidth)
@@ -229,6 +229,8 @@ void UnivKbd::VirtualKeyboardInnerWidget::paintEvent(QPaintEvent *event) {
     {
         fontPointSize = maxFontSize;
     }
+
+    font->setPointSizeF(fontPointSize);
 
 
 
