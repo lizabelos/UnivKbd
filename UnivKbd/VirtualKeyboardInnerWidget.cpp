@@ -199,6 +199,8 @@ void UnivKbd::VirtualKeyboardInnerWidget::onVirtualKeyPressed(VirtualKeyboardBut
             }
             break;
     }
+
+    update();
 }
 
 void UnivKbd::VirtualKeyboardInnerWidget::onSpecialKeyPressed(VirtualKeyboardButton &button, const Key &key, const QString &special) {
