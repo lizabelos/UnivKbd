@@ -6,7 +6,7 @@ var searchData=
   ['getkeys_7',['getKeys',['../classUnivKbd_1_1Keyboard.html#a29cb30fe01635b4d1b8cbb4a47146ee7',1,'UnivKbd::Keyboard']]],
   ['getmodifiers_8',['getModifiers',['../classUnivKbd_1_1VirtualKeyboard.html#ab8e819fb68031673996b764eb6c9eac8',1,'UnivKbd::VirtualKeyboard::getModifiers()'],['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a42f1197e744b59b89d1dd4fc797915d1',1,'UnivKbd::VirtualKeyboardInnerWidget::getModifiers()']]],
   ['getoperatingsystemkeyboards_9',['getOperatingSystemKeyboards',['../classUnivKbd_1_1Keyboard.html#aa782ffa40f94d897c36fcc4702c9eb23',1,'UnivKbd::Keyboard']]],
-  ['getspecials_10',['getSpecials',['../classUnivKbd_1_1Key.html#adf7a215044f330aa17a869ee33deb841',1,'UnivKbd::Key']]],
+  ['getspecials_10',['getSpecials',['../classUnivKbd_1_1Key.html#a7b486a125ffe307f1644709827fc3717',1,'UnivKbd::Key']]],
   ['gettype_11',['getType',['../classUnivKbd_1_1Key.html#a8f1341366bd49a15cd920677ea31fab5',1,'UnivKbd::Key']]],
   ['getx_12',['getX',['../classUnivKbd_1_1Key.html#aa42ef5d1d589e6b9858e128a5053dbfb',1,'UnivKbd::Key']]],
   ['getxspan_13',['getXSpan',['../classUnivKbd_1_1Key.html#a5aca6eecaa5c0d0d540e5c13dba3310e',1,'UnivKbd::Key']]],
