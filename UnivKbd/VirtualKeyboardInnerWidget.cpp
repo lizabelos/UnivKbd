@@ -29,6 +29,7 @@
 #include <QTimer>
 #include <QMainWindow>
 #include <QDockWidget>
+#include <QPainter>
 
 #include <unordered_set>
 
@@ -44,7 +45,7 @@ UnivKbd::VirtualKeyboardInnerWidget::VirtualKeyboardInnerWidget() {
 
     mSuggestionsLayout = new QHBoxLayout();
     mSuggestionsLayout->setSpacing(2);
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 10; i++) {
         mSuggestionButtons[i] = new QPushButton();
         mSuggestionsLayout->addWidget(mSuggestionButtons[i]);
         connect(mSuggestionButtons[i], &QPushButton::clicked, [=]() {
@@ -87,6 +88,19 @@ UnivKbd::VirtualKeyboardInnerWidget::VirtualKeyboardInnerWidget() {
 
     Keyboard keyboard = Keyboard::importKeyboard("US", "qwertyuiopasdfghjklzxcvbnm");
     loadLayoutFromKeyboard(keyboard);
+
+    // fill mDictionary with work from :/dictionary.txt
+    QFile dictionaryFile(":/dictionary.txt");
+    if (dictionaryFile.open(QIODevice::ReadOnly)) {
+        QTextStream in(&dictionaryFile);
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            mDictionary << line;
+        }
+    } else {
+        qDebug() << "Could not open dictionary file";
+        exit(1);
+    }
 
 }
 
@@ -149,6 +163,26 @@ void UnivKbd::VirtualKeyboardInnerWidget::onVirtualKeyPressed(VirtualKeyboardBut
     }
 
     emit virtualKeyPressed(button, key); // admitting there is a direct connection
+
+    // if the key is a character, add it to the current word
+    if (key.getCharacters().size() > 0 && key.getCharacters()[0] > 'a' && key.getCharacters()[0] < 'z') {
+        mCurrentWord += key.getCharacters()[0];
+    } else {
+        mCurrentWord = "";
+    }
+
+    QStringList suggestions = key.getSpecials(0);
+
+    if (mCurrentWord != "") {
+        for (const auto& word : mDictionary) {
+            if (word.startsWith(mCurrentWord)) {
+                suggestions << word;
+            }
+        }
+    }
+
+    setSuggestions(suggestions);
+
 
     switch (key.getType()) {
 
@@ -232,9 +266,14 @@ void UnivKbd::VirtualKeyboardInnerWidget::paintEvent(QPaintEvent *event) {
 
     font->setPointSizeF(fontPointSize);
 
-
-
     for (auto button : mButtons) {
         button->setFont(font);
+    }
+
+    // draw each button from here
+    QPainter painter(this);
+    painter.setFont(*font);
+    for (const auto& button : mButtons) {
+        button->paintFromParent(painter);
     }
 }

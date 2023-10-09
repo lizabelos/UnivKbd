@@ -44,26 +44,6 @@
 
 namespace UnivKbd {
 
-    class VirtualKeyboardSpecialsWidget : public QWidget {
-    Q_OBJECT
-
-    friend class VirtualKeyboardButton;
-
-    private:
-        VirtualKeyboardSpecialsWidget(QStringList specials, QWidget *parent);
-
-        void paintEvent(QPaintEvent *event) override;
-
-    signals:
-        void specialKeyPressed(const QString &key);
-
-    private:
-        QStringList mSpecials;
-        QPointer<QHBoxLayout> mLayout;
-        QList<QPointer<QPushButton>> mButtons;
-        QWidget *mDirectParent;
-    };
-
     class VirtualKeyboardButton : public QAbstractButton {
     Q_OBJECT
 
@@ -91,9 +71,13 @@ namespace UnivKbd {
             mFont = std::move(font);
         }
 
+        void paintFromParent(QPainter &painter);
 
     protected:
-        void paintEvent(QPaintEvent *event) override;
+        void paintEvent(QPaintEvent *event) override {
+            Q_UNUSED(event)
+            // do nothing
+        }
 
     signals:
         void virtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
@@ -111,7 +95,6 @@ namespace UnivKbd {
 
         QPixmap mPixmap;
 
-        QList<QPointer<VirtualKeyboardSpecialsWidget>> mSpecialsWidget;
         std::shared_ptr<QFont> mFont;
 
     };

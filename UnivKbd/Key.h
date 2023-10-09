@@ -143,7 +143,10 @@ namespace UnivKbd {
          *
          * @return The special characters associated to the key. If the key is not regular, it returns an empty string.
          **/
-        inline const QStringList& getSpecials(int i) const {
+        inline const QStringList getSpecials(int i) const {
+            if (i >= mSpecials.size()) {
+                return {};
+            }
             return mSpecials[i];
         }
 

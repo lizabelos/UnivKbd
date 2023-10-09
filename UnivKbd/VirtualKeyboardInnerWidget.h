@@ -87,8 +87,14 @@ namespace UnivKbd {
          * @brief Set the suggestions words to be displayed on top of the keyboard.
          */
         inline void setSuggestions(const QStringList &suggestions) {
-            for (int i = 0; i < std::min((int)3, (int)suggestions.size()); i++) {
-                mSuggestionButtons[i]->setText(suggestions[i]);
+            for (int i = 0; i < 10; i++) {
+                if (i < suggestions.size()) {
+                    mSuggestionButtons[i]->setText(suggestions[i]);
+                    mSuggestionButtons[i]->show();
+                } else {
+                    mSuggestionButtons[i]->setText("");
+                    mSuggestionButtons[i]->hide();
+                }
             }
         }
 
@@ -174,12 +180,15 @@ namespace UnivKbd {
         QPointer<VirtualKeyboardConfigurationWidget> mConfigurationWidget;
         QPointer<QPushButton> mOpenButton;
         QPointer<QHBoxLayout> mSuggestionsLayout;
-        QPointer<QPushButton> mSuggestionButtons[3];
+        QPointer<QPushButton> mSuggestionButtons[10];
 
         unsigned long mKeyModifier = 0;
         QKeySequence mKeySequence;
 
         bool mIsEnabled = true;
+
+        QStringList mDictionary;
+        QString mCurrentWord;
     };
 
 }

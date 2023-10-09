@@ -68,19 +68,6 @@ UnivKbd::VirtualKeyboardButton::VirtualKeyboardButton(const Key &key, std::share
         mPixmap = QPixmap(svgPath);
     }
 
-    for (int i = 0; i < key.getCharacters().size(); i++) {
-        if (key.getSpecials(i).size() == 0) {
-            mSpecialsWidget.append(nullptr);
-        } else {
-            QPointer<VirtualKeyboardSpecialsWidget> specialsWidget = new VirtualKeyboardSpecialsWidget(key.getSpecials(i), this);
-            specialsWidget->hide();
-            mSpecialsWidget.append(specialsWidget);
-            connect(specialsWidget, &VirtualKeyboardSpecialsWidget::specialKeyPressed, [=](const QString &special) {
-                emit specialKeyPressed(*this, mKey, special);
-            });
-        }
-    }
-
 }
 
 UnivKbd::VirtualKeyboardButton::~VirtualKeyboardButton() {
@@ -103,99 +90,40 @@ void UnivKbd::VirtualKeyboardButton::setCurrentKey(int index) {
     setText(mKeyString[index]);
 }
 
-void UnivKbd::VirtualKeyboardButton::paintEvent(QPaintEvent *event) {
+void UnivKbd::VirtualKeyboardButton::paintFromParent(QPainter &painter) {
 
-    // unused parameter
-    (void)event;
-
-    if (mFont == nullptr) {
-        return;
-    }
-
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
+    // get rect from parent
+    QRect rect = geometry();
 
     // Draw the background according to the button's state (hover, pressed, checked, etc.)
     if (isDown())
     {
-        painter.fillRect(rect(), QColor(0xCC, 0xCC, 0xCC));
+        painter.fillRect(rect, QColor(0xCC, 0xCC, 0xCC));
     }
     else if (isChecked())
     {
-        painter.fillRect(rect(), QColor(0xFF, 0xCC, 0x99));
+        painter.fillRect(rect, QColor(0xFF, 0xCC, 0x99));
     }
     else if (underMouse())
     {
-        painter.fillRect(rect(), QColor(0xCC, 0xCC, 0xCC));
+        painter.fillRect(rect, QColor(0xCC, 0xCC, 0xCC));
     }
     else
     {
-        painter.fillRect(rect(), QColor(0xFF, 0xFF, 0xFF));
-    }
-
-    if (underMouse()) {
-        if (mSpecialsWidget.size() > mCurrentKey && mSpecialsWidget[mCurrentKey] != nullptr) {
-            mSpecialsWidget[mCurrentKey]->show();
-        }
-    } else {
-        if (mSpecialsWidget.size() > mCurrentKey && mSpecialsWidget[mCurrentKey] != nullptr) {
-            if (!mSpecialsWidget[mCurrentKey]->underMouse()) {
-                mSpecialsWidget[mCurrentKey]->hide();
-            }
-        }
+        painter.fillRect(rect, QColor(0xFF, 0xFF, 0xFF));
     }
 
     if (mPixmap.isNull()) {
-        painter.setFont(*mFont);
 
         painter.setPen(Qt::black);
-        painter.drawText(rect(), Qt::AlignCenter, text());
+        painter.drawText(rect, Qt::AlignCenter, text());
     } else {
         QRect svgSize = mPixmap.rect();
         qreal svgHeight = mFont->pointSizeF() * 0.8;
         qreal svgWidth = svgHeight * svgSize.width() / svgSize.height();
 
-        QRect svgRect(rect().center().x() - svgWidth / 2, rect().center().y() - svgHeight / 2, svgWidth, svgHeight);
+        QRect svgRect(rect.center().x() - svgWidth / 2, rect.center().y() - svgHeight / 2, svgWidth, svgHeight);
         painter.drawPixmap(svgRect, mPixmap);
     }
 
 }
-
-UnivKbd::VirtualKeyboardSpecialsWidget::VirtualKeyboardSpecialsWidget(QStringList specials, QWidget *parent) : QWidget(parent->parentWidget()), mSpecials(specials), mDirectParent(parent) {
-    //QPointer<QHBoxLayout> mLayout;
-    //QList<QPointer<QPushButton>> mButtons;
-    qDebug() << "Creating specials widget with parent " << parent;
-
-    mLayout = new QHBoxLayout();
-    mLayout->setContentsMargins(0, 0, 0, 0);
-    mLayout->setSpacing(0);
-
-    for (int i = 0; i < specials.size(); i++) {
-        QPointer<QPushButton> button = new QPushButton(specials[i]);
-        mButtons.push_back(button);
-        mLayout->addWidget(button);
-        connect(button, &QPushButton::pressed, [=]() {
-            emit specialKeyPressed(specials[i]);
-        });
-    }
-
-    setLayout(mLayout);
-
-    setStyleSheet("background-color: red;");
-}
-
-void UnivKbd::VirtualKeyboardSpecialsWidget::paintEvent(QPaintEvent *event) {
-    // event is unused
-    (void)event;
-
-    // position the widget in the top center of the parent rect on its parent widget
-    QRect parentDrawRect = mDirectParent->rect().translated(mDirectParent->pos());
-    QRect drawRect = rect().translated(parentDrawRect.center().x() - rect().center().x(), parentDrawRect.top() - rect().height());
-    move(drawRect.topLeft());
-
-    qDebug() << "Painting specials widget with parent " << mDirectParent << " at " << drawRect.topLeft();
-
-    // update parent
-    mDirectParent->update();
-}
-
