@@ -45,13 +45,8 @@ UnivKbd::VirtualKeyboard::VirtualKeyboard(QWidget *parent, VirtualKeyboardAttach
 
     connect(gInnerWidget, &VirtualKeyboardInnerWidget::virtualKeyPressed, this, &VirtualKeyboard::onVirtualKeyPressed, Qt::DirectConnection);
     connect(gInnerWidget, &VirtualKeyboardInnerWidget::specialKeyPressed, this, &VirtualKeyboard::onSpecialKeyPressed, Qt::DirectConnection);
+    connect(gInnerWidget, &VirtualKeyboardInnerWidget::suggestionPressed, this, &VirtualKeyboard::onSuggestionPressed);
     connect(qApp, &QApplication::focusChanged, this, &VirtualKeyboard::onAppFocusChanged);
-
-    // forward the signal gCurrentKeyboard suggestionPressed to a lambda that emit suggestionPressed of this class
-    connect(gCurrentKeyboard, &VirtualKeyboard::suggestionPressed, [=](const QString &suggestion) {
-        emit suggestionPressed(suggestion);
-    });
-
 
 }
 
@@ -235,6 +230,22 @@ void UnivKbd::VirtualKeyboard::attachToCurrentWindowAsDockWidget() {
     mAttachMode = VirtualKeyboardAttachMode::Docked;
     if (gCurrentKeyboard != nullptr) {
         gCurrentKeyboard->parentTakeFocus();
+    }
+}
+
+void UnivKbd::VirtualKeyboard::onSuggestionPressed(const QString &suggestion, const QString &wordToReplace) {
+    if (gCurrentKeyboard != this) {
+        return;
+    }
+
+    QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Backspace, getModifiers(), "");
+    for (int i = 0; i < wordToReplace.size(); i++) {
+        QCoreApplication::postEvent(mParent, event);
+    }
+
+    for (int i = 0; i < suggestion.size(); i++) {
+        event = new QKeyEvent(QEvent::KeyPress, Qt::Key_unknown, getModifiers(), suggestion[i]);
+        QCoreApplication::postEvent(mParent, event);
     }
 }
 

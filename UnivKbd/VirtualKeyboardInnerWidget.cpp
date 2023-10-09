@@ -50,7 +50,11 @@ UnivKbd::VirtualKeyboardInnerWidget::VirtualKeyboardInnerWidget() {
         mSuggestionsLayout->addWidget(mSuggestionButtons[i]);
         connect(mSuggestionButtons[i], &QPushButton::clicked, [=]() {
             if (mSuggestionButtons[i]->text() != "") {
-                emit suggestionPressed(mSuggestionButtons[i]->text());
+                int numCharToRemove = std::min(mSuggestionButtons[i]->text().length(), mCurrentWord.length());
+                QString newWord = mCurrentWord.right(numCharToRemove);
+
+                emit suggestionPressed(mSuggestionButtons[i]->text(), newWord);
+
             }
         });
     }

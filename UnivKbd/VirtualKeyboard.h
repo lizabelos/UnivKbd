@@ -118,14 +118,6 @@ namespace UnivKbd {
             gInnerWidget->setSuggestions(suggestions);
         }
 
-    signals:
-        /**
-         * @brief This signal is emitted when a suggestion is pressed on the virtual keyboard.
-         *
-         * @param suggestion The suggestion that was pressed.
-         */
-        void suggestionPressed(const QString &suggestion);
-
     public slots:
         /**
          * @brief Sets the enabled state of the virtual keyboard.
@@ -150,6 +142,8 @@ namespace UnivKbd {
         void onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
 
         void onSpecialKeyPressed(VirtualKeyboardButton &button, const Key &key, const QString &special);
+
+        void onSuggestionPressed(const QString &suggestion, const QString &wordToReplace);
 
         void onAppFocusChanged(QObject *old, QObject *now);
 

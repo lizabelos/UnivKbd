@@ -134,7 +134,7 @@ namespace UnivKbd {
          *
          * @param suggestion The suggestion that was pressed.
          */
-        void suggestionPressed(const QString &suggestion);
+        void suggestionPressed(const QString &suggestion, const QString &wordToReplace);
 
     protected:
         void paintEvent(QPaintEvent *event) override;
