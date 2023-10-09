@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
-<a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classUnivKbd_1_1VirtualKeyboard-members.html">List of all members</a>  </div>
@@ -96,12 +95,6 @@ Public Slots</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnivKbd_1_1VirtualKeyboard.html#ac854609066bea2766e405f0551099d7f">triggerSetEnabled</a> ()</td></tr>
 <tr class="memdesc:ac854609066bea2766e405f0551099d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggers the <a class="el" href="classUnivKbd_1_1VirtualKeyboard.html#a4aa68c4415674c29e580cbc4944d682c" title="Sets the enabled state of the virtual keyboard.">setEnabled()</a> slot to enable or disable the virtual keyboard. <br /></td></tr>
 <tr class="separator:ac854609066bea2766e405f0551099d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
-Signals</h2></td></tr>
-<tr class="memitem:a44c3023a11e0a06a0b5c78256e1ba728"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnivKbd_1_1VirtualKeyboard.html#a44c3023a11e0a06a0b5c78256e1ba728">suggestionPressed</a> (const QString &amp;suggestion)</td></tr>
-<tr class="memdesc:a44c3023a11e0a06a0b5c78256e1ba728"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal is emitted when a suggestion is pressed on the virtual keyboard.  <a href="classUnivKbd_1_1VirtualKeyboard.html#a44c3023a11e0a06a0b5c78256e1ba728">More...</a><br /></td></tr>
-<tr class="separator:a44c3023a11e0a06a0b5c78256e1ba728"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -139,9 +132,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>findWindowAndAttachDo
 </div><!-- fragment --><p>If you don't want the keyboard to float, you can add it to your widget's layout using the <code>addWidget()</code> function:</p>
 <div class="fragment"><div class="line">anyWidget-&gt;layout()-&gt;addWidget(keyboard);</div>
 </div><!-- fragment --><p>During typing, show your own suggestions on top of the keyboard using the <code><a class="el" href="classUnivKbd_1_1VirtualKeyboard.html#a267f967bb280d15d12410e288a7648f0" title="Set the suggestions words to be displayed on top of the keyboard.">setSuggestions()</a></code> </p><div class="fragment"><div class="line">keyboard-&gt;<a class="code" href="classUnivKbd_1_1VirtualKeyboard.html#a267f967bb280d15d12410e288a7648f0">setSuggestions</a>(QStringList() &lt;&lt; <span class="stringliteral">&quot;suggestion1&quot;</span> &lt;&lt; <span class="stringliteral">&quot;suggestion2&quot;</span>);</div>
-<div class="line">connect(keyboard, &amp;<a class="code" href="classUnivKbd_1_1VirtualKeyboard.html#a44c3023a11e0a06a0b5c78256e1ba728">VirtualKeyboard::suggestionPressed</a>, <span class="keyword">this</span>, &amp;MyWidget::onSuggestionPressed);</div>
+<div class="line">connect(keyboard, &amp;VirtualKeyboard::suggestionPressed, <span class="keyword">this</span>, &amp;MyWidget::onSuggestionPressed);</div>
 <div class="ttc" id="aclassUnivKbd_1_1VirtualKeyboard_html_a267f967bb280d15d12410e288a7648f0"><div class="ttname"><a href="classUnivKbd_1_1VirtualKeyboard.html#a267f967bb280d15d12410e288a7648f0">UnivKbd::VirtualKeyboard::setSuggestions</a></div><div class="ttdeci">void setSuggestions(const QStringList &amp;suggestions)</div><div class="ttdoc">Set the suggestions words to be displayed on top of the keyboard.</div><div class="ttdef"><b>Definition:</b> VirtualKeyboard.h:117</div></div>
-<div class="ttc" id="aclassUnivKbd_1_1VirtualKeyboard_html_a44c3023a11e0a06a0b5c78256e1ba728"><div class="ttname"><a href="classUnivKbd_1_1VirtualKeyboard.html#a44c3023a11e0a06a0b5c78256e1ba728">UnivKbd::VirtualKeyboard::suggestionPressed</a></div><div class="ttdeci">void suggestionPressed(const QString &amp;suggestion)</div><div class="ttdoc">This signal is emitted when a suggestion is pressed on the virtual keyboard.</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1573aef08493614d6a7969e0ee80dc11"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1573aef08493614d6a7969e0ee80dc11">&#9670;&nbsp;</a></span>VirtualKeyboard()</h2>
@@ -236,40 +228,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>findWindowAndAttachDo
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">enabled</td><td>The enabled state of the virtual keyboard. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a44c3023a11e0a06a0b5c78256e1ba728"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44c3023a11e0a06a0b5c78256e1ba728">&#9670;&nbsp;</a></span>suggestionPressed</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UnivKbd::VirtualKeyboard::suggestionPressed </td>
-          <td>(</td>
-          <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>suggestion</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>This signal is emitted when a suggestion is pressed on the virtual keyboard. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">suggestion</td><td>The suggestion that was pressed. </td></tr>
   </table>
   </dd>
 </dl>

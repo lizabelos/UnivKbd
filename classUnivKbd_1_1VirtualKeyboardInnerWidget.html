@@ -105,9 +105,9 @@ Signals</h2></td></tr>
 <tr class="memitem:a1fdb63e399a278a2e5e4864ec7ee8a99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a1fdb63e399a278a2e5e4864ec7ee8a99">specialKeyPressed</a> (<a class="el" href="classUnivKbd_1_1VirtualKeyboardButton.html">VirtualKeyboardButton</a> &amp;button, const <a class="el" href="classUnivKbd_1_1Key.html">Key</a> &amp;key, const QString &amp;special)</td></tr>
 <tr class="memdesc:a1fdb63e399a278a2e5e4864ec7ee8a99"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal is emitted when a special key is pressed on the virtual keyboard.  <a href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a1fdb63e399a278a2e5e4864ec7ee8a99">More...</a><br /></td></tr>
 <tr class="separator:a1fdb63e399a278a2e5e4864ec7ee8a99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7e1ced54c14c333579eb494ef5a24ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#ae7e1ced54c14c333579eb494ef5a24ef">suggestionPressed</a> (const QString &amp;suggestion)</td></tr>
-<tr class="memdesc:ae7e1ced54c14c333579eb494ef5a24ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal is emitted when a suggestion is pressed on the virtual keyboard.  <a href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#ae7e1ced54c14c333579eb494ef5a24ef">More...</a><br /></td></tr>
-<tr class="separator:ae7e1ced54c14c333579eb494ef5a24ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b8948dee1347a40f74af7a0f4d932d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a2b8948dee1347a40f74af7a0f4d932d0">suggestionPressed</a> (const QString &amp;suggestion, const QString &amp;wordToReplace)</td></tr>
+<tr class="memdesc:a2b8948dee1347a40f74af7a0f4d932d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal is emitted when a suggestion is pressed on the virtual keyboard.  <a href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a2b8948dee1347a40f74af7a0f4d932d0">More...</a><br /></td></tr>
+<tr class="separator:a2b8948dee1347a40f74af7a0f4d932d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -272,8 +272,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>paintEvent</b> (QPain
 
 </div>
 </div>
-<a id="ae7e1ced54c14c333579eb494ef5a24ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7e1ced54c14c333579eb494ef5a24ef">&#9670;&nbsp;</a></span>suggestionPressed</h2>
+<a id="a2b8948dee1347a40f74af7a0f4d932d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b8948dee1347a40f74af7a0f4d932d0">&#9670;&nbsp;</a></span>suggestionPressed</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -285,8 +285,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>paintEvent</b> (QPain
           <td class="memname">void UnivKbd::VirtualKeyboardInnerWidget::suggestionPressed </td>
           <td>(</td>
           <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>suggestion</em></td><td>)</td>
+          <td class="paramname"><em>suggestion</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>wordToReplace</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>

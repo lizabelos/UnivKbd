@@ -6,5 +6,5 @@ var searchData=
   ['setsuggestions_23',['setSuggestions',['../classUnivKbd_1_1VirtualKeyboard.html#a267f967bb280d15d12410e288a7648f0',1,'UnivKbd::VirtualKeyboard::setSuggestions()'],['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a1f7d74749a7acbef554592dcbf41db72',1,'UnivKbd::VirtualKeyboardInnerWidget::setSuggestions()']]],
   ['simpletexteditor_24',['SimpleTextEditor',['../classUnivKbd_1_1SimpleTextEditor.html',1,'UnivKbd']]],
   ['specialkeypressed_25',['specialKeyPressed',['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a1fdb63e399a278a2e5e4864ec7ee8a99',1,'UnivKbd::VirtualKeyboardInnerWidget']]],
-  ['suggestionpressed_26',['suggestionPressed',['../classUnivKbd_1_1VirtualKeyboard.html#a44c3023a11e0a06a0b5c78256e1ba728',1,'UnivKbd::VirtualKeyboard::suggestionPressed()'],['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#ae7e1ced54c14c333579eb494ef5a24ef',1,'UnivKbd::VirtualKeyboardInnerWidget::suggestionPressed()']]]
+  ['suggestionpressed_26',['suggestionPressed',['../classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a2b8948dee1347a40f74af7a0f4d932d0',1,'UnivKbd::VirtualKeyboardInnerWidget']]]
 ];
