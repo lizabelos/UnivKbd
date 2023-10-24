@@ -238,13 +238,13 @@ void UnivKbd::VirtualKeyboard::onSuggestionPressed(const QString &suggestion, co
         return;
     }
 
-    QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Backspace, getModifiers(), "");
     for (int i = 0; i < wordToReplace.size(); i++) {
+        QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_Backspace, getModifiers(), "");
         QCoreApplication::postEvent(mParent, event);
     }
 
     for (int i = 0; i < suggestion.size(); i++) {
-        event = new QKeyEvent(QEvent::KeyPress, Qt::Key_unknown, getModifiers(), suggestion[i]);
+        QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_unknown, getModifiers(), suggestion[i]);
         QCoreApplication::postEvent(mParent, event);
     }
 }

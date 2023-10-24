@@ -277,9 +277,10 @@ void UnivKbd::VirtualKeyboardInnerWidget::paintEvent(QPaintEvent *event) {
     }
 
     // draw each button from here
-    QPainter painter(this);
-    painter.setFont(*font);
-    for (const auto& button : mButtons) {
-        button->paintFromParent(painter);
-    }
+    //QPainter painter(this);
+    //painter.setFont(*font);
+    //for (const auto& button : mButtons) {
+    //    button->paintFromParent(painter);
+    //}
+    
 }

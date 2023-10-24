@@ -90,10 +90,20 @@ void UnivKbd::VirtualKeyboardButton::setCurrentKey(int index) {
     setText(mKeyString[index]);
 }
 
-void UnivKbd::VirtualKeyboardButton::paintFromParent(QPainter &painter) {
+void UnivKbd::VirtualKeyboardButton::paintFromParent(QPainter &painter, bool fromParent) {
 
     // get rect from parent
-    QRect rect = geometry();
+    QRect rect;
+    if (fromParent) {
+        rect = geometry();
+    } else {
+        qDebug() << "Drawing keyboard button from inside";
+        rect = QRect(0, 0, width(), height());
+    }
+
+    // qdebug the key and the rect
+    qDebug() << "Drawing keyboard button";
+    qDebug() << mKey.toString() << " " << rect;
 
     // Draw the background according to the button's state (hover, pressed, checked, etc.)
     if (isDown())
@@ -114,7 +124,6 @@ void UnivKbd::VirtualKeyboardButton::paintFromParent(QPainter &painter) {
     }
 
     if (mPixmap.isNull()) {
-
         painter.setPen(Qt::black);
         painter.drawText(rect, Qt::AlignCenter, text());
     } else {

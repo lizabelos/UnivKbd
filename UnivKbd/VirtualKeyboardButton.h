@@ -36,6 +36,7 @@
 #include <QColor>
 #include <QList>
 #include <QComboBox>
+#include <QPainter>
 
 #include <unordered_set>
 #include <utility>
@@ -71,12 +72,13 @@ namespace UnivKbd {
             mFont = std::move(font);
         }
 
-        void paintFromParent(QPainter &painter);
+        void paintFromParent(QPainter &painter, bool fromParent = true);
 
     protected:
         void paintEvent(QPaintEvent *event) override {
             Q_UNUSED(event)
-            // do nothing
+            QPainter painter(this);
+            paintFromParent(painter, false);
         }
 
     signals:
