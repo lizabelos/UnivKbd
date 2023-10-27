@@ -96,12 +96,15 @@ Public Slots</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#abc3c09e5bf27365e78c0f8e216f982a0">triggerSetEnabled</a> ()</td></tr>
 <tr class="memdesc:abc3c09e5bf27365e78c0f8e216f982a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggers the <a class="el" href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a1ce5edad738bd48c3c5d710782726fb8" title="Sets the enabled state of the virtual keyboard.">setEnabled()</a> slot to enable or disable the virtual keyboard. <br /></td></tr>
 <tr class="separator:abc3c09e5bf27365e78c0f8e216f982a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace3d79795b6ae7c85b4a576c2112a3db"><td class="memItemLeft" align="right" valign="top"><a id="ace3d79795b6ae7c85b4a576c2112a3db"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>onSuggestionsButtonPressed</b> (int i)</td></tr>
+<tr class="separator:ace3d79795b6ae7c85b4a576c2112a3db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
-<tr class="memitem:aa7978e2d08a682c67952283e187c18ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#aa7978e2d08a682c67952283e187c18ff">virtualKeyPressed</a> (<a class="el" href="classUnivKbd_1_1VirtualKeyboardButton.html">VirtualKeyboardButton</a> &amp;button, const <a class="el" href="classUnivKbd_1_1Key.html">Key</a> &amp;key)</td></tr>
-<tr class="memdesc:aa7978e2d08a682c67952283e187c18ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal is emitted when a key is pressed on the virtual keyboard.  <a href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#aa7978e2d08a682c67952283e187c18ff">More...</a><br /></td></tr>
-<tr class="separator:aa7978e2d08a682c67952283e187c18ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa612a142296fef90eb9fc9adf50cd78d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#aa612a142296fef90eb9fc9adf50cd78d">virtualKeyPressed</a> (<a class="el" href="classUnivKbd_1_1VirtualKeyboardButton.html">VirtualKeyboardButton</a> *button, const <a class="el" href="classUnivKbd_1_1Key.html">Key</a> &amp;key)</td></tr>
+<tr class="memdesc:aa612a142296fef90eb9fc9adf50cd78d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal is emitted when a key is pressed on the virtual keyboard.  <a href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#aa612a142296fef90eb9fc9adf50cd78d">More...</a><br /></td></tr>
+<tr class="separator:aa612a142296fef90eb9fc9adf50cd78d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fdb63e399a278a2e5e4864ec7ee8a99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a1fdb63e399a278a2e5e4864ec7ee8a99">specialKeyPressed</a> (<a class="el" href="classUnivKbd_1_1VirtualKeyboardButton.html">VirtualKeyboardButton</a> &amp;button, const <a class="el" href="classUnivKbd_1_1Key.html">Key</a> &amp;key, const QString &amp;special)</td></tr>
 <tr class="memdesc:a1fdb63e399a278a2e5e4864ec7ee8a99"><td class="mdescLeft">&#160;</td><td class="mdescRight">This signal is emitted when a special key is pressed on the virtual keyboard.  <a href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a1fdb63e399a278a2e5e4864ec7ee8a99">More...</a><br /></td></tr>
 <tr class="separator:a1fdb63e399a278a2e5e4864ec7ee8a99"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,6 +124,12 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnivKbd_1_1VirtualKeyboardInnerWidget.html#a1f7d74749a7acbef554592dcbf41db72">setSuggestions</a> (const QStringList &amp;suggestions)</td></tr>
 <tr class="memdesc:a1f7d74749a7acbef554592dcbf41db72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the suggestions words to be displayed on top of the keyboard. <br /></td></tr>
 <tr class="separator:a1f7d74749a7acbef554592dcbf41db72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad39f966ab3cf8e0915fa600f97f50e20"><td class="memItemLeft" align="right" valign="top"><a id="ad39f966ab3cf8e0915fa600f97f50e20"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>lockSuggestions</b> ()</td></tr>
+<tr class="separator:ad39f966ab3cf8e0915fa600f97f50e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8890dde39e0ca179395ff31e011508a"><td class="memItemLeft" align="right" valign="top"><a id="ab8890dde39e0ca179395ff31e011508a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>unlockSuggestions</b> ()</td></tr>
+<tr class="separator:ab8890dde39e0ca179395ff31e011508a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -316,8 +325,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>paintEvent</b> (QPain
 
 </div>
 </div>
-<a id="aa7978e2d08a682c67952283e187c18ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7978e2d08a682c67952283e187c18ff">&#9670;&nbsp;</a></span>virtualKeyPressed</h2>
+<a id="aa612a142296fef90eb9fc9adf50cd78d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa612a142296fef90eb9fc9adf50cd78d">&#9670;&nbsp;</a></span>virtualKeyPressed</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -328,7 +337,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>paintEvent</b> (QPain
         <tr>
           <td class="memname">void UnivKbd::VirtualKeyboardInnerWidget::virtualKeyPressed </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classUnivKbd_1_1VirtualKeyboardButton.html">VirtualKeyboardButton</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classUnivKbd_1_1VirtualKeyboardButton.html">VirtualKeyboardButton</a> *&#160;</td>
           <td class="paramname"><em>button</em>, </td>
         </tr>
         <tr>
