@@ -50,7 +50,7 @@ UnivKbd::VirtualKeyboard::VirtualKeyboard(QWidget *parent, VirtualKeyboardAttach
 
 }
 
-void UnivKbd::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key) {
+void UnivKbd::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton *button, const Key &key) {
 
     if (gCurrentKeyboard != this) {
         return;
@@ -69,8 +69,10 @@ void UnivKbd::VirtualKeyboard::onVirtualKeyPressed(VirtualKeyboardButton &button
     default:
         if (key.getCharacters().size() == 0) {
             event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), "");
+        } else if (button != nullptr) {
+            event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), key.getCharacters()[button->getCurrentKey()]);
         } else {
-            event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), key.getCharacters()[button.getCurrentKey()]);
+            event = new QKeyEvent(QEvent::KeyPress, (int)key.toQtKey(), getModifiers(), key.getCharacters()[0]);
         }
         break;
 

@@ -139,7 +139,7 @@ namespace UnivKbd {
 
         void parentLooseFocus();
 
-        void onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
+        void onVirtualKeyPressed(VirtualKeyboardButton *button, const Key &key);
 
         void onSpecialKeyPressed(VirtualKeyboardButton &button, const Key &key, const QString &special);
 

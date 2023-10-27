@@ -82,7 +82,7 @@ namespace UnivKbd {
         }
 
     signals:
-        void virtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
+        void virtualKeyPressed(VirtualKeyboardButton *button, const Key &key);
 
         void specialKeyPressed(VirtualKeyboardButton &button, const Key &key, const QString &special);
 

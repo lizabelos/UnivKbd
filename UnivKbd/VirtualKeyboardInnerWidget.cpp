@@ -48,15 +48,7 @@ UnivKbd::VirtualKeyboardInnerWidget::VirtualKeyboardInnerWidget() {
     for (int i = 0; i < 10; i++) {
         mSuggestionButtons[i] = new QPushButton();
         mSuggestionsLayout->addWidget(mSuggestionButtons[i]);
-        connect(mSuggestionButtons[i], &QPushButton::clicked, [=]() {
-            if (mSuggestionButtons[i]->text() != "") {
-                int numCharToRemove = std::min(mSuggestionButtons[i]->text().length(), mCurrentWord.length());
-                QString newWord = mCurrentWord.right(numCharToRemove);
-
-                emit suggestionPressed(mSuggestionButtons[i]->text(), newWord);
-
-            }
-        });
+        connect(mSuggestionButtons[i], &QPushButton::clicked, [=]() { onSuggestionsButtonPressed(i); });
     }
 
     mKeyboardWithSuggestionsLayout->addLayout(mSuggestionsLayout);
@@ -143,7 +135,9 @@ void UnivKbd::VirtualKeyboardInnerWidget::addButtonFromKey(const Key &key) {
     mButtons.append(btn);
 }
 
-void UnivKbd::VirtualKeyboardInnerWidget::onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key) {
+void UnivKbd::VirtualKeyboardInnerWidget::onVirtualKeyPressed(VirtualKeyboardButton *button, const Key &key) {
+
+    qDebug() << "Pressed : " << key.getCharacters();
 
     switch (key.getType()) {
 
@@ -158,8 +152,9 @@ void UnivKbd::VirtualKeyboardInnerWidget::onVirtualKeyPressed(VirtualKeyboardBut
         case KeyType::SHIFT:
         case KeyType::ALT:
         case KeyType::CTRL:
+            assert(button != nullptr);
             pressModifier(key);
-            refreshModifiers(&button);
+            refreshModifiers(button);
             break;
 
         default:
@@ -169,8 +164,12 @@ void UnivKbd::VirtualKeyboardInnerWidget::onVirtualKeyPressed(VirtualKeyboardBut
     emit virtualKeyPressed(button, key); // admitting there is a direct connection
 
     // if the key is a character, add it to the current word
-    if (key.getCharacters().size() > 0 && key.getCharacters()[0] > 'a' && key.getCharacters()[0] < 'z') {
+    if (key.getCharacters().size() > 0 && key.getCharacters()[0] >= 'a' && key.getCharacters()[0] <= 'z') {
         mCurrentWord += key.getCharacters()[0];
+    } else if (key.getType() == KeyType::BACKSPACE) {
+        if (mCurrentWord.length() > 0) {
+            mCurrentWord = mCurrentWord.left(mCurrentWord.length() - 1);
+        }
     } else {
         mCurrentWord = "";
     }
@@ -196,10 +195,12 @@ void UnivKbd::VirtualKeyboardInnerWidget::onVirtualKeyPressed(VirtualKeyboardBut
             break;
 
         default:
-            if (key.getCharacters().size() == 0) {
-            } else {
-                mKeyModifier = 0;
-                refreshModifiers(&button);
+            if (button != nullptr) {
+                if (key.getCharacters().size() == 0) {
+                } else {
+                    mKeyModifier = 0;
+                    refreshModifiers(button);
+                }
             }
             break;
     }
@@ -283,4 +284,32 @@ void UnivKbd::VirtualKeyboardInnerWidget::paintEvent(QPaintEvent *event) {
     //    button->paintFromParent(painter);
     //}
     
+}
+
+void UnivKbd::VirtualKeyboardInnerWidget::onSuggestionsButtonPressed(int suggestionIndex) {
+    if (mSuggestionButtons[suggestionIndex]->text() == "") {
+        return;
+    }
+
+    // disable all modifiers
+    mKeyModifier = 0;
+    refreshModifiers();
+
+    lockSuggestions();
+
+    qDebug() << "Replacing " << mCurrentWord << " with " << mSuggestionButtons[suggestionIndex]->text();
+
+    QString currentWord = mCurrentWord;
+
+    for (int i = 0; i < currentWord.size(); i++) {
+        onVirtualKeyPressed(nullptr, Key(KeyType::BACKSPACE));
+    }
+
+    for (int i = 0; i < mSuggestionButtons[suggestionIndex]->text().size(); i++) {
+        onVirtualKeyPressed(nullptr, Key(mSuggestionButtons[suggestionIndex]->text()[i]));
+        qDebug() << "current word is : " << mCurrentWord;
+    }
+
+    unlockSuggestions();
+
 }

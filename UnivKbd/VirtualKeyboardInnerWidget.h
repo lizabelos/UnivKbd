@@ -87,6 +87,11 @@ namespace UnivKbd {
          * @brief Set the suggestions words to be displayed on top of the keyboard.
          */
         inline void setSuggestions(const QStringList &suggestions) {
+
+            if (mSuggestionLocked) {
+                return;
+            }
+
             for (int i = 0; i < 10; i++) {
                 if (i < suggestions.size()) {
                     mSuggestionButtons[i]->setText(suggestions[i]);
@@ -96,6 +101,22 @@ namespace UnivKbd {
                     mSuggestionButtons[i]->hide();
                 }
             }
+            // show "no suggestion available" when no suggestions are available
+            if (suggestions.size() == 0) {
+                mSuggestionButtons[0]->setText("No suggestion available");
+                mSuggestionButtons[0]->setEnabled(false);
+                mSuggestionButtons[0]->show();
+            } else {
+                mSuggestionButtons[0]->setEnabled(true);
+            }
+        }
+
+        void lockSuggestions() {
+            mSuggestionLocked = true;
+        }
+
+        void unlockSuggestions() {
+            mSuggestionLocked = false;
         }
 
     public slots:
@@ -111,6 +132,8 @@ namespace UnivKbd {
          */
         void triggerSetEnabled();
 
+        void onSuggestionsButtonPressed(int i);
+
     signals:
         /**
          * @brief This signal is emitted when a key is pressed on the virtual keyboard.
@@ -118,7 +141,7 @@ namespace UnivKbd {
          * @param button The button that was pressed.
          * @param key The associated key to the button that was pressed.
          */
-        void virtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
+        void virtualKeyPressed(VirtualKeyboardButton *button, const Key &key);
 
         /**
          * @brief This signal is emitted when a special key is pressed on the virtual keyboard.
@@ -140,7 +163,7 @@ namespace UnivKbd {
         void paintEvent(QPaintEvent *event) override;
 
     private slots:
-        void onVirtualKeyPressed(VirtualKeyboardButton &button, const Key &key);
+        void onVirtualKeyPressed(VirtualKeyboardButton *button, const Key &key);
 
         void onSpecialKeyPressed(VirtualKeyboardButton &button, const Key &key, const QString &special);
 
@@ -186,6 +209,8 @@ namespace UnivKbd {
         QKeySequence mKeySequence;
 
         bool mIsEnabled = true;
+
+        bool mSuggestionLocked = false;
 
         QStringList mDictionary;
         QString mCurrentWord;
